@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Auth\User;
-use Illuminate\Contracts\Validation\Validator;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -29,6 +29,10 @@ class RegisteredUserController extends Controller
         ]);
         $user = User::create($request->all());
 
-        return redirect('/login')->with('user', $user);
+        $request->authenticate();
+
+        $request->session()->regenerate();
+
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 }
