@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\WishController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,10 @@ Route::prefix('/users')->group(function () {
 });
 
 Route::get('/wishes', [WishController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/', function () {
+    return Inertia::render('Home');
+});
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

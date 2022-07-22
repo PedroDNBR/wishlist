@@ -1,9 +1,13 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const AuthAccountSpanTitle = styled.span`
-    color: #9AA5B5;
+	${({ theme }) => css`
+		color: ${theme.lightGray};
+	`}
 `;
 
 export const AuthAccountLink = styled.a`
-    color: #1E84DF;
+	${({ theme }) => css`
+		color: ${theme.blue};
+	`}
 `;

@@ -1,3 +1,4 @@
+import ProductCard from "@/Components/ProductCard";
 import { Inertia } from "@inertiajs/inertia";
 import React from "react";
 
@@ -8,7 +9,8 @@ function logout() {
 export default function Home({ errors }) {
 	return (
 		<>
-			<button onClick={logout}>Loguot</button>
+			{/* <button onClick={logout}>Loguot</button> */}
+			<ProductCard />
 		</>
 	)
 }
