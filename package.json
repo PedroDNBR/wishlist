@@ -22,7 +22,9 @@
         "vite": "^2.9.11"
     },
     "dependencies": {
+        "@hookform/resolvers": "^2.9.6",
         "react-hook-form": "^7.33.1",
-        "styled-components": "^5.3.5"
+        "styled-components": "^5.3.5",
+        "yup": "^0.32.11"
     }
 }

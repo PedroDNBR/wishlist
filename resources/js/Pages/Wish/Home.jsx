@@ -1,7 +1,8 @@
+import { Inertia } from "@inertiajs/inertia";
 import React from "react";
 
 function logout() {
-	Inertia.delete('/users/logout', data)
+	Inertia.delete('/users/logout')
 }
 
 export default function Home({ errors }) {

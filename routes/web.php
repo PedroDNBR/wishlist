@@ -22,10 +22,10 @@ Route::get('/login', 'Auth/AuthenticatedSessionController@create')->name('auth.l
 Route::prefix('/users')->group(function () {
     Route::post('/register', [RegisteredUserController::class, 'store']);
     Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-    Route::delete('/logout', [AuthenticatedSessionController::class, 'store']);
+    Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy']);
 });
 
-Route::get('/wishes', [WishController::class, 'index']);
+Route::get('/wishes', [WishController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

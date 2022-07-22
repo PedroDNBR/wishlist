@@ -16,6 +16,7 @@ export const AuthSubTitle = styled.h2`
 export const AuthTitleSpan = styled.span`
     color: #1e84df;
     font-size: 5.5rem;
+    line-height: 4rem;
 `;
 
 

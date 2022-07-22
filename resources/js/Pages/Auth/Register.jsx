@@ -12,11 +12,18 @@ export default function Register({ errors: propsErrors }) {
 		control,
 		handleSubmit,
 		setError,
-		formState: { isSubmitting, errors },
+		formState: { errors }
 	} = useForm();
 
-	function register(data) {
-		Inertia.post('/users/register', data)
+	useEffect(() => {
+		if (!propsErrors) return;
+		Object.keys(propsErrors).map((key) => {
+			setError(key, { type: 'custom', message: propsErrors[key] });
+		});
+	}, [propsErrors]);
+
+	async function register(data) {
+		await Inertia.post('/users/register', data);
 	}
 
 	return (
@@ -25,11 +32,11 @@ export default function Register({ errors: propsErrors }) {
 				<AuthTitleComponent>Create new account</AuthTitleComponent>
 				<AuthAccountSpan content="Already A Member? " link="/login" linkTitle="Log In" />
 				<Form onSubmit={handleSubmit(register)}>
-					<InputControlled control={control} error={errors?.name} label="Full Name" type="text" name="name" />
-					<InputControlled control={control} error={errors?.email} label="Email" type="text" name="email" />
-					<InputControlled control={control} error={errors?.password} label="Password" type="password" name="password" />
-					<InputControlled control={control} error={errors?.password_confirmation} label="Confirm Password" type="password" name="password_confirmation" />
-					<ButtonComponent name="Create Account" isLoading={isSubmitting} />
+					<InputControlled control={control} label="Full Name" type="text" name="name" />
+					<InputControlled control={control} label="Email" type="text" name="email" />
+					<InputControlled control={control} label="Password" type="password" name="password" />
+					<InputControlled control={control} label="Confirm Password" type="password" name="password_confirmation" />
+					<ButtonComponent name="Create Account" />
 				</Form>
 			</div>
 			<ImgAuth src="/assets/imgs/newpicture.svg" alt="" />

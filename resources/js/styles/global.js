@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
 export const Form = styled.form`
+    margin-top: 30px;
     width: 70%;
+    display: flex;
+    flex-direction: column;
 `;
 
 export const FluidContainer = styled.div`
