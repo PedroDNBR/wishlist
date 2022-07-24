@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name', 12);
+            $table->string('color', 6);
             $table->bigInteger('user_id')->foreign('user_id')->references('id')->on('users');
             $table->softDeletes();
             $table->timestamps();
