@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const AuthAccountSpanTitle = styled.span`
 	${({ theme }) => css`
-		color: ${theme.lightGray};
+		color: ${theme.white[300]};
 	`}
 `;
 

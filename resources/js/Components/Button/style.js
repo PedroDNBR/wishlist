@@ -6,7 +6,7 @@ export const Button = styled.button`
         padding: 20px 70px;
         display: flex;
         border-radius: 30px;
-        color: ${theme.white};
+        color: ${theme.white[100]};
         text-align: center;
         justify-content: center;
     `}

@@ -3,8 +3,8 @@ import styled, { css } from "styled-components";
 export const Input = styled.input`
 	${({ theme }) => css`
 			border: 0px;
-			color: ${theme.white};
-			background-color: ${theme.darkGray};
+			color: ${theme.white[100]};
+			background-color: ${theme.grey[500]};
 			padding: 0;
 			&:focus {
 					border-color: inherit;
@@ -25,7 +25,7 @@ const labelModifiers = {
 
 export const Label = styled.label`
 	${({ isError, theme }) => css`
-			color: ${theme.gray};
+			color: ${theme.grey[100]};
 			${isError && labelModifiers.error(theme)}
 	`}
 `;
@@ -54,7 +54,7 @@ export const Container = styled.div`
 	${({ theme }) => css`
 		padding: 10px 15px;
 		display: flex;
-		background-color: ${theme.darkGray};
+		background-color: ${theme.grey[500]};
 		border-radius: 15px;
 		flex-direction: column;
 		border: 2px solid transparent;

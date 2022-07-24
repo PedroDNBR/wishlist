@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const AuthTitle = styled.h1`
 ${({ theme }) => css`
-		color: ${theme.white};
+		color: ${theme.white[100]};
 		font-size: 4rem;
 		font-weight: bold;
 		transform: translateX(-2px);
@@ -11,7 +11,7 @@ ${({ theme }) => css`
 
 export const AuthSubTitle = styled.h2`
 	${({ theme }) => css`
-		color: ${theme.lightGray};
+		color: ${theme.white[300]};
 		font-size: 1.5rem;
 		font-weight: bold;
 	`}

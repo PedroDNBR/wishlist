@@ -6,7 +6,7 @@ export const Card = styled.div`
     width: 18.625rem;
     height: 25.875rem;
     border-radius: 30px;
-    background: ${theme.darkGray};
+    background: ${theme.grey[500]};
     display: flex;
     padding: 10px;
     flex-direction: column;
@@ -24,7 +24,7 @@ export const ImageContainer = styled.div`
 
 export const Image = styled.img`
   ${({ theme }) => css`
-    background: ${theme.halfLightGray};
+    background: ${theme.grey[400]};
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -35,7 +35,7 @@ export const Image = styled.img`
 export const Info = styled.div`
   ${({ theme }) => css`
     text-align: left;
-    color: ${theme.white};
+    color: ${theme.white[100]};
     height: 4rem;
   `}
 `;
@@ -43,7 +43,7 @@ export const Info = styled.div`
 
 export const Title = styled.h3`
   ${({ theme }) => css`
-    color: ${theme.white};
+    color: ${theme.white[100]};
     font-weight: 600;
     font-size: 1.33rem;
   `}
@@ -51,7 +51,7 @@ export const Title = styled.h3`
 
 export const Price = styled.h4`
   ${({ theme }) => css`
-    color: ${theme.white};
+    color: ${theme.white[100]};
     font-weight: normal;
     font-size: 1.16rem;
   `}
@@ -64,7 +64,7 @@ export const CategoryBadge = styled.span`
     gap: 5px;
     width: max-content;
     background: ${theme.red};
-    color: ${theme.white};
+    color: ${theme.white[100]};
     font-size: 0.875rem;
     padding: 2px 8px;
     border-radius: 15px;
@@ -72,7 +72,7 @@ export const CategoryBadge = styled.span`
 `;
 export const BadgeBall = styled.span`
   ${({ theme }) => css`
-    background: ${theme.white};
+    background: ${theme.white[100]};
     width: 0.5rem;
     height: 0.5rem;
     border-radius: 100px;
