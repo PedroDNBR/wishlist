@@ -1,3 +1,4 @@
+import Layout from "@/Base/Layout";
 import ProductCard from "@/Components/ProductCard";
 import { Inertia } from "@inertiajs/inertia";
 import React from "react";
@@ -10,7 +11,13 @@ export default function Home({ errors }) {
 	return (
 		<>
 			{/* <button onClick={logout}>Loguot</button> */}
-			<ProductCard />
+			<Layout>
+				<ProductCard />
+				<ProductCard />
+				<ProductCard />
+				<ProductCard />
+				<ProductCard />
+			</Layout>
 		</>
 	)
 }
