@@ -70,6 +70,7 @@ export const CategoryBadge = styled.span`
     border-radius: 15px;
   `}
 `;
+
 export const BadgeBall = styled.span`
   ${({ theme }) => css`
     background: ${theme.white[100]};
