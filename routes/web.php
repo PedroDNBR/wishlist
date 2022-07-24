@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\WishController;
+use App\Http\Controllers\Wish\CategoryController;
+use App\Http\Controllers\Wish\WishController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -26,7 +27,10 @@ Route::prefix('/users')->group(function () {
     Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy']);
 });
 
-Route::get('/wishes', [WishController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/wishes', [WishController::class, 'index'])->name('dashboard');
+    Route::get('/categories', [CategoryController::class, 'create'])->name('categories');
+});
 
 Route::get('/', function () {
     return Inertia::render('Home');
