@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-
+import { readableColor } from 'polished'
 
 export const Card = styled.div`
   ${({ theme }) => css`
@@ -58,13 +58,13 @@ export const Price = styled.h4`
 `;
 
 export const CategoryBadge = styled.span`
-  ${({ theme, color }) => css`
+  ${({ color }) => css`
     display: flex;
     align-items: center;
     gap: 5px;
     width: max-content;
     background: ${color};
-    color: ${theme.white[100]};
+    color: ${readableColor(color)};
     font-size: 0.875rem;
     padding: 2px 8px;
     border-radius: 15px;
@@ -73,8 +73,8 @@ export const CategoryBadge = styled.span`
 `;
 
 export const BadgeBall = styled.span`
-  ${({ theme }) => css`
-    background: ${theme.white[100]};
+  ${({ color }) => css`
+    background: ${readableColor(color)};
     width: 0.5rem;
     height: 0.5rem;
     border-radius: 100px;

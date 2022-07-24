@@ -32,7 +32,7 @@ export default function Categories({ errors: propsErrors }) {
       <Layout>
         <HexColorPicker color={color} onChange={setColor} />
         <CategoryBadge color={color}>
-          <BadgeBall />
+          <BadgeBall color={color} />
           {categoryName}
         </CategoryBadge>
         <form onSubmit={handleSubmit(register)}>
