@@ -4,6 +4,7 @@ import { BadgeBall, CategoryBadge } from "@/Components/ProductCard/style";
 import React, { useState } from "react";
 import { HexColorPicker } from "react-colorful";
 import { InputControlled } from "@/Components/Input";
+import ProductCard from "@/Components/ProductCard";
 
 export default function Categories({ errors: propsErrors }) {
   const [color, setColor] = useState("#aabbcc");
@@ -23,13 +24,13 @@ export default function Categories({ errors: propsErrors }) {
   async function register(data) {
   }
 
-
-  console.log(categoryName);
-
   return (
     <>
       {/* <button onClick={logout}>Loguot</button> */}
       <Layout>
+        <div>
+          <ProductCard color={color} categoryName={categoryName} />
+        </div>
         <HexColorPicker color={color} onChange={setColor} />
         <CategoryBadge color={color}>
           <BadgeBall color={color} />

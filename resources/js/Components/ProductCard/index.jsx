@@ -2,7 +2,7 @@ import React from "react";
 import { BadgeBall, Card, CategoryBadge, Image, ImageContainer, Info, Price, Title } from "./style";
 
 
-export default function ProductCard() {
+export default function ProductCard({ color, categoryName }) {
   return (
     <Card>
       <ImageContainer>
@@ -11,9 +11,9 @@ export default function ProductCard() {
       <Info>
         <Title>Galax Placa de vídeo</Title>
         <Price>R$ 30000,00</Price>
-        <CategoryBadge>
-          <BadgeBall />
-          Favorito
+        <CategoryBadge color={color}>
+          <BadgeBall color={color} />
+          {categoryName}
         </CategoryBadge>
       </Info>
     </Card>
