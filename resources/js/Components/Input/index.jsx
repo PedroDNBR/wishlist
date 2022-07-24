@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useController, useFormContext, Controller } from 'react-hook-form';
 import { Container, Error, Input, Label } from './style';
 
-export function InputControlled({ label, type, name, control, ...rest }) {
+export function InputControlled({ label, type, name, max = null, control, ...rest }) {
 	const { field, fieldState } = useController({ name, control });
 	const error = fieldState.error?.message;
 
@@ -15,6 +15,7 @@ export function InputControlled({ label, type, name, control, ...rest }) {
 					value={field.value ?? ''}
 					type={type}
 					name={name}
+					maxLength={max}
 				/>
 			</Container>
 			<Error>{error}</Error>

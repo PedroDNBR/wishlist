@@ -58,16 +58,17 @@ export const Price = styled.h4`
 `;
 
 export const CategoryBadge = styled.span`
-  ${({ theme }) => css`
+  ${({ theme, color }) => css`
     display: flex;
     align-items: center;
     gap: 5px;
     width: max-content;
-    background: ${theme.red};
+    background: ${color};
     color: ${theme.white[100]};
     font-size: 0.875rem;
     padding: 2px 8px;
     border-radius: 15px;
+    height: 1.35rem;
   `}
 `;
 
