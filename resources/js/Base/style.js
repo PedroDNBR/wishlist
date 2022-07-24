@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 
-
 export const Container = styled.section`
   display: flex;
   flex-direction: row;
@@ -43,5 +42,31 @@ export const LogoL = styled.h3`
     font-family: 'Lemon';
     font-size: 1.8rem;
     margin-left: -10px;
+	`};
+`;
+
+export const Icon = styled.label`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${theme.white[100]};
+    font-size: 2.18rem;
+    padding: 2rem;
+	`};
+`;
+
+export const ProfileImage = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+export const ProfineImageContainer = styled.div`
+   ${({ theme }) => css`
+    overflow: hidden;
+    border-radius: 100px;
+    width: 2.8rem;
+    height: 2.8rem;
+    border: 2px solid ${theme.blue};
 	`};
 `;

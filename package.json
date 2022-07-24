@@ -23,7 +23,9 @@
     },
     "dependencies": {
         "@hookform/resolvers": "^2.9.6",
+        "@react-icons/all-files": "^4.1.0",
         "react-hook-form": "^7.33.1",
+        "react-icons": "^4.4.0",
         "styled-components": "^5.3.5",
         "yup": "^0.32.11"
     }
