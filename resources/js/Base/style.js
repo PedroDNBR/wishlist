@@ -36,7 +36,7 @@ export const LogoW = styled.h3`
 	`};
 `;
 
-export const LogoL = styled.h3`
+export const LogoL = styled.span`
 	${({ theme }) => css`
     color: ${theme.blue};
     font-family: 'Lemon';
