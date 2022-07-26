@@ -30,6 +30,7 @@ Route::prefix('/users')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/wishes', [WishController::class, 'index'])->name('dashboard');
     Route::get('/categories', [CategoryController::class, 'create'])->name('categories');
+    Route::post('/category', [CategoryController::class, 'store'])->name('categoryStore');
 });
 
 Route::get('/', function () {

@@ -3,6 +3,7 @@
 namespace App\Models\Wish;
 
 use App\Models\BaseModel;
+use Illuminate\Support\Facades\Auth;
 
 class Category extends BaseModel
 {
@@ -15,6 +16,7 @@ class Category extends BaseModel
     protected $fillable = [
         'name',
         'color',
+        'user_id',
     ];
 
     /**
@@ -30,7 +32,13 @@ class Category extends BaseModel
     {
         return [
             'name' => ['required', 'string', 'max:12'],
-            'color' => ['required', 'string', 'digits:6'],
+            'color' => ['required', 'string', 'min:7', 'max:7'],
+            'user_id'  => ['required', 'integer'],
         ];
+    }
+
+    public function scopeFromLoggedUser($query)
+    {
+        return $query->where('user_id', Auth::user()->id);
     }
 }

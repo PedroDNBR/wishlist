@@ -1,4 +1,18 @@
-import styled, { css } from "styled-components";
+import styled, { createGlobalStyle, css } from "styled-components";
+
+const GlobalStyles = createGlobalStyle`
+	@media (max-width: 1080px) {
+      html: {
+        font-size: 93.75%;
+      }
+    }
+
+    @media (max-width: 720px) {
+      html: {
+        font-size: 87.5%;
+      }
+		}
+`
 
 export const Form = styled.form`
 	margin-top: 30px;

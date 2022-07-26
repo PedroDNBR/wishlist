@@ -17,8 +17,6 @@ export const Card = styled.div`
 export const ImageContainer = styled.div`
   ${({ theme }) => css`
     border-radius: 15px;
-    width: 17rem;
-    height: 17rem;
   `}
 `;
 

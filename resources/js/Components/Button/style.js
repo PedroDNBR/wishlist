@@ -9,5 +9,6 @@ export const Button = styled.button`
         color: ${theme.white[100]};
         text-align: center;
         justify-content: center;
+        width: 100%;
     `}
 `;
