@@ -29,6 +29,6 @@ class CategoryController extends Controller
             'name' => $request['name'],
             'user_id' =>  Auth::user()->id,
         ]);
-        return Inertia::render('Wish/Categories');
+        return redirect('/categories');
     }
 }
