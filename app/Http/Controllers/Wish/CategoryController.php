@@ -31,4 +31,10 @@ class CategoryController extends Controller
         ]);
         return redirect('/categories');
     }
+
+    public function destroy(Category $category)
+    {
+        $category->forceDelete();
+        return redirect('/categories');
+    }
 }

@@ -7,7 +7,9 @@ import ProductCard from "@/Components/ProductCard";
 import { CategoryLayout, CategoryForm, CategoryFormLayout, CategoryListingContainer, SearchCategoryForm } from "@/styles/categories";
 import { ButtonComponent } from "@/Components/Button";
 import { Inertia } from "@inertiajs/inertia";
-import { BadgeBall, CategoryBadge } from "@/Components/ProductCard/style";
+import { BadgeBall, CategoryBadge, DeleteButton } from "@/Components/ProductCard/style";
+import { ImCross } from 'react-icons/im';
+import { theme } from "@/styles/theme";
 
 export default function Categories({ errors: propsErrors, categories }) {
   const [color, setColor] = useState("#ffffff");
@@ -61,6 +63,15 @@ export default function Categories({ errors: propsErrors, categories }) {
     await Inertia.post('/categories', data)
   }
 
+  async function deleteCategory(id) {
+    await Inertia.delete(`/categories/${id}`);
+  }
+
+  const crossColor = {
+    color: theme.red,
+    width: '.7rem',
+  }
+
   return (
     <>
       <Layout>
@@ -84,6 +95,9 @@ export default function Categories({ errors: propsErrors, categories }) {
                 <CategoryBadge color={category.color}>
                   <BadgeBall color={category.color} />
                   {category.name}
+                  <DeleteButton onClick={() => deleteCategory(category.id)}>
+                    <ImCross style={crossColor} />
+                  </DeleteButton>
                 </CategoryBadge>
               )
             })}

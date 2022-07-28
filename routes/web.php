@@ -31,6 +31,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/wishes', [WishController::class, 'index'])->name('dashboard');
     Route::get('/categories', [CategoryController::class, 'create'])->name('categories');
     Route::post('/categories', [CategoryController::class, 'store'])->name('categoryStore');
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categoryDestroy');
 });
 
 Route::get('/', function () {

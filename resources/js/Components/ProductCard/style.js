@@ -67,6 +67,7 @@ export const CategoryBadge = styled.span`
     padding: 2px 8px;
     border-radius: 15px;
     height: 1.35rem;
+    position: relative;
   `}
 `;
 
@@ -76,5 +77,20 @@ export const BadgeBall = styled.span`
     width: 0.5rem;
     height: 0.5rem;
     border-radius: 100px;
+  `}
+`;
+
+export const DeleteButton = styled.button`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: ${theme.white[100]};
+    border-radius: 1000px;
+    width: 1.2rem;
+    height: 1.2rem;
+    position: absolute;
+    right: 0;
+    transform: translateY(-50%) translateX(50%);
   `}
 `;
