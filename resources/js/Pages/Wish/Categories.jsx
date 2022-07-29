@@ -10,6 +10,7 @@ import { Inertia } from "@inertiajs/inertia";
 import { BadgeBall, CategoryBadge, DeleteButton } from "@/Components/ProductCard/style";
 import { ImCross } from 'react-icons/im';
 import { theme } from "@/styles/theme";
+import * as Dialog from '@radix-ui/react-dialog';
 
 export default function Categories({ errors: propsErrors, categories }) {
   const [color, setColor] = useState("#ffffff");
@@ -17,6 +18,7 @@ export default function Categories({ errors: propsErrors, categories }) {
     control,
     handleSubmit,
     setError,
+    reset,
     formState: { errors, }
   } = useForm();
 
@@ -60,7 +62,9 @@ export default function Categories({ errors: propsErrors, categories }) {
 
   async function create(data) {
     data.color = color;
-    await Inertia.post('/categories', data)
+    await Inertia.post('/categories', data);
+    reset();
+    setColor("#ffffff")
   }
 
   async function deleteCategory(id) {
@@ -71,7 +75,7 @@ export default function Categories({ errors: propsErrors, categories }) {
     color: theme.red,
     width: '.7rem',
   }
-
+  const [container, setContainer] = React.useState(null);
   return (
     <>
       <Layout>
@@ -92,7 +96,7 @@ export default function Categories({ errors: propsErrors, categories }) {
           <CategoryListingContainer>
             {categories.map((category) => {
               return (
-                <CategoryBadge color={category.color}>
+                <CategoryBadge key={category.id} color={category.color} asButton>
                   <BadgeBall color={category.color} />
                   {category.name}
                   <DeleteButton onClick={() => deleteCategory(category.id)}>
@@ -103,6 +107,20 @@ export default function Categories({ errors: propsErrors, categories }) {
             })}
           </CategoryListingContainer>
         </CategoryLayout>
+        <Dialog.Root>
+          <Dialog.Trigger>trigger</Dialog.Trigger>
+
+          <Dialog.Portal>
+            <Dialog.Overlay />
+            <Dialog.Content>
+              <Dialog.Title>title</Dialog.Title>
+              <Dialog.Description>description</Dialog.Description>
+              <Dialog.Close>aaaaaaaaaaaaaaaaaaaaa</Dialog.Close>
+              aaaaaaaaaaaaaaaaa
+            </Dialog.Content>
+            aaaaaaaaaaaaaaaa
+          </Dialog.Portal>
+        </Dialog.Root>
       </Layout>
     </>
   )

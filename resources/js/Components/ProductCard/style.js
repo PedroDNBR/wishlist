@@ -56,7 +56,7 @@ export const Price = styled.h4`
 `;
 
 export const CategoryBadge = styled.span`
-  ${({ color }) => css`
+  ${({ color, asButton }) => css`
     display: flex;
     align-items: center;
     gap: 5px;
@@ -68,6 +68,7 @@ export const CategoryBadge = styled.span`
     border-radius: 15px;
     height: 1.35rem;
     position: relative;
+    ${asButton && css`cursor: pointer`}  
   `}
 `;
 
