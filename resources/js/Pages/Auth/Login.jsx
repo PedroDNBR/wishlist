@@ -2,26 +2,20 @@ import React, { useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { FluidContainer, Form, ImgAuth } from "@/styles/global";
 import { AuthTitleComponent } from "@/Components/AuthTitle";
-import AuthAccountSpan from "@/Components/AuthAccountSpan";
+import { AuthAccountSpan } from "@/Components/AuthAccountSpan";
 import { InputControlled } from "@/Components/Input";
 import { ButtonComponent } from "@/Components/Button";
 import { useForm } from "react-hook-form";
+import { useFormErrors } from "@/Hooks/useFormErrors";
 
-export default function Login({ errors: propsErrors }) {
+export default function Login({ errors: apiErrors }) {
   const {
     control,
     handleSubmit,
     setError,
-    formState: { errors }
   } = useForm();
 
-  useEffect(() => {
-    if (!propsErrors) return;
-    Object.keys(propsErrors).map((key) => {
-      setError(key, { type: 'custom', message: propsErrors[key] });
-    });
-  }, [propsErrors]);
-
+  useFormErrors(apiErrors, setError);
 
   function login(data) {
     Inertia.post('/users/login', data)

@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { readableColor } from 'polished'
+import { ImCross } from 'react-icons/im';
 
 export const Card = styled.div`
   ${({ theme }) => css`
@@ -68,7 +69,7 @@ export const CategoryBadge = styled.span`
     border-radius: 15px;
     height: 1.35rem;
     position: relative;
-    ${asButton && css`cursor: pointer`}  
+    ${asButton && css`cursor: pointer;`}  
   `}
 `;
 
@@ -93,5 +94,12 @@ export const DeleteButton = styled.button`
     position: absolute;
     right: 0;
     transform: translateY(-50%) translateX(50%);
+  `}
+`;
+
+export const CrossIcon = styled(ImCross)`
+ ${({ theme }) => css`
+    color: ${theme.red};
+    width: .7rem;
   `}
 `;

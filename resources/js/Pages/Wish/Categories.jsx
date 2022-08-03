@@ -1,126 +1,83 @@
-import Layout from "@/Base/Layout";
-import { useForm, useWatch } from "react-hook-form";
-import React, { useEffect, useState } from "react";
-import { HexColorPicker } from "react-colorful";
+import { Layout } from "@/Base/Layout";
+import { useForm } from "react-hook-form";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { InputControlled } from "@/Components/Input";
-import ProductCard from "@/Components/ProductCard";
-import { CategoryLayout, CategoryForm, CategoryFormLayout, CategoryListingContainer, SearchCategoryForm } from "@/styles/categories";
-import { ButtonComponent } from "@/Components/Button";
 import { Inertia } from "@inertiajs/inertia";
-import { BadgeBall, CategoryBadge, DeleteButton } from "@/Components/ProductCard/style";
-import { ImCross } from 'react-icons/im';
-import { theme } from "@/styles/theme";
+import { BadgeBall, CategoryBadge, CrossIcon, DeleteButton } from "@/Components/ProductCard/style";
+import { CategoryForm } from "@/Components/CategoryForm";
+import { CategoryFormLayout, CategoryLayout, CategoryListingContainer, SearchCategoryForm } from "@/Components/CategoryForm/styles";
+import { EditCategory } from "@/Components/EditCategory";
+import { useFormErrors } from "@/Hooks/useFormErrors";
 import * as Dialog from '@radix-ui/react-dialog';
 
-export default function Categories({ errors: propsErrors, categories }) {
-  const [color, setColor] = useState("#ffffff");
+export default function Categories({ errors: apiErrors, categories }) {
+  const createForm = useForm(); EditCategory
+  const [isEditing, setIsEditing] = useState(false);
+  const [editCategory, setEditCategory] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+
   const {
     control,
-    handleSubmit,
     setError,
     reset,
-    formState: { errors, }
-  } = useForm();
+  } = createForm;
+
+  const { handleErrors } = useFormErrors(apiErrors, setError, false);
 
   useEffect(() => {
-    if (!propsErrors) return;
-    Object.keys(propsErrors).map((key) => {
-      setError(key, { type: 'custom', message: propsErrors[key] });
-    });
-  }, [propsErrors]);
+    if (isEditing || !apiErrors) return;
 
-  const categoryName = useWatch({
-    control,
-    name: "name",
-  });
-
-  const [product, setProduct] = useState({
-    name: "Produto Favorito",
-    price: 3000,
-    category: {
-      name: categoryName,
-      color: color,
-    }
-  });
-
-  const colorSelectorStyle = {
-    width: '18.625rem',
-    height: '14.95rem',
-  }
-
-  useEffect(() => {
-    setProduct({
-      name: "Produto Favorito",
-      price: 3000,
-      category: {
-        name: categoryName,
-        color: color,
-      }
-    });
-  }, [categoryName, color])
-
+    handleErrors();
+  }, [apiErrors, isEditing])
 
   async function create(data) {
-    data.color = color;
     await Inertia.post('/categories', data);
-    reset();
-    setColor("#ffffff")
   }
 
   async function deleteCategory(id) {
     await Inertia.delete(`/categories/${id}`);
   }
 
-  const crossColor = {
-    color: theme.red,
-    width: '.7rem',
+  function closeModal() {
+    setOpenModal(false);
   }
-  const [container, setContainer] = React.useState(null);
+
   return (
     <>
       <Layout>
         <CategoryLayout>
           <CategoryFormLayout>
-            <ProductCard product={product} />
-            <CategoryForm>
-              <HexColorPicker style={colorSelectorStyle} color={color} onChange={setColor} />
-              <form onSubmit={handleSubmit(create)}>
-                <InputControlled control={control} label="Name" type="text" name="name" max='12' />
-                <ButtonComponent name="Create" />
-              </form>
-            </CategoryForm>
+            <CategoryForm form={createForm} onSubmit={create} buttonName='Create' />
           </CategoryFormLayout>
           <SearchCategoryForm>
             <InputControlled control={control} label="Search" type="text" name="search" max='12' />
           </SearchCategoryForm>
           <CategoryListingContainer>
-            {categories.map((category) => {
-              return (
-                <CategoryBadge key={category.id} color={category.color} asButton>
-                  <BadgeBall color={category.color} />
-                  {category.name}
-                  <DeleteButton onClick={() => deleteCategory(category.id)}>
-                    <ImCross style={crossColor} />
-                  </DeleteButton>
-                </CategoryBadge>
-              )
-            })}
+            <Dialog.Root open={openModal}>
+              {categories.map((category) => {
+                return (
+                  <Fragment key={category.id}>
+                    <CategoryBadge color={category.color}>
+                      <BadgeBall color={category.color} />
+                      <Dialog.Trigger onClick={() => {
+                        setEditCategory(category);
+                        setOpenModal(true);
+                      }}>
+                        {category.name}
+                      </Dialog.Trigger>
+                      <DeleteButton onClick={() => deleteCategory(category.id)}>
+                        <CrossIcon />
+                      </DeleteButton>
+                    </CategoryBadge>
+                  </Fragment>
+                )
+              })}
+              <Dialog.Portal>
+                <EditCategory closeModal={closeModal} buttonName='Update' category={editCategory} setIsEditing={setIsEditing} isEditing={isEditing} errors={apiErrors} />
+              </Dialog.Portal>
+            </Dialog.Root>
           </CategoryListingContainer>
         </CategoryLayout>
-        <Dialog.Root>
-          <Dialog.Trigger>trigger</Dialog.Trigger>
-
-          <Dialog.Portal>
-            <Dialog.Overlay />
-            <Dialog.Content>
-              <Dialog.Title>title</Dialog.Title>
-              <Dialog.Description>description</Dialog.Description>
-              <Dialog.Close>aaaaaaaaaaaaaaaaaaaaa</Dialog.Close>
-              aaaaaaaaaaaaaaaaa
-            </Dialog.Content>
-            aaaaaaaaaaaaaaaa
-          </Dialog.Portal>
-        </Dialog.Root>
       </Layout>
     </>
   )

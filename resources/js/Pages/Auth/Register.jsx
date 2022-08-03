@@ -4,23 +4,18 @@ import { InputControlled } from "@/Components/Input";
 import { FluidContainer, Form, ImgAuth } from "@/styles/global";
 import { ButtonComponent } from "@/Components/Button";
 import { AuthTitleComponent } from "@/Components/AuthTitle";
-import AuthAccountSpan from "@/Components/AuthAccountSpan";
+import { AuthAccountSpan } from "@/Components/AuthAccountSpan";
 import { Inertia } from "@inertiajs/inertia";
+import { useFormErrors } from "@/Hooks/useFormErrors";
 
-export default function Register({ errors: propsErrors }) {
+export default function Register({ errors: apiErrors }) {
 	const {
 		control,
 		handleSubmit,
 		setError,
-		formState: { errors }
 	} = useForm();
 
-	useEffect(() => {
-		if (!propsErrors) return;
-		Object.keys(propsErrors).map((key) => {
-			setError(key, { type: 'custom', message: propsErrors[key] });
-		});
-	}, [propsErrors]);
+	useFormErrors(apiErrors, setError);
 
 	async function register(data) {
 		await Inertia.post('/users/register', data);

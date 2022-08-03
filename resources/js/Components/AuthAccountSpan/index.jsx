@@ -1,7 +1,7 @@
 import { AuthAccountSpanTitle, AuthAccountLink } from "./style";
 
 
-export default function AuthAccountSpan({content, link, linkTitle}) {
+export function AuthAccountSpan({ content, link, linkTitle }) {
     return <>
         <AuthAccountSpanTitle>
             {content}

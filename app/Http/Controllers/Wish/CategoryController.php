@@ -16,7 +16,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $categories = Category::fromLoggedUser()->get();
+        $categories = Category::fromLoggedUser()->orderBy('name')->get();
         return Inertia::render('Wish/Categories', [
             'categories' => $categories
         ]);
@@ -29,6 +29,12 @@ class CategoryController extends Controller
             'name' => $request['name'],
             'user_id' =>  Auth::user()->id,
         ]);
+        return redirect('/categories');
+    }
+
+    public function update(Category $category, Request $request)
+    {
+        $category->update($request->all());
         return redirect('/categories');
     }
 

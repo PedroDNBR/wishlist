@@ -21,7 +21,7 @@ export const CategoryFormLayout = styled.div`
   }
 `;
 
-export const CategoryForm = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

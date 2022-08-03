@@ -2,7 +2,7 @@ import { Container, Menu, Content, LogoW, LogoL, Icon, ProfineImageContainer, Pr
 import { MdLabel } from 'react-icons/md';
 import { FaShoppingBasket } from 'react-icons/fa';
 
-export default function Layout({ children }) {
+export function Layout({ children }) {
   return (
     <>
       <Container>

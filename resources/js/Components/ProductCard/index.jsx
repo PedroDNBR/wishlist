@@ -2,7 +2,7 @@ import React from "react";
 import { BadgeBall, Card, CategoryBadge, Image, ImageContainer, Info, Price, Title } from "./style";
 
 
-export default function ProductCard({ product }) {
+export function ProductCard({ product }) {
   return (
     <Card>
       <ImageContainer>

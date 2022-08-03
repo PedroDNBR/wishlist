@@ -1,5 +1,5 @@
-import Layout from "@/Base/Layout";
-import ProductCard from "@/Components/ProductCard";
+import { Layout } from "@/Base/Layout";
+import { ProductCard } from "@/Components/ProductCard";
 import { Inertia } from "@inertiajs/inertia";
 import React from "react";
 
