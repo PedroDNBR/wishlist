@@ -45,7 +45,7 @@ export const LogoL = styled.span`
 	`};
 `;
 
-export const Icon = styled.label`
+export const Icon = styled.span`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
@@ -53,6 +53,7 @@ export const Icon = styled.label`
     color: ${theme.white[100]};
     font-size: 2.18rem;
     padding: 2rem;
+    cursor: pointer;
 	`};
 `;
 
@@ -61,7 +62,7 @@ export const ProfileImage = styled.img`
   height: 100%;
 `;
 
-export const ProfineImageContainer = styled.div`
+export const ProfileImageContainer = styled.div`
    ${({ theme }) => css`
     overflow: hidden;
     border-radius: 100px;

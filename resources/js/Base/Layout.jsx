@@ -1,20 +1,26 @@
-import { Container, Menu, Content, LogoW, LogoL, Icon, ProfineImageContainer, ProfileImage } from "./style";
+import { Container, Menu, Content, LogoW, LogoL, Icon, ProfileImageContainer, ProfileImage } from "./style";
 import { MdLabel } from 'react-icons/md';
 import { FaShoppingBasket } from 'react-icons/fa';
+import { Inertia } from "@inertiajs/inertia";
 
 export function Layout({ children }) {
+
+  function redirectToPage(url) {
+    Inertia.get(url);
+  }
+
   return (
     <>
       <Container>
         <Menu>
           <LogoW>W<LogoL>L</LogoL></LogoW>
           <div>
-            <Icon><FaShoppingBasket /></Icon>
-            <Icon><MdLabel /></Icon>
+            <button onClick={() => redirectToPage('/wishes')}><Icon><FaShoppingBasket /></Icon></button>
+            <button onClick={() => redirectToPage('/categories')}><Icon><MdLabel /></Icon></button>
           </div>
-          <ProfineImageContainer>
-            <ProfileImage src="https://scontent.fccm4-1.fna.fbcdn.net/v/t39.30808-6/284475660_2604059716394010_3231961472765155768_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=3BH8cc7QrIMAX8XjzM_&_nc_ht=scontent.fccm4-1.fna&oh=00_AT_Z5mKaxVic4RjZh6zPeH_zA82lzPBHUwc2rL6wjkEp7Q&oe=62E24448" />
-          </ProfineImageContainer>
+          <ProfileImageContainer>
+            <ProfileImage src="https://i.pinimg.com/736x/ec/e2/b0/ece2b0f541d47e4078aef33ffd22777e.jpg" />
+          </ProfileImageContainer>
         </Menu>
         <Content>
           {children}
