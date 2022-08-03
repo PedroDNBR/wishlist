@@ -7,16 +7,16 @@ function logout() {
 	Inertia.delete('/users/logout')
 }
 
-export default function Home({ errors }) {
+export default function Home({ errors, products = [] }) {
 	return (
 		<>
 			{/* <button onClick={logout}>Loguot</button> */}
 			<Layout>
-				<ProductCard />
-				<ProductCard />
-				<ProductCard />
-				<ProductCard />
-				<ProductCard />
+				{products.map((product) => {
+					return (
+						<ProductCard product={product} />
+					);
+				})}
 			</Layout>
 		</>
 	)
