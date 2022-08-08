@@ -39,12 +39,14 @@ export const Info = styled.div`
   `}
 `;
 
-
 export const Title = styled.h3`
   ${({ theme }) => css`
     color: ${theme.white[100]};
     font-weight: 600;
     font-size: 1.33rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   `}
 `;
 

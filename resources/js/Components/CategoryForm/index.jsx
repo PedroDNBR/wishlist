@@ -31,10 +31,12 @@ export function CategoryForm({ form, onSubmit, category, buttonName, closeModal 
   const [product, setProduct] = useState({
     name: "Produto Favorito",
     price: 3000,
-    category: {
-      name: categoryName,
-      color: color,
-    }
+    categories: [
+      {
+        name: categoryName,
+        color: color,
+      }
+    ]
   });
 
   useEffect(() => {
@@ -45,10 +47,12 @@ export function CategoryForm({ form, onSubmit, category, buttonName, closeModal 
     setProduct({
       name: "Produto Favorito",
       price: 3000,
-      category: {
-        name: categoryName,
-        color: color,
-      }
+      categories: [
+        {
+          name: categoryName,
+          color: color,
+        }
+      ]
     });
   }, [categoryName, color])
 

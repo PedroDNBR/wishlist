@@ -9,12 +9,16 @@ export function ProductCard({ product }) {
         <Image src="https://img.terabyteshop.com.br/produto/g/placa-de-video-galax-geforce-rtx-3090-ex-gaming-white-1-click-oc-24gb-gddr6x-384bit_104312.png" />
       </ImageContainer>
       <Info>
-        <Title>{product.name}</Title>
+        <Title><a href={product?.url} target="_blank">{product.name}</a></Title>
         <Price>R$ {product.price}</Price>
-        <CategoryBadge color={product.category.color}>
-          <BadgeBall color={product.category.color} />
-          {product.category.name}
-        </CategoryBadge>
+        {product?.categories?.map((category) => {
+          return (
+            <CategoryBadge color={category.color}>
+              <BadgeBall color={category.color} />
+              {category.name}
+            </CategoryBadge>
+          )
+        })}
       </Info>
     </Card>
   )

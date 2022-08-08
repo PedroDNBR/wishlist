@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Wish\CategoryController;
+use App\Http\Controllers\Wish\ProductController;
 use App\Http\Controllers\Wish\WishController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,6 +34,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/categories', [CategoryController::class, 'store'])->name('categoryStore');
     Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categoryDestroy');
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categoryDestroy');
+
+    Route::get('/create-product', [ProductController::class, 'create'])->name('categories');
 });
 
 Route::get('/', function () {
