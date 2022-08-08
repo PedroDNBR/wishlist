@@ -32,7 +32,7 @@ export default function Login({ errors: apiErrors }) {
             <ButtonComponent name="Log in" />
           </Form>
         </div>
-        <ImgAuth src="/assets/imgs/picture.svg" alt="" />
+        <ImgAuth src="/assets/imgs/newpicture.svg" alt="" />
       </FluidContainer>
     </>
   );
