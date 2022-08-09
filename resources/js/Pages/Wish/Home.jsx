@@ -14,7 +14,7 @@ export default function Home({ errors, products = [] }) {
 			<Layout>
 				{products.map((product) => {
 					return (
-						<ProductCard product={product} />
+						<ProductCard key={product.id} product={product} />
 					);
 				})}
 			</Layout>

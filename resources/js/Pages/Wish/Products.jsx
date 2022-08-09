@@ -58,6 +58,12 @@ export default function Home({ errors, categories }) {
     });
   }, [productName, productPrice, productUrl, productCategories])
 
+  function setCategory(category) {
+    if (productCategories.length > 3) return;
+    if (productCategories.find((arrayCategory) => arrayCategory.id === category.id)) return;
+    setProductCategories([...productCategories, category]);
+  }
+
   return (
     <>
       <Layout>
@@ -70,7 +76,7 @@ export default function Home({ errors, categories }) {
               <Dropdown side="right" align="start">
                 {categories.map((category) => {
                   return (
-                    <button key={category.id} onClick={() => setProductCategories([...productCategories, category])}>
+                    <button key={category.id} onClick={() => setCategory(category)}>
                       <Item color={category.color}>
                         {category.name}
                       </Item>
