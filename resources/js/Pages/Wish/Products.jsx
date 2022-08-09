@@ -18,11 +18,12 @@ export default function Home({ errors, categories }) {
     setValue,
   } = useForm();
 
+  const [productCategories, setProductCategories] = useState([]);
+
   const [product, setProduct] = useState({
     name: "Produto Favorito",
     price: 3000,
-    categories: [
-    ]
+    categories: productCategories,
   });
 
   const productName = useWatch({
@@ -53,10 +54,9 @@ export default function Home({ errors, categories }) {
       name: productName ? productName : "Produto Favorito",
       price: productPrice ? productPrice : 3000,
       url: productUrl,
-      categories: [
-      ]
+      categories: productCategories
     });
-  }, [productName, productPrice, productUrl])
+  }, [productName, productPrice, productUrl, productCategories])
 
   return (
     <>
@@ -64,11 +64,17 @@ export default function Home({ errors, categories }) {
         <CategoryFormLayout>
           <ProductCard product={product}>
             <DropdownMenu.Root>
-              <Trigger><GoPlus /></Trigger>
+              <div>
+                <Trigger><GoPlus /></Trigger>
+              </div>
               <Dropdown side="right" align="start">
                 {categories.map((category) => {
                   return (
-                    <Item color={category.color}>{category.name}</Item>
+                    <button key={category.id} onClick={() => setProductCategories([...productCategories, category])}>
+                      <Item color={category.color}>
+                        {category.name}
+                      </Item>
+                    </button>
                   )
                 })}
               </Dropdown>

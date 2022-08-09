@@ -11,15 +11,19 @@ export function ProductCard({ children = null, product }) {
       <Info>
         <Title><a href={product?.url} target="_blank">{product.name}</a></Title>
         <Price>R$ {product.price}</Price>
-        {product?.categories?.map((category) => {
-          return (
-            <CategoryBadge color={category.color}>
-              <BadgeBall color={category.color} />
-              {category.name}
-            </CategoryBadge>
-          )
-        })}
-        {children}
+        <div>
+          {product?.categories?.map((category) => {
+            return (
+              <div key={category.id}>
+                <CategoryBadge color={category.color}>
+                  <BadgeBall color={category.color} />
+                  {category.name}
+                </CategoryBadge>
+              </div>
+            )
+          })}
+          {children}
+        </div>
       </Info>
     </Card>
   )

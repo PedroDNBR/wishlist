@@ -35,7 +35,12 @@ export const Info = styled.div`
   ${({ theme }) => css`
     text-align: left;
     color: ${theme.white[100]};
-    height: 4rem;
+
+    div {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
   `}
 `;
 

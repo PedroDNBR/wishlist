@@ -7,11 +7,11 @@ export const Content = styled(DropdownMenu.Content)`
     background: ${theme.white[100]};
     color: #000;
     margin: 0 10px;
-    padding: 0.5rem;
-    border-radius: 15px;
+    padding: 0.25rem;
+    border-radius: 0 7.5px 7.5px 7.5px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
   `}
 `;
 
