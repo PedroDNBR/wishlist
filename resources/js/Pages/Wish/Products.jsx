@@ -70,9 +70,11 @@ export default function Home({ errors, categories }) {
         <CategoryFormLayout>
           <ProductCard product={product}>
             <DropdownMenu.Root>
-              <div>
-                <Trigger><GoPlus /></Trigger>
-              </div>
+              {productCategories.length < 4 && (
+                <div>
+                  <Trigger><GoPlus /></Trigger>
+                </div>
+              )}
               <Dropdown side="right" align="start">
                 {categories.map((category) => {
                   return (
