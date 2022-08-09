@@ -2,7 +2,7 @@ import React from "react";
 import { BadgeBall, Card, CategoryBadge, Image, ImageContainer, Info, Price, Title } from "./style";
 
 
-export function ProductCard({ product }) {
+export function ProductCard({ children = null, product }) {
   return (
     <Card>
       <ImageContainer>
@@ -19,6 +19,7 @@ export function ProductCard({ product }) {
             </CategoryBadge>
           )
         })}
+        {children}
       </Info>
     </Card>
   )

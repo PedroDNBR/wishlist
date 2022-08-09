@@ -5,8 +5,12 @@ import { InputControlled } from "@/Components/Input";
 import { ProductCard } from "@/Components/ProductCard";
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { Dropdown } from "@/Components/Dropdown";
+import { Item, Trigger } from "@/Components/Dropdown/styles";
+import { GoPlus } from 'react-icons/go'
 
-export default function Home({ errors }) {
+export default function Home({ errors, categories }) {
   const {
     control,
     setError,
@@ -58,7 +62,18 @@ export default function Home({ errors }) {
     <>
       <Layout>
         <CategoryFormLayout>
-          <ProductCard product={product} />
+          <ProductCard product={product}>
+            <DropdownMenu.Root>
+              <Trigger><GoPlus /></Trigger>
+              <Dropdown side="right" align="start">
+                {categories.map((category) => {
+                  return (
+                    <Item color={category.color}>{category.name}</Item>
+                  )
+                })}
+              </Dropdown>
+            </DropdownMenu.Root>
+          </ProductCard>
           <Container>
             <form>
               <InputControlled control={control} label="Name" type="text" name="name" max="55" />
