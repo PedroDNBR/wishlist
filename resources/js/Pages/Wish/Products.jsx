@@ -64,11 +64,18 @@ export default function Home({ errors, categories }) {
     setProductCategories([...productCategories, category]);
   }
 
+  function deleteCategory(id) {
+    const newItems = productCategories.filter((category) => category.id !== id);
+    setProductCategories(newItems);
+  }
+  console.log(categories);
+  console.log(productCategories);
+
   return (
     <>
       <Layout>
         <CategoryFormLayout>
-          <ProductCard product={product}>
+          <ProductCard product={product} deletableCategory={true} onDelete={deleteCategory}>
             <DropdownMenu.Root>
               {productCategories.length < 4 && (
                 <div>
@@ -76,7 +83,7 @@ export default function Home({ errors, categories }) {
                 </div>
               )}
               <Dropdown side="right" align="start">
-                {categories.map((category) => {
+                {categories.filter(category => !productCategories.includes(category)).map((category) => {
                   return (
                     <button key={category.id} onClick={() => setCategory(category)}>
                       <Item color={category.color}>

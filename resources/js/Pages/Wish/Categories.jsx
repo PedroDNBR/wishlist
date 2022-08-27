@@ -1,14 +1,14 @@
 import { Layout } from "@/Base/Layout";
 import { useForm } from "react-hook-form";
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { InputControlled } from "@/Components/Input";
 import { Inertia } from "@inertiajs/inertia";
-import { BadgeBall, CategoryBadge, CrossIcon, DeleteButton } from "@/Components/ProductCard/style";
 import { CategoryForm } from "@/Components/CategoryForm";
 import { CategoryFormLayout, CategoryLayout, CategoryListingContainer, SearchCategoryForm } from "@/Components/CategoryForm/styles";
 import { EditCategory } from "@/Components/EditCategory";
 import { useFormErrors } from "@/Hooks/useFormErrors";
 import * as Dialog from '@radix-ui/react-dialog';
+import { Category } from "@/Components/CategoryBadge";
 
 export default function Categories({ errors: apiErrors, categories }) {
   const createForm = useForm(); EditCategory
@@ -34,10 +34,6 @@ export default function Categories({ errors: apiErrors, categories }) {
     await Inertia.post('/categories', data);
   }
 
-  async function deleteCategory(id) {
-    await Inertia.delete(`/categories/${id}`);
-  }
-
   function closeModal() {
     setOpenModal(false);
   }
@@ -56,20 +52,12 @@ export default function Categories({ errors: apiErrors, categories }) {
             <Dialog.Root open={openModal}>
               {categories.map((category) => {
                 return (
-                  <Fragment key={category.id}>
-                    <CategoryBadge color={category.color}>
-                      <BadgeBall color={category.color} />
-                      <Dialog.Trigger onClick={() => {
-                        setEditCategory(category);
-                        setOpenModal(true);
-                      }}>
-                        {category.name}
-                      </Dialog.Trigger>
-                      <DeleteButton onClick={() => deleteCategory(category.id)}>
-                        <CrossIcon />
-                      </DeleteButton>
-                    </CategoryBadge>
-                  </Fragment>
+                  <Dialog.Trigger key={category.id} onClick={() => {
+                    setEditCategory(category);
+                    setOpenModal(true);
+                  }}>
+                    <Category category={category} canDelete={true} />
+                  </Dialog.Trigger>
                 )
               })}
               <Dialog.Portal>

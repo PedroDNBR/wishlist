@@ -1,18 +1,23 @@
-import { useState } from 'react';
+import { Inertia } from '@inertiajs/inertia';
+import { BadgeBall, CategoryBadge, CrossIcon, DeleteButton } from './style';
 
-export function CategoryBadge({ name }) {
+export function Category({ category, canDelete = false, onDelete = null }) {
+  async function deleteCategory(event, id) {
+    event.stopPropagation();
+    if (onDelete) return onDelete(id);
+
+    await Inertia.delete(`/categories/${id}`);
+  }
+
   return (
     <CategoryBadge color={category.color}>
       <BadgeBall color={category.color} />
-      <Dialog.Trigger onClick={() => {
-        setEditCategory(category);
-        setOpenModal(true);
-      }}>
-        {category.name}
-      </Dialog.Trigger>
-      <DeleteButton onClick={() => deleteCategory(category.id)}>
-        <CrossIcon />
-      </DeleteButton>
+      {category.name}
+      {canDelete && (
+        <DeleteButton onClick={(e) => deleteCategory(e, category.id)}>
+          <CrossIcon />
+        </DeleteButton>
+      )}
     </CategoryBadge>
   );
 }

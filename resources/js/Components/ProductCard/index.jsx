@@ -1,7 +1,8 @@
 import React from "react";
-import { BadgeBall, Card, CategoryBadge, Image, ImageContainer, Info, Price, Title } from "./style";
+import { Category } from "../CategoryBadge";
+import { Card, CategoryWrapper, Image, ImageContainer, Info, Price, Title } from "./style";
 
-export function ProductCard({ children = null, product, deletableCategory = false }) {
+export function ProductCard({ children = null, product, deletableCategory = false, onDelete = null }) {
   return (
     <Card>
       <ImageContainer>
@@ -10,19 +11,12 @@ export function ProductCard({ children = null, product, deletableCategory = fals
       <Info>
         <Title><a href={product?.url} target="_blank">{product.name}</a></Title>
         <Price>R$ {product.price}</Price>
-        <div>
-          {product?.categories?.map((category) => {
-            return (
-              <div key={category.id}>
-                <CategoryBadge color={category.color}>
-                  <BadgeBall color={category.color} />
-                  {category.name}
-                </CategoryBadge>
-              </div>
-            )
-          })}
+        <CategoryWrapper>
+          {product?.categories?.map((category) => (
+            <Category category={category} canDelete={deletableCategory} key={category.id ? category.id : "1"} onDelete={onDelete} />
+          ))}
           {children}
-        </div>
+        </CategoryWrapper>
       </Info>
     </Card>
   )
