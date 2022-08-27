@@ -1,8 +1,7 @@
 import React from "react";
 import { BadgeBall, Card, CategoryBadge, Image, ImageContainer, Info, Price, Title } from "./style";
 
-
-export function ProductCard({ children = null, product }) {
+export function ProductCard({ children = null, product, deletableCategory = false }) {
   return (
     <Card>
       <ImageContainer>
