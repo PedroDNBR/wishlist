@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bdb11cbd47b3a0a4411982da1a59ffe2",
+    "content-hash": "7d8e0113a69b801f52a8a540015e9aac",
     "packages": [
         {
             "name": "brick/math",
@@ -961,6 +961,79 @@
                 }
             ],
             "time": "2022-01-18T10:59:08+00:00"
+        },
+        {
+            "name": "kovah/laravel-html-meta",
+            "version": "v2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kovah/laravel-html-meta.git",
+                "reference": "b58d9b2e2ac0f431a70a0400c5d025e83f6a321c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kovah/laravel-html-meta/zipball/b58d9b2e2ac0f431a70a0400c5d025e83f6a321c",
+                "reference": "b58d9b2e2ac0f431a70a0400c5d025e83f6a321c",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.2",
+                "illuminate/http": "^7.0 | ^8.0 | ^9.0",
+                "illuminate/support": "^7.0 | ^8.0 | ^9.0",
+                "php": "^7.4 | ^8.0 | ^8.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4.2",
+                "orchestra/testbench": "^6.23 || ^7.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Kovah\\HtmlMeta\\HtmlMetaServiceProvider"
+                    ],
+                    "aliases": {
+                        "HtmlMeta": "Kovah\\HtmlMeta\\Facades\\HtmlMeta"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kovah\\HtmlMeta\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Woblick",
+                    "email": "mail@kovah.de",
+                    "homepage": "https://kovah.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel package to parse meta information from an URL.",
+            "homepage": "https://github.com/kovah/laravel-html-meta",
+            "keywords": [
+                "html",
+                "laravel",
+                "meta",
+                "parser"
+            ],
+            "support": {
+                "issues": "https://github.com/Kovah/laravel-html-meta/issues",
+                "source": "https://github.com/Kovah/laravel-html-meta/tree/v2.1.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/kovah",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-05-06T14:07:18+00:00"
         },
         {
             "name": "laravel/framework",

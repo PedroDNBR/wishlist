@@ -9,6 +9,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { Dropdown } from "@/Components/Dropdown";
 import { Item, Trigger } from "@/Components/Dropdown/styles";
 import { GoPlus } from 'react-icons/go'
+import axios from "axios";
 
 export default function Home({ errors, categories }) {
   const {
@@ -18,11 +19,15 @@ export default function Home({ errors, categories }) {
     setValue,
   } = useForm();
 
+  const placeholderImage = "https://lolitajoias.com.br/wp-content/uploads/2020/09/no-image.jpg"
+
   const [productCategories, setProductCategories] = useState([]);
+  const [productImage, setProductImage] = useState(placeholderImage);
 
   const [product, setProduct] = useState({
     name: "Produto Favorito",
     price: 3000,
+    image: productImage,
     categories: productCategories,
   });
 
@@ -47,16 +52,35 @@ export default function Home({ errors, categories }) {
     price = price.replace(/(\d)(\d{2})$/, "$1.$2");
     price = price.replace(/(?=(\d{3})+(\D))\B/g, ",");
     setValue('lowest_price', price);
-  }, [productPrice])
+  }, [productPrice]);
 
-  useEffect(() => {
+  async function getImage() {
+    if (productUrl) {
+      try {
+        const response = await axios.post('/api/image', { url: productUrl });
+        setProductImage(response.data);
+      } catch (e) {
+      }
+    } else {
+      setProductImage(placeholderImage);
+    }
+    defineProduct();
+  }
+
+  function defineProduct() {
     setProduct({
       name: productName ? productName : "Produto Favorito",
       price: productPrice ? productPrice : 3000,
       url: productUrl,
+      image: productImage,
       categories: productCategories
     });
+  }
+
+  useEffect(() => {
+    getImage();
   }, [productName, productPrice, productUrl, productCategories])
+
 
   function setCategory(category) {
     if (productCategories.length > 3) return;
@@ -68,8 +92,6 @@ export default function Home({ errors, categories }) {
     const newItems = productCategories.filter((category) => category.id !== id);
     setProductCategories(newItems);
   }
-  console.log(categories);
-  console.log(productCategories);
 
   return (
     <>
@@ -98,7 +120,7 @@ export default function Home({ errors, categories }) {
           <Container>
             <form>
               <InputControlled control={control} label="Name" type="text" name="name" max="55" />
-              <InputControlled control={control} label="URL" type="text" name="url" />
+              <InputControlled control={control} label="URL" type="text" name="url" onPaste={getImage} />
               <InputControlled control={control} label="Lowest Price" type="text" max="18" name="lowest_price" />
               <ButtonComponent name="Create" />
             </form>

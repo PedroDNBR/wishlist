@@ -6,7 +6,7 @@ export function ProductCard({ children = null, product, deletableCategory = fals
   return (
     <Card>
       <ImageContainer>
-        <Image src="https://img.terabyteshop.com.br/produto/g/placa-de-video-galax-geforce-rtx-3090-ex-gaming-white-1-click-oc-24gb-gddr6x-384bit_104312.png" />
+        <Image src={product.image} />
       </ImageContainer>
       <Info>
         <Title><a href={product?.url} target="_blank">{product.name}</a></Title>

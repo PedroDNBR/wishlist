@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useController, useFormContext, Controller } from 'react-hook-form';
+import { useController } from 'react-hook-form';
 import { Container, Error, Input, Label } from './style';
 
 export function InputControlled({ label, type, name, max = null, control, ...rest }) {
@@ -16,6 +15,7 @@ export function InputControlled({ label, type, name, max = null, control, ...res
 					type={type}
 					name={name}
 					maxLength={max}
+					{...rest}
 				/>
 			</Container>
 			<Error>{error}</Error>

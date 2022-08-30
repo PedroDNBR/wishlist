@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Wish;
 
 use App\Http\Controllers\Controller;
 use App\Models\Wish\Category;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use Kovah\HtmlMeta\Facades\HtmlMeta;
 
 class ProductController extends Controller
 {
@@ -19,5 +20,12 @@ class ProductController extends Controller
         return Inertia::render('Wish/Products', [
             'categories' => $categories,
         ]);
+    }
+
+    public function getImage(Request $request)
+    {
+        $metas = HtmlMeta::forUrl($request['url'])->getMeta();
+
+        return $metas['og:image'];
     }
 }

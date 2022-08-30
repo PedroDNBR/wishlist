@@ -35,7 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categoryDestroy');
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categoryDestroy');
 
-    Route::get('/create-product', [ProductController::class, 'create'])->name('categories');
+    Route::get('/create-product', [ProductController::class, 'create'])->name('product');
 });
 
 Route::get('/', function () {

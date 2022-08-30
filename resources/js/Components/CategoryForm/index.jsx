@@ -9,6 +9,7 @@ import { ProductCard } from "../ProductCard";
 export function CategoryForm({ form, onSubmit, category, buttonName, closeModal }) {
   const { control, handleSubmit, reset, setValue } = form;
   const [color, setColor] = useState(category?.color ?? '#ffffff');
+  const placeholderImage = "https://lolitajoias.com.br/wp-content/uploads/2020/09/no-image.jpg"
 
   async function submitHandler(data) {
     setColor("#ffffff");
@@ -31,6 +32,7 @@ export function CategoryForm({ form, onSubmit, category, buttonName, closeModal 
   const [product, setProduct] = useState({
     name: "Produto Favorito",
     price: 3000,
+    image: placeholderImage,
     categories: [
       {
         name: categoryName,
@@ -47,6 +49,7 @@ export function CategoryForm({ form, onSubmit, category, buttonName, closeModal 
     setProduct({
       name: "Produto Favorito",
       price: 3000,
+      image: placeholderImage,
       categories: [
         {
           name: categoryName,
