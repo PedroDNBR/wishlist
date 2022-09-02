@@ -55,31 +55,33 @@ export default function Home({ errors, categories }) {
   }, [productPrice]);
 
   async function getImage() {
-    if (productUrl) {
-      try {
-        const response = await axios.post('/api/image', { url: productUrl });
-        setProductImage(response.data);
-      } catch (e) {
-      }
-    } else {
-      setProductImage(placeholderImage);
+    if (!productUrl) return;
+    try {
+      const response = await axios.post('/api/image', { url: productUrl });
+      setProductImage(response.data);
+    } catch (e) {
+      console.log(e);
     }
-    defineProduct();
   }
 
   function defineProduct() {
-    setProduct({
+    const newProduct = {
       name: productName ? productName : "Produto Favorito",
       price: productPrice ? productPrice : 3000,
       url: productUrl,
       image: productImage,
       categories: productCategories
-    });
+    };
+    setProduct(newProduct);
   }
 
   useEffect(() => {
+    defineProduct();
+  }, [productName, productPrice, productCategories, productImage]);
+
+  useEffect(() => {
     getImage();
-  }, [productName, productPrice, productUrl, productCategories])
+  }, [productUrl]);
 
 
   function setCategory(category) {
