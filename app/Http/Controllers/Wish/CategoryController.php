@@ -14,12 +14,26 @@ class CategoryController extends Controller
     {
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $categories = Category::fromLoggedUser()->orderBy('name')->get();
+        $categories = Category::fromLoggedUser();
+        $search = $request['search'];
+        if (!empty($search))
+            $categories = $categories->where('name', 'ilike', '%' . $search . '%');
+
+        $categories = $categories->orderBy('name')->get();
         return Inertia::render('Wish/Categories', [
             'categories' => $categories
         ]);
+    }
+
+    public function search(Request $request)
+    {
+        $categories = Category::fromLoggedUser()
+            ->where('name', 'ilike', '%' . $request['search'] . '%')
+            ->orderBy('name')
+            ->get();
+        return $categories;
     }
 
     public function store(Request $request)

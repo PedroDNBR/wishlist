@@ -1,5 +1,5 @@
 import { Layout } from "@/Base/Layout";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import React, { useEffect, useState } from "react";
 import { InputControlled } from "@/Components/Input";
 import { Inertia } from "@inertiajs/inertia";
@@ -9,12 +9,14 @@ import { EditCategory } from "@/Components/EditCategory";
 import { useFormErrors } from "@/Hooks/useFormErrors";
 import * as Dialog from '@radix-ui/react-dialog';
 import { Category } from "@/Components/CategoryBadge";
+import axios from "axios";
 
 export default function Categories({ errors: apiErrors, categories }) {
   const createForm = useForm(); EditCategory
   const [isEditing, setIsEditing] = useState(false);
   const [editCategory, setEditCategory] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const [listCategories, setListCategories] = useState(categories);
 
   const {
     control,
@@ -38,6 +40,25 @@ export default function Categories({ errors: apiErrors, categories }) {
     setOpenModal(false);
   }
 
+  const search = useWatch({
+    control,
+    name: "search",
+  });
+
+  async function getSearch() {
+    const newCategoryList = await axios.get(`/categories/search?search=${search}`);
+    console.log(newCategoryList.data);
+    setListCategories(newCategoryList.data);
+  }
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (search) getSearch();
+    }, 1500)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [search])
+
   return (
     <>
       <Layout>
@@ -50,7 +71,7 @@ export default function Categories({ errors: apiErrors, categories }) {
           </SearchCategoryForm>
           <CategoryListingContainer>
             <Dialog.Root open={openModal}>
-              {categories.map((category) => {
+              {listCategories.map((category) => {
                 return (
                   <Dialog.Trigger key={category.id} onClick={() => {
                     setEditCategory(category);

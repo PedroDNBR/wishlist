@@ -31,6 +31,7 @@ Route::prefix('/users')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/wishes', [WishController::class, 'index'])->name('dashboard');
     Route::get('/categories', [CategoryController::class, 'create'])->name('categories');
+    Route::get('/categories/search', [CategoryController::class, 'search'])->name('categoriesSearch');
     Route::post('/categories', [CategoryController::class, 'store'])->name('categoryStore');
     Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categoryDestroy');
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categoryDestroy');
