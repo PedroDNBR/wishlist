@@ -19,7 +19,7 @@ class CategoryController extends Controller
         $categories = Category::fromLoggedUser();
         $search = $request['search'];
         if (!empty($search))
-            $categories = $categories->where('name', 'ilike', '%' . $search . '%');
+            $categories = $categories->where('name', 'like', '%' . $search . '%');
 
         $categories = $categories->orderBy('name')->get();
         return Inertia::render('Wish/Categories', [
@@ -30,7 +30,7 @@ class CategoryController extends Controller
     public function search(Request $request)
     {
         $categories = Category::fromLoggedUser()
-            ->where('name', 'ilike', '%' . $request['search'] . '%')
+            ->where('name', 'like', '%' . $request['search'] . '%')
             ->orderBy('name')
             ->get();
         return $categories;
