@@ -47,17 +47,24 @@ export default function Categories({ errors: apiErrors, categories }) {
 
   async function getSearch() {
     const newCategoryList = await axios.get(`/categories/search?search=${search}`);
-    console.log(newCategoryList.data);
     setListCategories(newCategoryList.data);
   }
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       if (search) getSearch();
+      else setListCategories(categories);
     }, 1500)
 
     return () => clearTimeout(delayDebounceFn)
   }, [search])
+
+  useEffect(() => {
+    if (search)
+      getSearch();
+    else
+      setListCategories(categories);
+  }, [categories]);
 
   return (
     <>
