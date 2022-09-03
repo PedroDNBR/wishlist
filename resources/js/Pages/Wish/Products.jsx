@@ -10,14 +10,24 @@ import { Dropdown } from "@/Components/Dropdown";
 import { Item, Trigger } from "@/Components/Dropdown/styles";
 import { GoPlus } from 'react-icons/go'
 import axios from "axios";
+import { Inertia } from "@inertiajs/inertia";
+import { useFormErrors } from "@/Hooks/useFormErrors";
 
 export default function Home({ errors, categories }) {
   const {
     control,
     setError,
     reset,
+    handleSubmit,
     setValue,
   } = useForm();
+
+  useFormErrors(errors, setError);
+
+  async function sendProduct() {
+    await Inertia.post('/product', product);
+    reset();
+  }
 
   const placeholderImage = "https://lolitajoias.com.br/wp-content/uploads/2020/09/no-image.jpg"
 
@@ -26,8 +36,8 @@ export default function Home({ errors, categories }) {
 
   const [product, setProduct] = useState({
     name: "Produto Favorito",
-    price: 3000,
-    image: productImage,
+    lowest_price: 3000,
+    image_url: productImage,
     categories: productCategories,
   });
 
@@ -67,9 +77,9 @@ export default function Home({ errors, categories }) {
   function defineProduct() {
     const newProduct = {
       name: productName ? productName : "Produto Favorito",
-      price: productPrice ? productPrice : 3000,
+      lowest_price: productPrice ? productPrice : 3000,
       url: productUrl,
-      image: productImage,
+      image_url: productImage,
       categories: productCategories
     };
     setProduct(newProduct);
@@ -120,7 +130,7 @@ export default function Home({ errors, categories }) {
             </DropdownMenu.Root>
           </ProductCard>
           <Container>
-            <form>
+            <form onSubmit={handleSubmit(sendProduct)}>
               <InputControlled control={control} label="Name" type="text" name="name" max="55" />
               <InputControlled control={control} label="URL" type="text" name="url" onPaste={getImage} />
               <InputControlled control={control} label="Lowest Price" type="text" max="18" name="lowest_price" />

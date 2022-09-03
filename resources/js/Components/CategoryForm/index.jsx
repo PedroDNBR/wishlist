@@ -31,8 +31,8 @@ export function CategoryForm({ form, onSubmit, category, buttonName, closeModal 
 
   const [product, setProduct] = useState({
     name: "Produto Favorito",
-    price: 3000,
-    image: placeholderImage,
+    lowest_price: 3000,
+    image_url: placeholderImage,
     categories: [
       {
         name: categoryName,
@@ -48,8 +48,8 @@ export function CategoryForm({ form, onSubmit, category, buttonName, closeModal 
   useEffect(() => {
     setProduct({
       name: "Produto Favorito",
-      price: 3000,
-      image: placeholderImage,
+      lowest_price: 3000,
+      image_url: placeholderImage,
       categories: [
         {
           name: categoryName,

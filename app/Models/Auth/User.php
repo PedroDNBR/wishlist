@@ -3,6 +3,7 @@
 namespace App\Models\Auth;
 
 use App\Models\BaseModel;
+use App\Models\Wish\Product;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -75,5 +76,10 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     public function setPasswordConfirmationAttribute(string $value)
     {
         $this->attributes['password_confirmation'] = bcrypt($value);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 }

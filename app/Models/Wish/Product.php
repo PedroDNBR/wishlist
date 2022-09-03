@@ -3,9 +3,8 @@
 namespace App\Models\Wish;
 
 use App\Models\BaseModel;
-use Illuminate\Support\Facades\Auth;
 
-class Category extends BaseModel
+class Product extends BaseModel
 {
 
     /**
@@ -15,7 +14,9 @@ class Category extends BaseModel
      */
     protected $fillable = [
         'name',
-        'color',
+        'url',
+        'lowest_price',
+        'image_url',
         'user_id',
     ];
 
@@ -31,19 +32,16 @@ class Category extends BaseModel
     public function getRules()
     {
         return [
-            'name' => ['required', 'string', 'max:12'],
-            'color' => ['required', 'string', 'min:7', 'max:7'],
+            'name' => ['required', 'string', 'max:255'],
+            'url' => ['required', 'string', 'max:255'],
+            'lowest_price'  => ['required', 'string', 'max:255'],
+            'image_url'  => ['required', 'string'],
             'user_id'  => ['required', 'integer'],
         ];
     }
 
-    public function scopeFromLoggedUser($query)
+    public function categories()
     {
-        return $query->where('user_id', Auth::user()->id);
-    }
-
-    public function products()
-    {
-        return $this->belongsToMany(Product::class, 'product_categories');
+        return $this->belongsToMany(Category::class, 'product_categories');
     }
 }
