@@ -3,6 +3,8 @@
 namespace App\Models\Wish;
 
 use App\Models\BaseModel;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class Product extends BaseModel
 {
@@ -43,5 +45,30 @@ class Product extends BaseModel
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'product_categories');
+    }
+
+    public static function createProductAndCategories(array $data)
+    {
+        $user_id = Auth::user()->id;
+
+        $product = Product::create([
+            'name' => $data['name'],
+            'url' => $data['url'],
+            'lowest_price' => $data['lowest_price'],
+            'image_url' => $data['image_url'],
+            'user_id' =>  $user_id,
+        ]);
+
+        ProductCategory::createCategoriesFromArray($data['categories'], $product->id);
+
+        $product->load('categories');
+        return $product;
+    }
+
+    public static function getAuthenticatedProductsWithCategories()
+    {
+        $products = Auth::user()->products;
+        $products->load('categories');
+        return $products;
     }
 }

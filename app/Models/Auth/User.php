@@ -12,6 +12,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends BaseModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
@@ -76,6 +77,13 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     public function setPasswordConfirmationAttribute(string $value)
     {
         $this->attributes['password_confirmation'] = bcrypt($value);
+    }
+
+    public static function createUserAndAuthenticate(array $values)
+    {
+        $user = User::create($values);
+
+        Auth::login($user);
     }
 
     public function products()

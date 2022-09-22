@@ -46,4 +46,14 @@ class Category extends BaseModel
     {
         return $this->belongsToMany(Product::class, 'product_categories');
     }
+
+    public static function getOrSearchCategory(?string $search)
+    {
+        $categories = Category::fromLoggedUser();
+        if (!empty($search))
+            $categories = $categories->where('name', 'like', '%' . $search . '%');
+
+        $categories = $categories->orderBy('name')->get();
+        return $categories;
+    }
 }

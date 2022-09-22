@@ -24,4 +24,14 @@ class ProductCategory extends BaseModel
             'category_id'  => ['required', 'integer'],
         ];
     }
+
+    public static function createCategoriesFromArray(array $categories, string $productId)
+    {
+        foreach ($categories as $category) {
+            ProductCategory::create([
+                'product_id' =>  $productId,
+                'category_id' => $category['id'],
+            ]);
+        }
+    }
 }
