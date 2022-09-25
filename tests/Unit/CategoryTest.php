@@ -24,8 +24,6 @@ class CategoryTest extends TestCase
         }
     }
 
-
-
     public function test_list_categories()
     {
         $this->boot(2);
@@ -40,5 +38,26 @@ class CategoryTest extends TestCase
             $this->assertInstanceOf(Category::class, $category);
         }
         $this->assertTrue($categories->contains('id', $newCategory->id));
+    }
+
+    public function test_list_searched_categories()
+    {
+        $this->boot(2);
+
+        $searchWord = 'testt';
+
+        $newCategory = Category::factory()->create([
+            'name' => $searchWord
+        ]);
+
+        $categories = Category::getOrSearchCategory($searchWord);
+
+        $this->assertCount(1, $categories);
+        $this->assertInstanceOf(Collection::class, $categories);
+        foreach ($categories as $category) {
+            $this->assertInstanceOf(Category::class, $category);
+        }
+        $this->assertTrue($categories->contains('id', $newCategory->id));
+        $this->assertTrue($categories->contains('name', $searchWord));
     }
 }
