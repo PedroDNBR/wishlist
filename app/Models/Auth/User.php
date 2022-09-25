@@ -4,6 +4,7 @@ namespace App\Models\Auth;
 
 use App\Models\BaseModel;
 use App\Models\Wish\Product;
+use Database\Factories\UserFactory;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -44,6 +45,11 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
         'password',
         'remember_token',
     ];
+
+    protected static function newFactory()
+    {
+        return UserFactory::new();
+    }
 
     /**
      * Disable soft deletes for this model

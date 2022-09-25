@@ -3,6 +3,7 @@
 namespace App\Models\Wish;
 
 use App\Models\BaseModel;
+use Database\Factories\CategoryFactory;
 use Illuminate\Support\Facades\Auth;
 
 class Category extends BaseModel
@@ -18,6 +19,11 @@ class Category extends BaseModel
         'color',
         'user_id',
     ];
+
+    protected static function newFactory()
+    {
+        return CategoryFactory::new();
+    }
 
     /**
      * The attributes that should be cast.
@@ -47,7 +53,7 @@ class Category extends BaseModel
         return $this->belongsToMany(Product::class, 'product_categories');
     }
 
-    public static function getOrSearchCategory(?string $search)
+    public static function getOrSearchCategory(?string $search = null)
     {
         $categories = Category::fromLoggedUser();
         if (!empty($search))
