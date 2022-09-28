@@ -16,16 +16,6 @@ class CategoryTest extends TestCase
 
     private User $user;
 
-    // private function boot()
-    // {
-    //     $response = $this->post('/users/register', [
-    //         'name' => 'teste',
-    //         'email' => 'teste@teste.com',
-    //         'password' => 'teste123',
-    //         'password_confirmation' => 'teste123'
-    //     ]);
-    // }
-
     private function boot()
     {
         $this->user = User::factory()->create();
