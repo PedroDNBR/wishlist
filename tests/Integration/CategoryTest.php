@@ -69,6 +69,33 @@ class CategoryTest extends TestCase
             ->assertSee($name . 'a');
     }
 
+    public function test_can_search_by_category_name()
+    {
+        $this->boot();
+
+        $nameToSearch = 'thisisaname';
+        $nameToIgnore = 'notaname';
+
+        $this->actingAs($this->user)
+            ->withSession(['banned' => false])
+            ->post('/categories', $this->categoryFields([
+                'name' => $nameToSearch
+            ]));
+
+        $this->actingAs($this->user)
+            ->withSession(['banned' => false])
+            ->post('/categories', $this->categoryFields([
+                'name' => $nameToIgnore
+            ]));
+
+        $this->actingAs($this->user)
+            ->withSession(['banned' => false])
+            ->get('/categories/search?search=' . $nameToSearch)
+            ->assertSessionHasNoErrors()
+            ->assertSee($nameToSearch)
+            ->assertDontSee($nameToIgnore);
+    }
+
     protected function categoryFields($overrides = [])
     {
         return array_merge([
