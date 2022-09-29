@@ -88,7 +88,7 @@ class CategoryTest extends TestCase
             ->assertDontSee($nameToIgnore);
     }
 
-    public function test_can_up_category()
+    public function test_can_update_category()
     {
         $this->boot();
 
@@ -117,6 +117,34 @@ class CategoryTest extends TestCase
             ->get('/categories')
             ->assertSessionHasNoErrors()
             ->assertSee($newCategoryName)
+            ->assertDontSee('test cat');
+    }
+
+    public function test_can_delete_category()
+    {
+        $this->boot();
+
+        $this->actingAs($this->user)
+            ->withSession(['banned' => false])
+            ->post('/categories', $this->categoryFields())
+            ->assertSessionHasNoErrors();
+
+        $this->actingAs($this->user)
+            ->withSession(['banned' => false])
+            ->get('/categories')
+            ->assertSessionHasNoErrors()
+            ->assertSee('test cat');
+
+        $category = $this->user->categories()->first();
+        $this->actingAs($this->user)
+            ->withSession(['banned' => false])
+            ->delete('/categories/' . $category->id,)
+            ->assertSessionHasNoErrors();
+
+        $this->actingAs($this->user)
+            ->withSession(['banned' => false])
+            ->get('/categories')
+            ->assertSessionHasNoErrors()
             ->assertDontSee('test cat');
     }
 
