@@ -3,8 +3,6 @@
 namespace Tests\Feature\Integration;
 
 use App\Models\Auth\User;
-use App\Models\Wish\Category;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
