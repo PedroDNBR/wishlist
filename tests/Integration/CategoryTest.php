@@ -19,6 +19,8 @@ class CategoryTest extends TestCase
     private function boot()
     {
         $this->user = User::factory()->create();
+
+        Auth::login($this->user);
     }
 
     public function test_can_register_category()
@@ -84,6 +86,38 @@ class CategoryTest extends TestCase
             ->assertSessionHasNoErrors()
             ->assertSee($nameToSearch)
             ->assertDontSee($nameToIgnore);
+    }
+
+    public function test_can_up_category()
+    {
+        $this->boot();
+
+        $this->actingAs($this->user)
+            ->withSession(['banned' => false])
+            ->post('/categories', $this->categoryFields())
+            ->assertSessionHasNoErrors();
+
+        $this->actingAs($this->user)
+            ->withSession(['banned' => false])
+            ->get('/categories')
+            ->assertSessionHasNoErrors()
+            ->assertSee('test cat');
+
+        $category = $this->user->categories()->first();
+        $newCategoryName = 'newone';
+        $this->actingAs($this->user)
+            ->withSession(['banned' => false])
+            ->put('/categories/' . $category->id, [
+                'name' => $newCategoryName
+            ])
+            ->assertSessionHasNoErrors();
+
+        $this->actingAs($this->user)
+            ->withSession(['banned' => false])
+            ->get('/categories')
+            ->assertSessionHasNoErrors()
+            ->assertSee($newCategoryName)
+            ->assertDontSee('test cat');
     }
 
     protected function categoryFields($overrides = [])

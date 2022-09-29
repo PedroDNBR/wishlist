@@ -3,6 +3,7 @@
 namespace App\Models\Auth;
 
 use App\Models\BaseModel;
+use App\Models\Wish\Category;
 use App\Models\Wish\Product;
 use Database\Factories\UserFactory;
 use Illuminate\Auth\MustVerifyEmail;
@@ -95,5 +96,10 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
     }
 }
