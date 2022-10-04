@@ -78,6 +78,24 @@ class AuthenticationTest extends TestCase
             ->assertSessionHasNoErrors();
     }
 
+    public function test_can_authenticate_user()
+    {
+        $this->post('/users/register', $this->userFields())
+            ->assertSessionHasNoErrors();
+
+        $response = $this->post('/users/login', $this->userFields())
+            ->assertSessionHasNoErrors();
+    }
+
+    public function test_cannot_authenticate_with_an_invalid_credential()
+    {
+        $this->post('/users/register', $this->userFields())
+            ->assertSessionHasNoErrors();
+
+        $response = $this->post('/users/login', $this->userFields(['email' => 'foo@bar.com']))
+            ->assertSessionHasErrors(['email' => 'These credentials do not match our records.']);
+    }
+
     protected function userFields($overrides = [])
     {
         return array_merge([
