@@ -38,6 +38,24 @@ class ProductTest extends TestCase
             ->assertSessionHasNoErrors();
     }
 
+    public function test_can_list_products_home()
+    {
+        $this->boot();
+
+        $productName = 'nameeee';
+
+        $this->actingAs($this->user)
+            ->withSession(['banned' => false])
+            ->post('/product', $this->productFields(['name' => $productName]))
+            ->assertSessionHasNoErrors();
+
+        $this->actingAs($this->user)
+            ->withSession(['banned' => false])
+            ->get('/wishes')
+            ->assertSessionHasNoErrors()
+            ->assertSee($productName);
+    }
+
     protected function productFields($overrides = [])
     {
         return array_merge([
