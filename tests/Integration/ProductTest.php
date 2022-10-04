@@ -35,7 +35,23 @@ class ProductTest extends TestCase
         $this->actingAs($this->user)
             ->withSession(['banned' => false])
             ->post('/product', $this->productFields())
-            ->assertSessionHasNoErrors();
+            ->assertSessionHasNoErrors()
+            ->assertDontSee('/login');
+    }
+
+    public function test_cannot_register_product()
+    {
+
+        $this->user = User::factory()->create();
+
+        $this->category = $this->user->categories()->create([
+            'name' => 'Category',
+            'color' => '#ffffff'
+        ]);
+
+        $this->post('/product', $this->productFields())
+            ->assertSessionHasNoErrors()
+            ->assertSee('/login');
     }
 
     public function test_can_list_products_home()
@@ -47,13 +63,15 @@ class ProductTest extends TestCase
         $this->actingAs($this->user)
             ->withSession(['banned' => false])
             ->post('/product', $this->productFields(['name' => $productName]))
-            ->assertSessionHasNoErrors();
+            ->assertSessionHasNoErrors()
+            ->assertDontSee('/login');
 
         $this->actingAs($this->user)
             ->withSession(['banned' => false])
             ->get('/wishes')
             ->assertSessionHasNoErrors()
-            ->assertSee($productName);
+            ->assertSee($productName)
+            ->assertDontSee('/login');
     }
 
     protected function productFields($overrides = [])

@@ -21,6 +21,12 @@ class CategoryTest extends TestCase
         Auth::login($this->user);
     }
 
+    public function test_cannot_register_category()
+    {
+        $this->post('/categories', $this->categoryFields())
+            ->assertSee('/login');
+    }
+
     public function test_can_register_category()
     {
         $this->boot();
@@ -28,7 +34,8 @@ class CategoryTest extends TestCase
         $this->actingAs($this->user)
             ->withSession(['banned' => false])
             ->post('/categories', $this->categoryFields())
-            ->assertSessionHasNoErrors();
+            ->assertSessionHasNoErrors()
+            ->assertDontSee('/login');
     }
 
     public function test_can_list_categories()
