@@ -43,7 +43,7 @@ class ProductTest extends TestCase
         $this->assertEquals($product->name, 'Name');
     }
 
-    public function test_invaid_url_product_creating()
+    public function test_invalid_url_product_creating()
     {
         $this->boot();
 
@@ -56,6 +56,82 @@ class ProductTest extends TestCase
             'url' => 'aa',
             'lowest_price' => '100',
             'image_url' => 'https://example.com/',
+            'categories' => [
+                $category->toArray()
+            ]
+        ]);
+    }
+
+    public function test_empty_name_creating()
+    {
+        $this->boot();
+
+        $category = Category::factory()->create();
+
+        $this->expectException(\Watson\Validating\ValidationException::class);
+
+        Product::createProductAndCategories([
+            'name' => '',
+            'url' => 'aa',
+            'lowest_price' => '100',
+            'image_url' => 'https://example.com/',
+            'categories' => [
+                $category->toArray()
+            ]
+        ]);
+    }
+
+    public function test_empty_url_creating()
+    {
+        $this->boot();
+
+        $category = Category::factory()->create();
+
+        $this->expectException(\Watson\Validating\ValidationException::class);
+
+        Product::createProductAndCategories([
+            'name' => 'name',
+            'url' => '',
+            'lowest_price' => '100',
+            'image_url' => 'https://example.com/',
+            'categories' => [
+                $category->toArray()
+            ]
+        ]);
+    }
+
+    public function test_empty_price_creating()
+    {
+        $this->boot();
+
+        $category = Category::factory()->create();
+
+        $this->expectException(\Watson\Validating\ValidationException::class);
+
+        Product::createProductAndCategories([
+            'name' => 'name',
+            'url' => 'https://example.com/',
+            'lowest_price' => '',
+            'image_url' => 'https://example.com/',
+            'categories' => [
+                $category->toArray()
+            ]
+        ]);
+    }
+
+    public function test_empty_image_url_creating()
+    {
+        $this->boot();
+
+        $category = Category::factory()->create();
+
+        $this->expectException(\Watson\Validating\ValidationException::class);
+
+        Product::createProductAndCategories([
+            'name' => 'name',
+            'url' => 'https://example.com/',
+            'lowest_price' => '100',
+            'image_url' => '',
             'categories' => [
                 $category->toArray()
             ]
