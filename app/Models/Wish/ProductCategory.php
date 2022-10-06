@@ -25,6 +25,10 @@ class ProductCategory extends BaseModel
         ];
     }
 
+    public static function bootSoftDeletes()
+    {
+    }
+
     public static function createCategoriesFromArray(array $categories, string $productId)
     {
         foreach ($categories as $category) {

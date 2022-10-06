@@ -3,6 +3,7 @@
 namespace App\Models\Wish;
 
 use App\Models\BaseModel;
+use Database\Factories\ProductFactory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 
@@ -21,6 +22,11 @@ class Product extends BaseModel
         'image_url',
         'user_id',
     ];
+
+    protected static function newFactory()
+    {
+        return ProductFactory::new();
+    }
 
     /**
      * The attributes that should be cast.
