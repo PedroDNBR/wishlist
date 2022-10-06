@@ -42,4 +42,23 @@ class ProductTest extends TestCase
         $this->assertEquals($product->url, 'https://example.com/');
         $this->assertEquals($product->name, 'Name');
     }
+
+    public function test_invaid_url_product_creating()
+    {
+        $this->boot();
+
+        $category = Category::factory()->create();
+
+        $this->expectException(\Watson\Validating\ValidationException::class);
+
+        Product::createProductAndCategories([
+            'name' => 'Name',
+            'url' => 'aa',
+            'lowest_price' => '100',
+            'image_url' => 'https://example.com/',
+            'categories' => [
+                $category->toArray()
+            ]
+        ]);
+    }
 }
