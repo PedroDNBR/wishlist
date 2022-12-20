@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Inertia } from "@inertiajs/inertia";
+import { Inertia, RequestPayload } from "@inertiajs/inertia";
 import { FluidContainer, Form, ImgAuth } from "@/styles/global";
 import { AuthTitleComponent } from "@/Components/AuthTitle";
 import { AuthAccountSpan } from "@/Components/AuthAccountSpan";
@@ -8,16 +8,20 @@ import { ButtonComponent } from "@/Components/Button";
 import { useForm } from "react-hook-form";
 import { useFormErrors } from "@/Hooks/useFormErrors";
 
-export default function Login({ errors: apiErrors }) {
+interface LoginProps {
+  errors: Record<string, string>;
+}
+
+export default function Login({ errors: apiErrors }: LoginProps) {
   const {
     control,
     handleSubmit,
     setError,
   } = useForm();
 
-  useFormErrors(apiErrors, setError);
+  useFormErrors({errors: apiErrors, setError: setError});
 
-  function login(data) {
+  function login(data: RequestPayload) {
     Inertia.post('/users/login', data)
   }
   return (

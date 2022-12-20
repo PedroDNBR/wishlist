@@ -2,8 +2,17 @@ import styled, { css } from "styled-components";
 import { readableColor } from 'polished'
 import { ImCross } from 'react-icons/im';
 
+interface CategoryBadgeProps {
+  color: string;
+  asButton?: boolean;
+}
+
+interface BadgeBallProps {
+  color: string;
+}
+
 export const CategoryBadge = styled.span`
-${({ color, asButton }) => css`
+${({ color, asButton }: CategoryBadgeProps) => css`
   display: flex;
   align-items: center;
   gap: 5px;
@@ -20,7 +29,7 @@ ${({ color, asButton }) => css`
 `;
 
 export const BadgeBall = styled.span`
-${({ color }) => css`
+${({ color }: BadgeBallProps) => css`
   background: ${readableColor(color)};
   width: 0.5rem;
   height: 0.5rem;

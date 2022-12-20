@@ -1,21 +1,32 @@
 import { Container } from "./styles";
 import { useEffect, useState } from "react";
 import { HexColorPicker } from "react-colorful";
-import { useWatch } from "react-hook-form";
+import { FieldValues, SubmitHandler, UseFormReturn, useWatch } from "react-hook-form";
 import { ButtonComponent } from "../Button";
 import { InputControlled } from "../Input";
 import { ProductCard } from "../ProductCard";
+import { Category } from "@/Types/Category";
+import { RequestPayload } from "@inertiajs/inertia";
+import { Product } from "@/Types/Product";
 
-export function CategoryForm({ form, onSubmit, category, buttonName, closeModal }) {
+interface CategoryFormProps {
+  form: UseFormReturn<FieldValues, object>;
+  category?: Category;
+  buttonName: string;
+  closeModal?: () => void;
+  onSubmit: (data: Category, id: number | undefined) => Promise<void>;
+}
+
+export function CategoryForm({ form, onSubmit, category, buttonName, closeModal }: CategoryFormProps) {
   const { control, handleSubmit, reset, setValue } = form;
   const [color, setColor] = useState(category?.color ?? '#ffffff');
   const placeholderImage = "https://lolitajoias.com.br/wp-content/uploads/2020/09/no-image.jpg"
 
-  async function submitHandler(data) {
+  async function submitHandler(data: Category) {
     setColor("#ffffff");
     data.color = color;
     await onSubmit(data, category?.id);
-    closeModal();
+    if (closeModal) closeModal();
     reset();
   }
 
@@ -29,10 +40,11 @@ export function CategoryForm({ form, onSubmit, category, buttonName, closeModal 
     name: "name",
   });
 
-  const [product, setProduct] = useState({
+  const [product, setProduct] = useState<Product>({
     name: "Produto Favorito",
     lowest_price: 3000,
     image_url: placeholderImage,
+    url: '',
     categories: [
       {
         name: categoryName,
@@ -50,6 +62,7 @@ export function CategoryForm({ form, onSubmit, category, buttonName, closeModal 
       name: "Produto Favorito",
       lowest_price: 3000,
       image_url: placeholderImage,
+      url: '',
       categories: [
         {
           name: categoryName,
@@ -64,8 +77,8 @@ export function CategoryForm({ form, onSubmit, category, buttonName, closeModal 
       <ProductCard product={product} />
       <Container>
         <HexColorPicker style={colorSelectorStyle} color={color} onChange={setColor} />
-        <form onSubmit={handleSubmit(submitHandler)}>
-          <InputControlled control={control} label="Name" type="text" name="name" max='12' />
+        <form onSubmit={handleSubmit(submitHandler as SubmitHandler<FieldValues>)}>
+          <InputControlled control={control} label="Name" type="text" name="name" max={12} />
           <ButtonComponent name={buttonName} />
         </form>
       </Container>

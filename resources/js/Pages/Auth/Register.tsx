@@ -5,19 +5,23 @@ import { FluidContainer, Form, ImgAuth } from "@/styles/global";
 import { ButtonComponent } from "@/Components/Button";
 import { AuthTitleComponent } from "@/Components/AuthTitle";
 import { AuthAccountSpan } from "@/Components/AuthAccountSpan";
-import { Inertia } from "@inertiajs/inertia";
+import { Inertia, RequestPayload } from "@inertiajs/inertia";
 import { useFormErrors } from "@/Hooks/useFormErrors";
 
-export default function Register({ errors: apiErrors }) {
+interface RegisterProps {
+  errors: Record<string, string>;
+}
+
+export default function Register({ errors: apiErrors }: RegisterProps) {
 	const {
 		control,
 		handleSubmit,
 		setError,
 	} = useForm();
 
-	useFormErrors(apiErrors, setError);
+	useFormErrors({errors: apiErrors, setError: setError});
 
-	async function register(data) {
+	async function register(data: RequestPayload) {
 		await Inertia.post('/users/register', data);
 	}
 

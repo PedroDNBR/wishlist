@@ -2,10 +2,15 @@ import { Container, Menu, Content, LogoW, LogoL, Icon, ProfileImageContainer, Pr
 import { MdLabel } from 'react-icons/md';
 import { FaShoppingBasket } from 'react-icons/fa';
 import { Inertia } from "@inertiajs/inertia";
+import { ReactNode } from "react";
 
-export function Layout({ children }) {
+interface LayoutProps {
+  children: ReactNode;
+}
 
-  function redirectToPage(url) {
+export function Layout({ children }: LayoutProps) {
+
+  function redirectToPage(url: string) {
     Inertia.get(url);
   }
 

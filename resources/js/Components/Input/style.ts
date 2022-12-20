@@ -1,4 +1,9 @@
-import styled, { css } from "styled-components";
+import styled, { css, DefaultTheme } from "styled-components";
+
+interface InputStyleProps {
+	isError: boolean;
+	theme: DefaultTheme;
+}
 
 export const Input = styled.input`
 	${({ theme }) => css`
@@ -15,26 +20,26 @@ export const Input = styled.input`
 `;
 
 const labelModifiers = {
-	active: (theme) => css`
+	active: (theme: DefaultTheme) => css`
 		color: ${theme.blue};
 	`,
-	error: (theme) => css`
+	error: (theme: DefaultTheme) => css`
 		color: ${theme.red};
 	`,
 }
 
 export const Label = styled.label`
-	${({ isError, theme }) => css`
+	${({ isError, theme }: InputStyleProps) => css`
 			color: ${theme.grey[100]};
 			${isError && labelModifiers.error(theme)}
 	`}
 `;
 
 const borderModifiers = {
-	active: (theme) => css`
+	active: (theme: DefaultTheme) => css`
 		border: 2px solid ${theme.blue};
 	`,
-	error: (theme) => css`
+	error: (theme: DefaultTheme) => css`
 		border: 2px solid ${theme.red};
 	`,
 }
@@ -49,9 +54,8 @@ ${({ theme }) => css`
 		padding-left: 15px;
 	`}
 `;
-
-export const Container = styled.div`
-	${({ theme }) => css`
+export const Container = styled.div<InputStyleProps>`
+	${({ theme, isError }) => css`
 		padding: 10px 15px;
 		display: flex;
 		background-color: ${theme.grey[500]};
@@ -66,8 +70,6 @@ export const Container = styled.div`
 			-webkit-box-shadow: 0px 0px 0px 2px ${theme.fadeDarkBlue};
 			box-shadow: 0px 0px 0px 2px ${theme.fadeDarkBlue};
 		}
-		${({ isError, theme }) => css`
-			${isError && borderModifiers.error(theme)}
-		`} 
+		${isError && borderModifiers.error(theme)}
 	`} 
 `;

@@ -1,5 +1,6 @@
 import { Layout } from "@/Base/Layout";
 import { ProductCard } from "@/Components/ProductCard";
+import { Product } from "@/Types/Product";
 import { Inertia } from "@inertiajs/inertia";
 import React from "react";
 
@@ -7,7 +8,12 @@ function logout() {
 	Inertia.delete('/users/logout')
 }
 
-export default function Home({ errors, products = [] }) {
+interface HomeProps {
+  errors: Record<string, string>;
+  products: Product[];
+}
+
+export default function Home({ errors, products = [] }: HomeProps) {
 	return (
 		<>
 			{/* <button onClick={logout}>Loguot</button> */}

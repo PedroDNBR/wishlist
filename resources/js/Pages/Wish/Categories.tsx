@@ -2,7 +2,7 @@ import { Layout } from "@/Base/Layout";
 import { useForm, useWatch } from "react-hook-form";
 import React, { useEffect, useState } from "react";
 import { InputControlled } from "@/Components/Input";
-import { Inertia } from "@inertiajs/inertia";
+import { Inertia, RequestPayload } from "@inertiajs/inertia";
 import { CategoryForm } from "@/Components/CategoryForm";
 import { CategoryFormLayout, CategoryLayout, CategoryListingContainer, SearchCategoryForm } from "@/Components/CategoryForm/styles";
 import { EditCategory } from "@/Components/EditCategory";
@@ -10,11 +10,17 @@ import { useFormErrors } from "@/Hooks/useFormErrors";
 import * as Dialog from '@radix-ui/react-dialog';
 import { Category } from "@/Components/CategoryBadge";
 import axios from "axios";
+import { Category as CategoryInterface } from "@/Types/Category";
 
-export default function Categories({ errors: apiErrors, categories }) {
+interface CategoryProps {
+  errors: Record<string, string>;
+  categories: CategoryInterface[];
+}
+
+export default function Categories({ errors: apiErrors, categories }: CategoryProps) {
   const createForm = useForm(); EditCategory
   const [isEditing, setIsEditing] = useState(false);
-  const [editCategory, setEditCategory] = useState(null);
+  const [editCategory, setEditCategory] = useState<CategoryInterface | null>(null);
   const [openModal, setOpenModal] = useState(false);
   const [listCategories, setListCategories] = useState(categories);
 
@@ -24,7 +30,7 @@ export default function Categories({ errors: apiErrors, categories }) {
     reset,
   } = createForm;
 
-  const { handleErrors } = useFormErrors(apiErrors, setError, false);
+  const { handleErrors } = useFormErrors({errors: apiErrors, setError: setError, enabled: false});
 
   useEffect(() => {
     if (isEditing || !apiErrors) return;
@@ -32,8 +38,8 @@ export default function Categories({ errors: apiErrors, categories }) {
     handleErrors();
   }, [apiErrors, isEditing])
 
-  async function create(data) {
-    await Inertia.post('/categories', data);
+  async function create(data: CategoryInterface) {
+    await Inertia.post('/categories', data as unknown as RequestPayload);
   }
 
   function closeModal() {
@@ -74,7 +80,7 @@ export default function Categories({ errors: apiErrors, categories }) {
             <CategoryForm form={createForm} onSubmit={create} buttonName='Create' />
           </CategoryFormLayout>
           <SearchCategoryForm>
-            <InputControlled control={control} label="Search" type="text" name="search" max='12' />
+            <InputControlled control={control} label="Search" type="text" name="search" max={12} />
           </SearchCategoryForm>
           <CategoryListingContainer>
             <Dialog.Root open={openModal}>

@@ -1,8 +1,16 @@
-import React from "react";
+import { Product } from "@/Types/Product";
+import { ReactNode } from "react";
 import { Category } from "../CategoryBadge";
 import { Card, CategoryWrapper, Image, ImageContainer, Info, Price, Title } from "./style";
 
-export function ProductCard({ children = null, product, deletableCategory = false, onDelete = null }) {
+interface ProductCardProps {
+  children?: ReactNode;
+  product: Product;
+  deletableCategory?: boolean,
+  onDelete?: ((id: number | undefined) => void) | null;
+}
+
+export function ProductCard({ children = null, product, deletableCategory = false, onDelete = null }: ProductCardProps) {
   return (
     <Card>
       <ImageContainer>

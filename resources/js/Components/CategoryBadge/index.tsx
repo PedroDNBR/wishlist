@@ -1,8 +1,15 @@
+import { Category as CategoryInterface } from '@/Types/Category';
 import { Inertia } from '@inertiajs/inertia';
 import { BadgeBall, CategoryBadge, CrossIcon, DeleteButton } from './style';
 
-export function Category({ category, canDelete = false, onDelete = null }) {
-  async function deleteCategory(event, id) {
+interface CategoryBadgeProps{
+	category: CategoryInterface;
+  canDelete?: boolean;
+  onDelete?: ((id: number | undefined) => void) | null;
+}
+
+export function Category({ category, canDelete = false, onDelete = null }: CategoryBadgeProps) {
+  async function deleteCategory(event: React.MouseEvent, id: number|undefined) {
     event.stopPropagation();
     if (onDelete) return onDelete(id);
 

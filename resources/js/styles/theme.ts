@@ -13,5 +13,4 @@ export const theme = {
     600: '#272A37'
   },
   fadeDarkBlue: '#1f86e033',
-
-}
+} as const

@@ -35,8 +35,13 @@ export const Trigger = styled(DropdownMenu.Trigger)`
   `}
 `;
 
+interface ItemProps {
+  theme: object;
+  color: string;
+}
+
 export const Item = styled(DropdownMenu.Item)`
-  ${({ theme, color }) => css`
+  ${({ theme, color }: ItemProps) => css`
     color: ${readableColor(color)};
     background: ${color};
     padding: 0.4rem;

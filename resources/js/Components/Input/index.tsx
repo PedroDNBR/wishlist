@@ -1,7 +1,14 @@
-import { useController } from 'react-hook-form';
+import { Control, FieldValues, useController } from 'react-hook-form';
 import { Container, Error, Input, Label } from './style';
 
-export function InputControlled({ label, type, name, max = null, control, ...rest }) {
+interface InputControlledProps extends React.InputHTMLAttributes<HTMLInputElement>  {
+	label: string;
+	control: Control<FieldValues, object>;
+	name: string;
+	max?: number;
+}
+
+export function InputControlled({ label, type, name, max, control, ...rest }: InputControlledProps) {
 	const { field, fieldState } = useController({ name, control });
 	const error = fieldState.error?.message;
 
