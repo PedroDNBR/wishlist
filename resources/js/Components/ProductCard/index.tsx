@@ -18,7 +18,7 @@ export function ProductCard({ children = null, product, deletableCategory = fals
       </ImageContainer>
       <Info>
         <Title><a href={product?.url} target="_blank">{product.name}</a></Title>
-        <Price>R$ {product.lowest_price}</Price>
+        <Price>Menor preço: R$ {product.lowest_price}</Price>
         <CategoryWrapper>
           {product?.categories?.map((category) => (
             <Category category={category} canDelete={deletableCategory} key={category.id ? category.id : "1"} onDelete={onDelete} />

@@ -1,5 +1,8 @@
 import { Layout } from "@/Base/Layout";
+import { ProductsContainer } from "@/Base/style";
+import { HomeSearchBar } from "@/Components/HomeSearchBar";
 import { ProductCard } from "@/Components/ProductCard";
+import { CardInList } from "@/Components/ProductCard/style";
 import { Product } from "@/Types/Product";
 import { Inertia } from "@inertiajs/inertia";
 import React from "react";
@@ -18,11 +21,16 @@ export default function Home({ errors, products = [] }: HomeProps) {
 		<>
 			{/* <button onClick={logout}>Loguot</button> */}
 			<Layout>
-				{products.map((product) => {
-					return (
-						<ProductCard key={product.id} product={product} />
-					);
-				})}
+				{/* <HomeSearchBar/> */}
+				<ProductsContainer>
+					{products.map((product) => {
+						return (
+							<CardInList>
+								<ProductCard key={product.id} product={product} />
+							</CardInList>
+						);
+					})}
+				</ProductsContainer>
 			</Layout>
 		</>
 	)

@@ -141,7 +141,7 @@ export default function Products({ errors, categories }: CreateProductProps) {
             <form onSubmit={handleSubmit(sendProduct)}>
               <InputControlled control={control} label="Name" type="text" name="name" max={55} />
               <InputControlled control={control} label="URL" type="text" name="url" onPaste={getImage} />
-              <InputControlled control={control} label="Lowest Price" type="text" max={18} name="lowest_price" />
+              <InputControlled control={control} label="Lowest Price" type="text" max={10} name="lowest_price" />
               <ButtonComponent name="Create" />
             </form>
           </Container>

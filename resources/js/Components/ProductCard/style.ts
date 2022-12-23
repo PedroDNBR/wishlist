@@ -13,6 +13,10 @@ export const Card = styled.div`
   `}
 `;
 
+export const CardInList = styled.div`
+  margin: 0 auto;
+`;
+
 export const ImageContainer = styled.div`
   ${({ theme }) => css`
     border-radius: 15px;

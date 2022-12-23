@@ -60,7 +60,7 @@ class Product extends BaseModel
         $product = Product::create([
             'name' => $data['name'],
             'url' => $data['url'],
-            'lowest_price' => $data['lowest_price'],
+            'lowest_price' => str_replace(',', '', $data['lowest_price']),
             'image_url' => $data['image_url'],
             'user_id' =>  $user_id,
         ]);
