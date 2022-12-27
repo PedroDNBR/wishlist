@@ -1,6 +1,6 @@
 import styled, { css, DefaultTheme } from "styled-components";
 
-interface InputStyleProps {
+export interface InputStyleProps {
 	isError: boolean;
 	theme: DefaultTheme;
 }
@@ -35,7 +35,7 @@ export const Label = styled.label`
 	`}
 `;
 
-const borderModifiers = {
+export const borderModifiers = {
 	active: (theme: DefaultTheme) => css`
 		border: 2px solid ${theme.blue};
 	`,

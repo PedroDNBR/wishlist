@@ -1,5 +1,6 @@
 import { Control, FieldValues, useController } from 'react-hook-form';
-import { Container, Error, Input } from '../Input/style';
+import { Error } from '../Input/style';
+import { Input, Container, SearchIcon } from './style';
 
 interface SearchInputControlledProps extends React.InputHTMLAttributes<HTMLInputElement>  {
 	control: Control<FieldValues, object>;
@@ -22,8 +23,9 @@ export function SearchInputControlled({ type, name, max, control, ...rest }: Sea
 					maxLength={max}
 					{...rest}
 				/>
+				<SearchIcon />
 			</Container>
-			<Error>{error}</Error>
+			{/* <Error>{error}</Error> */}
 		</div>
 	);
 }

@@ -10,6 +10,7 @@ export const Card = styled.div`
     padding: 10px;
     flex-direction: column;
     gap: .2rem;
+    margin-bottom: 2rem;
   `}
 `;
 

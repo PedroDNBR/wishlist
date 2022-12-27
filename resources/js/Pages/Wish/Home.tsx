@@ -3,6 +3,7 @@ import { ProductsContainer } from "@/Base/style";
 import { HomeSearchBar } from "@/Components/HomeSearchBar";
 import { ProductCard } from "@/Components/ProductCard";
 import { CardInList } from "@/Components/ProductCard/style";
+import { Category } from "@/Types/Category";
 import { Product } from "@/Types/Product";
 import { Inertia } from "@inertiajs/inertia";
 import React from "react";
@@ -14,14 +15,15 @@ function logout() {
 interface HomeProps {
   errors: Record<string, string>;
   products: Product[];
+  categories: Category[];
 }
 
-export default function Home({ errors, products = [] }: HomeProps) {
+export default function Home({ errors, products = [], categories = [] }: HomeProps) {
 	return (
 		<>
 			{/* <button onClick={logout}>Loguot</button> */}
 			<Layout>
-				{/* <HomeSearchBar/> */}
+				<HomeSearchBar categories={categories}/>
 				<ProductsContainer>
 					{products.map((product) => {
 						return (

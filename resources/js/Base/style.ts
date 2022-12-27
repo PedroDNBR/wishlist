@@ -21,9 +21,11 @@ export const Menu = styled.section`
 
 export const Content = styled.article`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin-left: 7.75rem;
   width: 100%;
+  padding-inline: 3rem;
+  
 `;
 
 export const LogoW = styled.h3`
@@ -77,22 +79,27 @@ export const ProductsContainer = styled.div`
   width: 100%;
 
   @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 18.625rem);
   }
 
   @media (min-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 18.625rem);
   }
 
-  @media (min-width: 1366px) {
-    grid-template-columns: repeat(3, 1fr);
+  @media (min-width: 1131px) {
+    grid-template-columns: repeat(3, 18.625rem);
+  }
+
+  @media (min-width: 1450px) {
+    grid-template-columns: repeat(4, 18.625rem);
   }
 
   @media (min-width: 1600px) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 18.625rem);
   }
 
   @media (min-width: 1920px) {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, 18.625rem);
   }
+  justify-content: space-between;
 `;
