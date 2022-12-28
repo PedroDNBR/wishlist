@@ -48,6 +48,11 @@ class Product extends BaseModel
         ];
     }
 
+    public function scopeFromLoggedUser($query)
+    {
+        return $query->where('user_id', Auth::user()->id);
+    }
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'product_categories');

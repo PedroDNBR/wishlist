@@ -16,14 +16,21 @@ interface HomeProps {
   errors: Record<string, string>;
   products: Product[];
   categories: Category[];
+	request?: {
+    filter?: {
+      categories?: string[];
+      name?: string;
+    },
+    sort?: string;
+  };
 }
 
-export default function Home({ errors, products = [], categories = [] }: HomeProps) {
+export default function Home({ errors, products = [], categories = [], request }: HomeProps) {
 	return (
 		<>
 			{/* <button onClick={logout}>Loguot</button> */}
 			<Layout>
-				<HomeSearchBar categories={categories}/>
+				<HomeSearchBar categories={categories} request={request} />
 				<ProductsContainer>
 					{products.map((product) => {
 						return (

@@ -41,7 +41,7 @@ interface ItemProps {
 }
 
 export const Item = styled(DropdownMenu.Item)`
-  ${({ theme, color }: ItemProps) => css`
+  ${({ color }: ItemProps) => css`
     color: ${readableColor(color)};
     background: ${color};
     padding: 0.4rem;
