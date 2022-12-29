@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { SearchInputControlled } from "../SearchInput";
 import { Select } from "../Select/style";
-import { SearchHeader } from "./style";
+import { colorStyles, SearchHeader } from "./style";
 
 interface SearchProps {
   categories: Category[];
@@ -50,25 +50,7 @@ export function HomeSearchBar({ categories = [], request}: SearchProps) {
     { value: '-name', label: 'Título Z-A' },
     { value: 'lowest_price', label: 'Menor Preço' },
     { value: '-lowest_price', label: 'Maior Preço' },
-  ]
-
-  const colorStyles = {
-    control: (styles: any) => ({...styles, backgroundColor: 'white'}),
-    option: (styles: any, { data }: any) => {
-      return {
-        ...styles, 
-        border: `1px solid ${data.color}`,
-        borderRadius: "15px" 
-      }
-    },
-    multiValue: (styles: any, {data}: any) => {
-      return {
-        ...styles,
-        border: `1px solid ${data.color}`,
-        color: data.color,
-      }
-    }
-  }
+  ];
 
   const categoriesSelect = () => {
     return categories.map(category => {

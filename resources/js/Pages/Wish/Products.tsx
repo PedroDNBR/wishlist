@@ -15,6 +15,7 @@ import { useFormErrors } from "@/Hooks/useFormErrors";
 import { Category } from "@/Types/Category";
 import { Product } from "@/Types/Product";
 import { Select } from "@/Components/Select/style";
+import { colorStyles } from "@/Components/HomeSearchBar/style";
 
 interface CreateProductProps {
   errors: Record<string, string>;
@@ -114,25 +115,6 @@ export default function Products({ errors, categories }: CreateProductProps) {
   function deleteCategory(id?: number) {
     const newItems = productCategories.filter((category: Category) => category.id !== id);
     setProductCategories(newItems);
-  }
-
-
-  const colorStyles = {
-    control: (styles: any) => ({...styles, backgroundColor: 'white'}),
-    option: (styles: any, { data }: any) => {
-      return {
-        ...styles, 
-        border: `1px solid ${data.color}`,
-        borderRadius: "15px" 
-      }
-    },
-    multiValue: (styles: any, {data}: any) => {
-      return {
-        ...styles,
-        border: `1px solid ${data.color}`,
-        color: data.color,
-      }
-    }
   }
 
   const categoriesSelect = () => {

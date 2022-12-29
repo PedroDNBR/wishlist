@@ -11,3 +11,21 @@ export const SearchHeader = styled.section`
     padding: 1rem;
   `}
 `;
+
+export const colorStyles = {
+  control: (styles: any) => ({...styles, backgroundColor: 'white'}),
+  option: (styles: any, { data }: any) => {
+    return {
+      ...styles, 
+      border: `1px solid ${data.color}`,
+      borderRadius: "15px" 
+    }
+  },
+  multiValue: (styles: any, {data}: any) => {
+    return {
+      ...styles,
+      border: `1px solid ${data.color}`,
+      color: data.color,
+    }
+  }
+}
