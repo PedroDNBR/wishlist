@@ -14,6 +14,7 @@ import { Inertia, RequestPayload } from "@inertiajs/inertia";
 import { useFormErrors } from "@/Hooks/useFormErrors";
 import { Category } from "@/Types/Category";
 import { Product } from "@/Types/Product";
+import { Select } from "@/Components/Select/style";
 
 interface CreateProductProps {
   errors: Record<string, string>;
@@ -101,11 +102,13 @@ export default function Products({ errors, categories }: CreateProductProps) {
     getImage();
   }, [productUrl]);
 
-
-  function setCategory(category: Category) {
+  function setCategoriesId(id: number) {
+    setOpen(false);
     if (productCategories.length > 3) return;
-    if (productCategories.find((arrayCategory: Category) => arrayCategory.id === category.id)) return;
-    setProductCategories([...productCategories, category]);
+    const foundCategory: Category|undefined = categories.find((arrayCategory: Category) => arrayCategory.id === id)
+      if(foundCategory)
+        setProductCategories([...productCategories, foundCategory]);
+  
   }
 
   function deleteCategory(id?: number) {
@@ -113,19 +116,48 @@ export default function Products({ errors, categories }: CreateProductProps) {
     setProductCategories(newItems);
   }
 
+
+  const colorStyles = {
+    control: (styles: any) => ({...styles, backgroundColor: 'white'}),
+    option: (styles: any, { data }: any) => {
+      return {
+        ...styles, 
+        border: `1px solid ${data.color}`,
+        borderRadius: "15px" 
+      }
+    },
+    multiValue: (styles: any, {data}: any) => {
+      return {
+        ...styles,
+        border: `1px solid ${data.color}`,
+        color: data.color,
+      }
+    }
+  }
+
+  const categoriesSelect = () => {
+    return categories.filter(category => !productCategories.includes(category)).map((category: Category) => {
+      return {
+        value: category.id,
+        label: category.name,
+        color: category.color,
+      };
+    });
+  }
+
+  const [open, setOpen] = useState(false);
   return (
     <>
       <Layout>
         <CategoryFormLayout>
           <ProductCard product={product} deletableCategory={true} onDelete={deleteCategory}>
-            <DropdownMenu.Root>
-              {productCategories.length < 4 && (
+            {productCategories.length < 4 && (
+            <DropdownMenu.Root open={open} onOpenChange={setOpen}>
                 <div>
                   <Trigger><GoPlus /></Trigger>
                 </div>
-              )}
               <Dropdown side="right" align="start">
-                {(categories || []).filter(category => !productCategories.includes(category)).map((category: Category) => {
+                {/* {(categories || []).filter(category => !productCategories.includes(category)).map((category: Category) => {
                   return (
                     <button key={category.id} onClick={() => setCategory(category)}>
                       <Item color={category.color}>
@@ -133,9 +165,17 @@ export default function Products({ errors, categories }: CreateProductProps) {
                       </Item>
                     </button>
                   )
-                })}
+                })} */}
+              <Select
+                classNamePrefix="react-select" 
+                options={categoriesSelect()} 
+                placeholder="Selecionar categoria" 
+                onChange={(choice: any) => setCategoriesId(choice.value)}
+                styles={colorStyles}
+              />
               </Dropdown>
             </DropdownMenu.Root>
+            )}
           </ProductCard>
           <Container>
             <form onSubmit={handleSubmit(sendProduct)}>
