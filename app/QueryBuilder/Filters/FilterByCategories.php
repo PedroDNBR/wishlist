@@ -9,11 +9,10 @@ class FilterByCategories implements Filter
 {
     public function __invoke(Builder $query, $value, string $property)
     {
-        $query->whereHas('categories', function ($query) use ($value) {
-            if (gettype($value) == 'string')
-                $query->where('categories.id', $value);
-            else
-                $query->whereIn('categories.id', $value);
-        });
+        foreach ($value as $id) {
+            $query->whereHas('categories', function ($q) use ($id) {
+                $q->where('categories.id', $id);
+            });
+        }
     }
 }
