@@ -19,6 +19,7 @@ export const CardInList = styled.div`
 `;
 
 export const ImageContainer = styled.div`
+  position: relative;
   ${({ theme }) => css`
     border-radius: 15px;
   `}
