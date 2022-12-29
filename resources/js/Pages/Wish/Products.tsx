@@ -157,15 +157,6 @@ export default function Products({ errors, categories }: CreateProductProps) {
                   <Trigger><GoPlus /></Trigger>
                 </div>
               <Dropdown side="right" align="start">
-                {/* {(categories || []).filter(category => !productCategories.includes(category)).map((category: Category) => {
-                  return (
-                    <button key={category.id} onClick={() => setCategory(category)}>
-                      <Item color={category.color}>
-                        {category.name}
-                      </Item>
-                    </button>
-                  )
-                })} */}
               <Select
                 classNamePrefix="react-select" 
                 options={categoriesSelect()} 
