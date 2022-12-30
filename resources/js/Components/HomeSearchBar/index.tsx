@@ -25,7 +25,6 @@ export function HomeSearchBar({ categories = [], request}: SearchProps) {
     handleSubmit,
     setError,
   } = useForm();
-  console.log(request)
   const [sort, setSort] = useState('');
   const [categoriesId, setCategoriesId] = useState([]); 
 
