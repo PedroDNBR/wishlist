@@ -82,7 +82,7 @@ export function HomeSearchBar({ categories = [], request}: SearchProps) {
         onChange={(choice: any) => setCategoriesId(choice.map((x: any) => x.value))}
         styles={colorStyles}
       />
-      <SearchInputControlled control={control} type="text" name="search" />
+      <SearchInputControlled control={control} type="text" name="search" placeholder="Pesquisar" />
       <Select 
         classNamePrefix="react-select" 
         defaultValue={filters[filters.findIndex(item => item.value === request?.sort)] ?? filters[0]} 

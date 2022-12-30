@@ -1,5 +1,5 @@
 import { Container, Menu, Content, LogoW, LogoL, Icon, ProfileImageContainer, ProfileImage } from "./style";
-import { MdLabel } from 'react-icons/md';
+import { MdLabel, MdOutlineAddCircle } from 'react-icons/md';
 import { FaShoppingBasket } from 'react-icons/fa';
 import { Inertia } from "@inertiajs/inertia";
 import { ReactNode } from "react";
@@ -18,10 +18,11 @@ export function Layout({ children }: LayoutProps) {
     <>
       <Container>
         <Menu>
-          <LogoW>W<LogoL>L</LogoL></LogoW>
+        <a href='/wishes'><LogoW>W<LogoL>L</LogoL></LogoW></a>
           <div>
-            <button onClick={() => redirectToPage('/wishes')}><Icon><FaShoppingBasket /></Icon></button>
-            <button onClick={() => redirectToPage('/categories')}><Icon><MdLabel /></Icon></button>
+            <a href='/wishes'><Icon><FaShoppingBasket /></Icon></a>
+            <a href='/categories'><Icon><MdLabel /></Icon></a>
+            <a href='/create-product'><Icon><MdOutlineAddCircle /></Icon></a>
           </div>
           <ProfileImageContainer>
             <ProfileImage src="https://i.pinimg.com/736x/ec/e2/b0/ece2b0f541d47e4078aef33ffd22777e.jpg" />

@@ -1,6 +1,6 @@
 import { Category as CategoryInterface } from '@/Types/Category';
 import { Inertia } from '@inertiajs/inertia';
-import { BadgeBall, CategoryBadge, CrossIcon, DeleteButton } from './style';
+import { BadgeBall, CategoryBadge, CategoryName, CrossIcon, DeleteButton } from './style';
 
 interface CategoryBadgeProps{
 	category: CategoryInterface;
@@ -19,7 +19,9 @@ export function Category({ category, canDelete = false, onDelete = null }: Categ
   return (
     <CategoryBadge color={category.color}>
       <BadgeBall color={category.color} />
-      {category.name}
+      <CategoryName>
+        {category.name}
+      </CategoryName>
       {canDelete && (
         <DeleteButton onClick={(e) => deleteCategory(e, category.id)}>
           <CrossIcon />

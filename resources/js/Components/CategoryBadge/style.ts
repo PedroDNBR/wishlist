@@ -54,8 +54,14 @@ ${({ theme }) => css`
 `;
 
 export const CrossIcon = styled(ImCross)`
-${({ theme }) => css`
-  color: ${theme.red};
-  width: .7rem;
-`}
+  ${({ theme }) => css`
+    color: ${theme.red};
+    width: .7rem;
+  `}
+`;
+
+export const CategoryName = styled.span`
+    max-width: 6rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
 `;

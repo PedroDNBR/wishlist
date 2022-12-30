@@ -24,7 +24,7 @@ export function ProductCard({ children = null, product, deletableCategory = fals
         <Price>Menor preço: R$ {product.lowest_price}</Price>
         <CategoryWrapper>
           {product?.categories?.map((category) => (
-            <Category category={category} canDelete={deletableCategory} key={category.id ? category.id : "1"} onDelete={onDelete} />
+              <Category category={category} canDelete={deletableCategory} key={category.id ? category.id : "1"} onDelete={onDelete} />
           ))}
           {children}
         </CategoryWrapper>
