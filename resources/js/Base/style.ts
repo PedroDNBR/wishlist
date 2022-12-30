@@ -13,10 +13,74 @@ export const Menu = styled.section`
     height: 100vh;
     background: ${theme.grey[500]};
     flex-direction: column;
-    padding: 2rem;
+    padding-block: 2rem;
+    padding-inline: 0.5rem;
+    justify-content: space-between;
+    align-items: start;
+    transition: .5s;
+
+    border-right: 0px solid ${theme.grey[600]};
+
+
+    :hover {
+      width: 18rem;
+      border-right: 2px solid ${theme.grey[600]};
+    }
+
+    &:hover ${MenuTitle} {
+      overflow: hidden;
+      width: 10rem;
+    }
+
+    &:hover ${MenuDark} {
+      visibility: visible;
+    }
+	`};
+  z-index: 10;
+`;
+
+export const MenuContent = styled.section`
+  ${({ theme }) => css`
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-	`};
+    z-index: 10;
+  `};
+`;
+
+export const MenuDark = styled.div`
+  visibility: visible;
+  opacity: .5;
+  background: black;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+`
+
+export const MenuTitle = styled.span`
+  display: inline-block;
+  position: absolute;
+  width: 0rem;
+  font-size: 1rem;
+  left: 100%;
+  ${({ theme }) => css`
+    color: ${theme.white[100]};
+  `}
+
+  white-space:nowrap;
+  overflow:hidden;
+
+  -webkit-transition: width .25s ease-in-out;
+  -moz-transition: width .25s ease-in-out;
+  -o-transition: width .25s ease-in-out;
+  transition: width .25s ease-in-out;
+
+
 `;
 
 export const Content = styled.article`
@@ -49,6 +113,7 @@ export const LogoL = styled.span`
 
 export const Icon = styled.span`
   ${({ theme }) => css`
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -71,6 +136,7 @@ export const ProfileImageContainer = styled.div`
     width: 2.8rem;
     height: 2.8rem;
     border: 2px solid ${theme.blue};
+    margin-inline: 2rem;
 	`};
 `;
 

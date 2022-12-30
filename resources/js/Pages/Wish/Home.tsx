@@ -34,7 +34,7 @@ export default function Home({ errors, products = [], categories = [], request }
 				<ProductsContainer>
 					{products.map((product) => {
 						return (
-							<CardInList>
+							<CardInList key={product.id}>
 								<ProductCard key={product.id} product={product} />
 							</CardInList>
 						);
