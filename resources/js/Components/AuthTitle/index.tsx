@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { AuthSubTitle, AuthTitle, AuthTitleSpan } from "./style";
 
 interface AuthTitleComponentProps {
@@ -5,8 +6,9 @@ interface AuthTitleComponentProps {
 }
 
 export function AuthTitleComponent({children}: AuthTitleComponentProps) {
+  const { t } = useTranslation();
   return <>
-    <AuthSubTitle>Start for free</AuthSubTitle>
+    <AuthSubTitle>{t("It's free")}</AuthSubTitle>
     <AuthTitle>{children}<AuthTitleSpan>.</AuthTitleSpan></AuthTitle>
   </>
 }

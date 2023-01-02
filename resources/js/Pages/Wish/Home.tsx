@@ -8,10 +8,6 @@ import { Product } from "@/Types/Product";
 import { Inertia } from "@inertiajs/inertia";
 import React from "react";
 
-function logout() {
-	Inertia.delete('/users/logout')
-}
-
 interface HomeProps {
   errors: Record<string, string>;
   products: Product[];
@@ -28,7 +24,6 @@ interface HomeProps {
 export default function Home({ errors, products = [], categories = [], request }: HomeProps) {
 	return (
 		<>
-			{/* <button onClick={logout}>Loguot</button> */}
 			<Layout>
 				<HomeSearchBar categories={categories} request={request} />
 				<ProductsContainer>

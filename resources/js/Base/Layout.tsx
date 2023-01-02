@@ -12,9 +12,10 @@ export function Layout({ children }: LayoutProps) {
 
   const [ visible, setVisible ] = useState<string>('hidden');
 
-  function redirectToPage(url: string) {
-    Inertia.get(url);
+  function logout() {
+    Inertia.delete('/users/logout')
   }
+  
 
   return (
     <>
@@ -33,6 +34,7 @@ export function Layout({ children }: LayoutProps) {
                 <ProfileImage src="https://i.pinimg.com/736x/ec/e2/b0/ece2b0f541d47e4078aef33ffd22777e.jpg" />
               </ProfileImageContainer>
               <MenuTitle style={{top: '30%'}}>Perfil</MenuTitle>
+			        <button style={{position: 'absolute', left: '170%', top: '27%'}} onClick={logout}>Logout</button>
             </div>
           </MenuContent>
         </Menu>
