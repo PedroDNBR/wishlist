@@ -31,13 +31,28 @@ export const Menu = styled.section`
       overflow: hidden;
       width: 10rem;
     }
-
-    &:hover ${MenuDark} {
-      visibility: visible;
-    }
 	`};
   z-index: 10;
 `;
+
+export interface MenuDarkProps {
+  visible: string | 'hidden' | 'visible';
+}
+
+export const MenuDark = styled.div`
+  ${({ visible }: MenuDarkProps) => css`
+    visibility: ${visible};
+	`};
+  opacity: .5;
+  background: black;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+`;
+
 
 export const MenuContent = styled.section`
   ${({ theme }) => css`
@@ -49,18 +64,6 @@ export const MenuContent = styled.section`
     z-index: 10;
   `};
 `;
-
-export const MenuDark = styled.div`
-  visibility: visible;
-  opacity: .5;
-  background: black;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  top: 0;
-  left: 0;
-`
 
 export const MenuTitle = styled.span`
   display: inline-block;

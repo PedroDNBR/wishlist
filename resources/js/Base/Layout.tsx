@@ -1,14 +1,16 @@
-import { Container, Menu, Content, LogoW, LogoL, Icon, ProfileImageContainer, ProfileImage, MenuContent, MenuTitle, MenuDark, } from "./style";
+import { Container, Menu, Content, LogoW, LogoL, Icon, ProfileImageContainer, ProfileImage, MenuContent, MenuTitle, MenuDark, MenuDarkProps, } from "./style";
 import { MdLabel, MdOutlineAddCircle } from 'react-icons/md';
 import { FaShoppingBasket } from 'react-icons/fa';
 import { Inertia } from "@inertiajs/inertia";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 export function Layout({ children }: LayoutProps) {
+
+  const [ visible, setVisible ] = useState<string>('hidden');
 
   function redirectToPage(url: string) {
     Inertia.get(url);
@@ -17,7 +19,8 @@ export function Layout({ children }: LayoutProps) {
   return (
     <>
       <Container>
-        <Menu>
+        <MenuDark visible={visible} />
+        <Menu onMouseEnter={() => setVisible('visible')} onMouseLeave={() => setVisible('hidden')}>
           <MenuContent>
             <a href='/wishes' style={{position: 'relative'}}><LogoW>W<LogoL>L</LogoL></LogoW> <MenuTitle style={{top: '20%', marginLeft: '1rem', fontSize: '2rem'}}>Wishlist</MenuTitle></a>
             <div>
