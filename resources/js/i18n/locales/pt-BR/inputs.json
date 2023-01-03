@@ -1,0 +1,18 @@
+{
+  "register": "Cadastrar",
+  "full-name": "Nome completo",
+  "name": "Nome",
+  "email": "Email",
+  "password": "Senha",
+  "confirm-password": "Confirmar senha",
+  "login": "Entrar",
+  "create-account": "Criar conta",
+  "create": "Criar",
+  "search": "Pesquisar",
+  "select-category": "Selecionar categoria",
+  "title-a-z": "Título A-Z",
+  "title-z-a": "Título Z-A",
+  "lowest-price": "Menor preço",
+  "highest-price": "Maior preço",
+  "url": "URL"
+}

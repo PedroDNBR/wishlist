@@ -37,13 +37,13 @@ export default function Register({ errors: apiErrors }: RegisterProps) {
 		<FluidContainer>
 			<div>
 				<AuthTitleComponent>{t('Create new account')}</AuthTitleComponent>
-				<AuthAccountSpan content={t('Already A Member?')} link="/login" linkTitle={t('Log in')} />
+				<AuthAccountSpan content={t('titles:already-a-member')} link="/login" linkTitle={t('inputs:login')} />
 				<Form onSubmit={handleSubmit(register)}>
-					<InputControlled control={control} label={t('Full name')} type="text" name="name" />
-					<InputControlled control={control} label={t('Email')} type="text" name="email" />
-					<InputControlled control={control} label={t('Password')} type="password" name="password" />
-					<InputControlled control={control} label={t('Confirm password')} type="password" name="password_confirmation" />
-					<ButtonComponent name={t('Create Account')} />
+					<InputControlled control={control} label={t('inputs:full-name')} type="text" name="name" />
+					<InputControlled control={control} label={t('inputs:email')} type="text" name="email" />
+					<InputControlled control={control} label={t('inputs:password')} type="password" name="password" />
+					<InputControlled control={control} label={t('inputs:confirm-password')} type="password" name="password_confirmation" />
+					<ButtonComponent name={t('inputs:create-account')} />
 				</Form>
 			</div>
 			<ImgAuth src="/assets/imgs/newpicture.svg" alt="" />

@@ -36,12 +36,12 @@ export default function Login({ errors: apiErrors }: LoginProps) {
     <>
       <FluidContainer>
         <div>
-          <AuthTitleComponent>{t('Login in your account')}</AuthTitleComponent>
-          <AuthAccountSpan content={t("Doesn't have an account?")} link="/register" linkTitle={t('Register')} />
+          <AuthTitleComponent>{t('titles:login-your-account')}</AuthTitleComponent>
+          <AuthAccountSpan content={t("titles:doesnt-have-an-account")} link="/register" linkTitle={t('inputs:register')} />
           <Form onSubmit={handleSubmit(login)}>
-            <InputControlled control={control} label={t('Email')} type="text" name="email" />
-            <InputControlled control={control} label={t('Password')} type="password" name="password" />
-            <ButtonComponent name={t('Log in')} />
+            <InputControlled control={control} label={t('inputs:email')} type="text" name="email" />
+            <InputControlled control={control} label={t('inputs:password')} type="password" name="password" />
+            <ButtonComponent name={t('inputs:login')} />
           </Form>
         </div>
         <ImgAuth src="/assets/imgs/newpicture.svg" alt="" />

@@ -3,12 +3,15 @@ import { MdLabel, MdOutlineAddCircle } from 'react-icons/md';
 import { FaShoppingBasket } from 'react-icons/fa';
 import { Inertia } from "@inertiajs/inertia";
 import { ReactNode, useState } from "react";
+import { useTranslation } from "react-i18next";
+import '@/i18n';
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 export function Layout({ children }: LayoutProps) {
+  const { t } = useTranslation();
 
   const [ visible, setVisible ] = useState<string>('hidden');
 

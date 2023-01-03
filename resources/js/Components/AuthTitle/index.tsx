@@ -8,7 +8,7 @@ interface AuthTitleComponentProps {
 export function AuthTitleComponent({children}: AuthTitleComponentProps) {
   const { t } = useTranslation();
   return <>
-    <AuthSubTitle>{t("It's free")}</AuthSubTitle>
+    <AuthSubTitle>{t("titles:its-free")}</AuthSubTitle>
     <AuthTitle>{children}<AuthTitleSpan>.</AuthTitleSpan></AuthTitle>
   </>
 }

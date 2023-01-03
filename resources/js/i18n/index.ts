@@ -3,8 +3,12 @@ import { initReactI18next } from 'react-i18next';
 
 import LanguageDetector from "i18next-browser-languagedetector";
 
-import translationEN from './locales/en/translations.json';
-import translationPT from './locales/pt-BR/translations.json';
+import inputsEn from './locales/en/inputs.json';
+import inputsPt from './locales/pt-BR/inputs.json';
+
+import titlesEn from './locales/en/titles.json';
+import titlesPt from './locales/pt-BR/titles.json';
+
 
 i18n
 .use(LanguageDetector)
@@ -12,15 +16,18 @@ i18n
 .init({
   resources: {
     en: {
-      translation: translationEN
+      inputs: inputsEn,
+      titles: titlesEn,
+
     },
     'pt-BR': {
-      translation: translationPT
+      inputs: inputsPt,
+      titles: titlesPt,
     }
   },
+  ns: ['inputs', 'titles'],
   // lng: "en", // if you're using a language detector, do not define the lng option
   fallbackLng: "en",
-
   interpolation: {
     escapeValue: false // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
   }
