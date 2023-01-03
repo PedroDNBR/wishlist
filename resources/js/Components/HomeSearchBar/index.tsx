@@ -1,12 +1,15 @@
 import { Category } from "@/Types/Category";
 import { Inertia } from "@inertiajs/inertia";
 import { request } from "http";
+import { t } from "i18next";
 import { readableColor } from "polished";
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { SearchInputControlled } from "../SearchInput";
 import { Select } from "../Select/style";
 import { colorStyles, SearchHeader } from "./style";
+import { useTranslation } from "react-i18next";
+import '@/i18n';
 
 interface SearchProps {
   categories: Category[];
@@ -25,6 +28,9 @@ export function HomeSearchBar({ categories = [], request}: SearchProps) {
     handleSubmit,
     setError,
   } = useForm();
+
+  const { t } = useTranslation();
+
   const [sort, setSort] = useState('');
   const [categoriesId, setCategoriesId] = useState([]); 
 
@@ -45,10 +51,10 @@ export function HomeSearchBar({ categories = [], request}: SearchProps) {
   }, [sort, search, categoriesId])
 
   const filters = [
-    { value: 'name', label: 'Título A-Z' },
-    { value: '-name', label: 'Título Z-A' },
-    { value: 'lowest_price', label: 'Menor Preço' },
-    { value: '-lowest_price', label: 'Maior Preço' },
+    { value: 'name', label: t('inputs:title-a-z') },
+    { value: '-name', label: t('inputs:title-z-a') },
+    { value: 'lowest_price', label: t('inputs:lowest-price') },
+    { value: '-lowest_price', label: t('inputs:highest-price') },
   ];
 
   const categoriesSelect = () => {
@@ -76,13 +82,13 @@ export function HomeSearchBar({ categories = [], request}: SearchProps) {
         classNamePrefix="react-select" 
         options={categoriesSelect()} 
         isMulti 
-        placeholder="Selecionar categoria" 
+        placeholder={t('inputs:select-categories')} 
         defaultValue={getSelectedCategories} 
         hideSelectedOptions={false}
         onChange={(choice: any) => setCategoriesId(choice.map((x: any) => x.value))}
         styles={colorStyles}
       />
-      <SearchInputControlled control={control} type="text" name="search" placeholder="Pesquisar" />
+      <SearchInputControlled control={control} type="text" name="search" placeholder={t('inputs:search') ?? 'Search'} />
       <Select 
         classNamePrefix="react-select" 
         defaultValue={filters[filters.findIndex(item => item.value === request?.sort)] ?? filters[0]} 
