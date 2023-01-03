@@ -4,10 +4,12 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from "i18next-browser-languagedetector";
 
 import inputsEn from './locales/en/inputs.json';
-import inputsPt from './locales/pt-BR/inputs.json';
-
 import titlesEn from './locales/en/titles.json';
+import labelsEn from './locales/en/labels.json';
+
+import inputsPt from './locales/pt-BR/inputs.json';
 import titlesPt from './locales/pt-BR/titles.json';
+import labelsPt from './locales/pt-BR/labels.json';
 
 
 i18n
@@ -18,11 +20,13 @@ i18n
     en: {
       inputs: inputsEn,
       titles: titlesEn,
+      labels: labelsEn,
 
     },
     'pt-BR': {
       inputs: inputsPt,
       titles: titlesPt,
+      labels: labelsPt,
     }
   },
   ns: ['inputs', 'titles'],

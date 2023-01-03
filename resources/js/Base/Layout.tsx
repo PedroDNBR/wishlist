@@ -28,16 +28,16 @@ export function Layout({ children }: LayoutProps) {
           <MenuContent>
             <a href='/wishes' style={{position: 'relative'}}><LogoW>W<LogoL>L</LogoL></LogoW> <MenuTitle style={{top: '20%', marginLeft: '1rem', fontSize: '2rem'}}>Wishlist</MenuTitle></a>
             <div>
-              <a href='/wishes'><Icon><FaShoppingBasket /> <MenuTitle>Lista de desejos</MenuTitle></Icon></a>
-              <a href='/categories'><Icon><MdLabel /> <MenuTitle>Categorias</MenuTitle></Icon></a>
-              <a href='/create-product'><Icon><MdOutlineAddCircle /> <MenuTitle>Cadastrar produto</MenuTitle></Icon></a>
+              <a href='/wishes'><Icon><FaShoppingBasket /> <MenuTitle>{t('labels:my-list')}</MenuTitle></Icon></a>
+              <a href='/categories'><Icon><MdLabel /> <MenuTitle>{t('labels:categories')}</MenuTitle></Icon></a>
+              <a href='/create-product'><Icon><MdOutlineAddCircle /> <MenuTitle>{t('labels:create-product')}</MenuTitle></Icon></a>
             </div>
             <div style={{position: 'relative'}}>
               <ProfileImageContainer>
                 <ProfileImage src="https://i.pinimg.com/736x/ec/e2/b0/ece2b0f541d47e4078aef33ffd22777e.jpg" />
               </ProfileImageContainer>
-              <MenuTitle style={{top: '30%'}}>Perfil</MenuTitle>
-			        <button style={{position: 'absolute', left: '170%', top: '27%'}} onClick={logout}>Logout</button>
+              <MenuTitle style={{top: '30%'}}>{t('labels:profile')}</MenuTitle>
+			        <button style={{position: 'absolute', left: '170%', top: '27%'}} onClick={logout}>{t('labels:logout')}</button>
             </div>
           </MenuContent>
         </Menu>
