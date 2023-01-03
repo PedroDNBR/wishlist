@@ -4,5 +4,6 @@
   "create-product": "Create product",
   "profile": "Profile",
   "logout": "Log out",
-  "lowest-price": "Lowest Price"
+  "lowest-price": "Lowest price",
+  "favorite-product": "Favorite product"
 }

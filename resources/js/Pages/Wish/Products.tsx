@@ -16,6 +16,7 @@ import { Category } from "@/Types/Category";
 import { Product } from "@/Types/Product";
 import { Select } from "@/Components/Select/style";
 import { colorStyles } from "@/Components/HomeSearchBar/style";
+import { useTranslation } from "react-i18next";
 
 interface CreateProductProps {
   errors: Record<string, string>;
@@ -31,6 +32,8 @@ export default function Products({ errors, categories }: CreateProductProps) {
     setValue,
   } = useForm();
 
+  const { t } = useTranslation();
+
   useFormErrors({errors, setError: setError});
 
   async function sendProduct() {
@@ -44,7 +47,7 @@ export default function Products({ errors, categories }: CreateProductProps) {
   const [productImage, setProductImage] = useState<string>(placeholderImage);
 
   const [product, setProduct] = useState<Product>({
-    name: "Produto Favorito",
+    name: t('labels:favorite-product'),
     lowest_price: 3000,
     image_url: productImage,
     categories: productCategories,
@@ -86,7 +89,7 @@ export default function Products({ errors, categories }: CreateProductProps) {
 
   function defineProduct() {
     const newProduct = {
-      name: productName ? productName : "Produto Favorito",
+      name: productName ? productName : t('labels:favorite-product'),
       lowest_price: productPrice ? productPrice : 3000,
       url: productUrl,
       image_url: productImage,
@@ -142,7 +145,7 @@ export default function Products({ errors, categories }: CreateProductProps) {
               <Select
                 classNamePrefix="react-select" 
                 options={categoriesSelect()} 
-                placeholder="Selecionar categoria" 
+                placeholder={t('inputs:select-categories')}
                 onChange={(choice: any) => setCategoriesId(choice.value)}
                 styles={colorStyles}
               />
@@ -152,9 +155,9 @@ export default function Products({ errors, categories }: CreateProductProps) {
           </ProductCard>
           <Container>
             <form onSubmit={handleSubmit(sendProduct)}>
-              <InputControlled control={control} label="Name" type="text" name="name" max={55} />
-              <InputControlled control={control} label="URL" type="text" name="url" onPaste={getImage} />
-              <InputControlled control={control} label="Lowest Price" type="text" max={10} name="lowest_price" />
+              <InputControlled control={control} label={t('inputs:name')} type="text" name="name" max={55} />
+              <InputControlled control={control} label={t('inputs:url')} type="text" name="url" onPaste={getImage} />
+              <InputControlled control={control} label={t('inputs:lowest-price')} type="text" max={10} name="lowest_price" />
               <ButtonComponent name="Create" />
             </form>
           </Container>

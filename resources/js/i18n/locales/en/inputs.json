@@ -8,11 +8,12 @@
   "login": "Log in",
   "create-account": "Create account",
   "create": "Create",
+  "update": "Update",
   "search": "Search",
   "select-categories": "Select categories",
   "title-a-z": "Title A-Z",
   "title-z-a": "Title Z-A",
-  "lowest-price": "Lowest Price",
-  "highest-price": "Highest Price",
+  "lowest-price": "Lowest price",
+  "highest-price": "Highest price",
   "url": "URL"
 }

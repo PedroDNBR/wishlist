@@ -4,5 +4,6 @@
   "create-product": "Cadastrar produtos",
   "profile": "Perfil",
   "logout": "Sair",
-  "lowest-price": "Menor preço"
+  "lowest-price": "Menor preço",
+  "favorite-product": "Produto favorito"
 }

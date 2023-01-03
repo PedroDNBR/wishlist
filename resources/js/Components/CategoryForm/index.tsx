@@ -8,6 +8,7 @@ import { ProductCard } from "../ProductCard";
 import { Category } from "@/Types/Category";
 import { RequestPayload } from "@inertiajs/inertia";
 import { Product } from "@/Types/Product";
+import { useTranslation } from "react-i18next";
 
 interface CategoryFormProps {
   form: UseFormReturn<FieldValues, object>;
@@ -19,6 +20,7 @@ interface CategoryFormProps {
 
 export function CategoryForm({ form, onSubmit, category, buttonName, closeModal }: CategoryFormProps) {
   const { control, handleSubmit, reset, setValue } = form;
+  const { t } = useTranslation();
   const [color, setColor] = useState(category?.color ?? '#ffffff');
   const placeholderImage = "https://lolitajoias.com.br/wp-content/uploads/2020/09/no-image.jpg"
 
@@ -41,7 +43,7 @@ export function CategoryForm({ form, onSubmit, category, buttonName, closeModal 
   });
 
   const [product, setProduct] = useState<Product>({
-    name: "Produto Favorito",
+    name: t('labels:favorite-product'),
     lowest_price: 3000,
     image_url: placeholderImage,
     url: '',
@@ -59,7 +61,7 @@ export function CategoryForm({ form, onSubmit, category, buttonName, closeModal 
 
   useEffect(() => {
     setProduct({
-      name: "Produto Favorito",
+      name: t('labels:favorite-product'),
       lowest_price: 3000,
       image_url: placeholderImage,
       url: '',
@@ -78,7 +80,7 @@ export function CategoryForm({ form, onSubmit, category, buttonName, closeModal 
       <Container>
         <HexColorPicker style={colorSelectorStyle} color={color} onChange={setColor} />
         <form onSubmit={handleSubmit(submitHandler as SubmitHandler<FieldValues>)}>
-          <InputControlled control={control} label="Name" type="text" name="name" max={12} />
+          <InputControlled control={control} label={t('inputs:name')} type="text" name="name" max={12} />
           <ButtonComponent name={buttonName} />
         </form>
       </Container>

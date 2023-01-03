@@ -11,6 +11,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { Category } from "@/Components/CategoryBadge";
 import axios from "axios";
 import { Category as CategoryInterface } from "@/Types/Category";
+import { useTranslation } from "react-i18next";
 
 interface CategoryProps {
   errors: Record<string, string>;
@@ -19,6 +20,7 @@ interface CategoryProps {
 
 export default function Categories({ errors: apiErrors, categories }: CategoryProps) {
   const createForm = useForm(); EditCategory
+  const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
   const [editCategory, setEditCategory] = useState<CategoryInterface | null>(null);
   const [openModal, setOpenModal] = useState(false);
@@ -77,10 +79,10 @@ export default function Categories({ errors: apiErrors, categories }: CategoryPr
       <Layout>
         <CategoryLayout>
           <CategoryFormLayout>
-            <CategoryForm form={createForm} onSubmit={create} buttonName='Create' />
+            <CategoryForm form={createForm} onSubmit={create} buttonName={t('inputs:create')} />
           </CategoryFormLayout>
           <SearchCategoryForm>
-            <InputControlled control={control} label="Search" type="text" name="search" max={12} />
+            <InputControlled control={control} label={t('inputs:search')} type="text" name="search" max={12} />
           </SearchCategoryForm>
           <CategoryListingContainer>
             <Dialog.Root open={openModal}>
@@ -95,7 +97,7 @@ export default function Categories({ errors: apiErrors, categories }: CategoryPr
                 )
               })}
               <Dialog.Portal>
-                <EditCategory closeModal={closeModal} buttonName='Update' category={editCategory} setIsEditing={setIsEditing} isEditing={isEditing} errors={apiErrors} />
+                <EditCategory closeModal={closeModal} buttonName={t('inputs:update')} category={editCategory} setIsEditing={setIsEditing} isEditing={isEditing} errors={apiErrors} />
               </Dialog.Portal>
             </Dialog.Root>
           </CategoryListingContainer>
