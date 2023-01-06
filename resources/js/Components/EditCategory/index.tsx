@@ -3,8 +3,10 @@ import { Category } from "@/Types/Category";
 import { Inertia, RequestPayload } from "@inertiajs/inertia";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { AiOutlineClose } from "react-icons/ai";
 import { CategoryForm } from "../CategoryForm";
 import { Modal } from "../Modal";
+import { CloseModal } from "../OpenImageModal/styles";
 
 interface EditCategoryProps {
   errors: Record<string, string>;
@@ -43,6 +45,9 @@ export function EditCategory({ errors, setIsEditing, isEditing, category, button
     <Modal closeModal={closeModal} rootProps={{
       onOpenChange: handleOpenChange
     }}>
+      <CloseModal onClick={closeModal}>
+        <AiOutlineClose />
+      </CloseModal>
       <CategoryForm closeModal={closeModal} buttonName={buttonName} category={category ?? undefined} form={editForm} onSubmit={update} />
     </Modal>
   );

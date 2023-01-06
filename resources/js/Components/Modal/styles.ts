@@ -16,6 +16,7 @@ export const Overlay = styled(Dialog.Overlay)`
 
 export const Content = styled(Dialog.Content)`
   ${({ theme }) => css`
+    position: relative;
     background: ${theme.grey[600]};
     display: flex;
     gap: 3rem;
