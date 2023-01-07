@@ -58,7 +58,6 @@ export function OpenImageModal({ setProductImageAndImageFile }: OpenImageModalPr
       setSentImage(imageInputFile);
       SetImagePreviewUrl(URL.createObjectURL(imageInputFile));
     }
-
   }, [imageInputFile])
 
   const preventDragEvents = {
@@ -77,7 +76,8 @@ export function OpenImageModal({ setProductImageAndImageFile }: OpenImageModalPr
 
   function submitImage(e: any) {
     e.preventDefault();
-    setProductImageAndImageFile(imagePreviewUrl, sentImage);
+    if(setProductImageAndImageFile)
+      setProductImageAndImageFile(imagePreviewUrl, sentImage);
   }
 
   return (

@@ -144,9 +144,12 @@ export default function Products({ errors, categories }: CreateProductProps) {
         }
       });
       setProductImage(response.data.location)
-    }
+      await Inertia.post('/product', {...product, image_url: response?.data.location } as unknown as RequestPayload);
+  } else {
+    await Inertia.post('/product', product as unknown as RequestPayload);
+  }
 
-    await Inertia.post('/product', {...product, image_url: response?.data.location } as unknown as RequestPayload);
+
     reset();
   }
 
