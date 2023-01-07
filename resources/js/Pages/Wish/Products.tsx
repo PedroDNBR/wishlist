@@ -36,15 +36,11 @@ export default function Products({ errors, categories }: CreateProductProps) {
 
   useFormErrors({errors, setError: setError});
 
-  async function sendProduct() {
-    await Inertia.post('/product', product as unknown as RequestPayload);
-    reset();
-  }
-
   const placeholderImage = "https://lolitajoias.com.br/wp-content/uploads/2020/09/no-image.jpg"
 
   const [productCategories, setProductCategories] = useState<Category[]>([]);
   const [productImage, setProductImage] = useState<string>(placeholderImage);
+  const [productImageFile, setProductImageFile] = useState<File | undefined>(undefined);
 
   const [product, setProduct] = useState<Product>({
     name: t('labels:favorite-product'),
@@ -81,13 +77,15 @@ export default function Products({ errors, categories }: CreateProductProps) {
     if (!productUrl) return;
     try {
       const response = await axios.post('/api/image', { url: productUrl });
-      setProductImage(response.data);
+      if(response.data)
+        setProductImage(response.data);
     } catch (e) {
       console.log(e);
     }
   }
 
   function defineProduct() {
+    console.log(productImage);
     const newProduct = {
       name: productName ? productName : t('labels:favorite-product'),
       lowest_price: productPrice ? productPrice : 3000,
@@ -131,7 +129,25 @@ export default function Products({ errors, categories }: CreateProductProps) {
   }
 
   function setProductImageAndImageFile(preview: string, file?: File) {
-    console.log(preview, file);
+    setProductImageFile(file);
+    setProductImage(preview);
+  }
+
+  async function sendProduct() {
+    let response;
+    if(productImageFile) {
+      const formData = new FormData();
+      formData.append("file", productImageFile);
+      response = await axios.post('/api/store-image', formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        }
+      });
+      setProductImage(response.data.location)
+    }
+
+    await Inertia.post('/product', {...product, image_url: response?.data.location } as unknown as RequestPayload);
+    reset();
   }
 
   const [open, setOpen] = useState(false);
