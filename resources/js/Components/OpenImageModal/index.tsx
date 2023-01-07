@@ -4,13 +4,17 @@ import { Overlay, Content } from '../Modal/styles';
 import { InputControlled } from '../Input';
 import { useController, useForm, useWatch } from 'react-hook-form';
 import { ButtonComponent } from '../Button';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { usePaste } from '@/Hooks/usePaste';
 import { AiOutlineClose } from 'react-icons/ai';
 
-export function OpenImageModal() {
+interface OpenImageModalProps {
+  setProductImageAndImageFile: ((preview: string ,file?: File) => void) | null;
+}
+
+export function OpenImageModal({ setProductImageAndImageFile }: OpenImageModalProps) {
   const {
     control,
     handleSubmit,
@@ -18,7 +22,7 @@ export function OpenImageModal() {
     register,
   } = useForm();
 
-  const [sentImage, setSentImage] = useState<File | null>();
+  const [sentImage, setSentImage] = useState<File | undefined>(undefined);
 
   useEffect(() => {
     console.log(sentImage);
@@ -39,7 +43,7 @@ export function OpenImageModal() {
 
   useEffect(() => {
     SetImagePreviewUrl(imageUrl);
-      setSentImage(null);
+      setSentImage(undefined);
     }, [imageUrl])
 
   useEffect(() => {
@@ -71,6 +75,11 @@ export function OpenImageModal() {
 
   const [isDragging, setIsDragging] = useState(false);
 
+  function submitImage(e: any) {
+    e.preventDefault();
+    setProductImageAndImageFile(imagePreviewUrl, sentImage);
+  }
+
   return (
     <>
       <Dialog.Root>
@@ -79,24 +88,25 @@ export function OpenImageModal() {
         <Dialog.Portal>
           <Overlay>
             <Content>
-                <Container>
-                  <CloseModal>
-                    <AiOutlineClose />
-                  </CloseModal>
-                  <ImageInputLabel htmlFor="image-file" url={imagePreviewUrl} onDrop={(e) => dragDropImage(e)} {...preventDragEvents}>
-                    <DragAndDropOverlay isDragging={isDragging}>{t('inputs:drag-drop-here')}</DragAndDropOverlay>
-                  </ImageInputLabel>
-                  <div></div>
-                  <ImageInput type='file' id="image-file" name="image-file" accept="image/*"
-                    onChange={(e) => {
-                      if(e.target.files)
-                        setImageInputFile(e.target.files[0]);
-                      e.target.value = '';
-                    }}
-                  />
-                  <InputControlled label='Url ou Imagem copiada' type='text' name='image-url' max={512} control={control} />
-                  <ButtonComponent name='Aplicar' />
-                </Container>
+              <form onSubmit={submitImage}>
+                  <Container>
+                    <CloseModal>
+                      <AiOutlineClose />
+                    </CloseModal>
+                    <ImageInputLabel htmlFor="image-file" url={imagePreviewUrl} onDrop={(e) => dragDropImage(e)} {...preventDragEvents}>
+                      <DragAndDropOverlay isDragging={isDragging}>{t('inputs:drag-drop-here')}</DragAndDropOverlay>
+                    </ImageInputLabel>
+                    <ImageInput type='file' id="image-file" name="image-file" accept="image/*"
+                      onChange={(e) => {
+                        if(e.target.files)
+                          setImageInputFile(e.target.files[0]);
+                        e.target.value = '';
+                      }}
+                    />
+                    <InputControlled label='Url ou Imagem copiada' type='text' name='image-url' max={512} control={control} />
+                    <ButtonComponent name='Aplicar' />
+                  </Container>
+                </form>
             </Content>
           </Overlay>
         </Dialog.Portal>

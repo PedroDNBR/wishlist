@@ -63,7 +63,7 @@ export const ImageInputLabel = styled.label`
   background-repeat: no-repeat;
   background-position: center;
   background-color: rgba(0,0,0,0.25);
-  background-size: 25%, 100%;
+  background-size: 25%, cover;
 
   &:hover {
     background: url('/assets/imgs/upload.svg'), linear-gradient( rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25) );
@@ -73,7 +73,7 @@ export const ImageInputLabel = styled.label`
     background-repeat: no-repeat;
     background-position: center;
     background-color: rgba(0,0,0,0.25);
-    background-size: 25%, 100%, 100%;
+    background-size: 25%, 100%, cover;
   }
 
   display: flex;

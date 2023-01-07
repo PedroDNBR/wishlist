@@ -130,12 +130,16 @@ export default function Products({ errors, categories }: CreateProductProps) {
     });
   }
 
+  function setProductImageAndImageFile(preview: string, file?: File) {
+    console.log(preview, file);
+  }
+
   const [open, setOpen] = useState(false);
   return (
     <>
       <Layout>
         <CategoryFormLayout>
-          <ProductCard product={product} deletableCategory={true} onDelete={deleteCategory} isEditing={true}>
+          <ProductCard product={product} deletableCategory={true} onDelete={deleteCategory} isEditing={true} setProductImageAndImageFile={setProductImageAndImageFile}>
             {productCategories.length < 4 && (
             <DropdownMenu.Root open={open} onOpenChange={setOpen}>
                 <div>
