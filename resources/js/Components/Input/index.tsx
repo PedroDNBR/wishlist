@@ -15,7 +15,7 @@ export function InputControlled({ label, type, name, max, control, ...rest }: In
 	return (
 		<div>
 			<Container isError={!!error}>
-				<Label isError={!!error}>{label}</Label>
+				<Label isError={!!error} htmlFor={name} >{label}</Label>
 				<Input
 					{...(field || {})}
 					value={field.value ?? ''}
