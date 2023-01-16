@@ -32,6 +32,7 @@ export function HomeSearchBar({ categories = [], request}: SearchProps) {
 
   const [sort, setSort] = useState('');
   const [categoriesId, setCategoriesId] = useState([]); 
+  const { height, width } = useWindowDimensions();
 
   const search = useWatch({
     control,
@@ -99,7 +100,7 @@ export function HomeSearchBar({ categories = [], request}: SearchProps) {
   );
 
   function menu() {
-    if(useWindowDimensions().width > 1024) {
+    if(width > 1024) {
       return <>
         <SearchHeader>
           {menuOptions}
@@ -109,8 +110,8 @@ export function HomeSearchBar({ categories = [], request}: SearchProps) {
       return <>
         <Root>
           <SearchButtonMobile><FaFilter /></SearchButtonMobile>
-          <Portal style={{width: "100% !important"}}>
-            <Content side="bottom" align="center" style={{width: "100% !important"}}>
+          <Portal>
+            <Content side="bottom" align="center">
               {menuOptions}
             </Content>
           </Portal>

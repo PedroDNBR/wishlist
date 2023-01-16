@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 export const Container = styled.section`
   display: flex;
@@ -150,6 +151,18 @@ export const ProfileImageContainer = styled.div`
 	`};
 `;
 
+
+export const ProfileImageContainerMobile = styled.div`
+   ${({ theme }) => css`
+    overflow: hidden;
+    border-radius: 100px;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 2px solid ${theme.blue};
+	`};
+`;
+
+
 export const ProductsContainer = styled.div`
   display: grid;
   width: 100%;
@@ -185,12 +198,63 @@ export const MenuMobile = styled.button`
 	${({ theme }) => css`
     display: none;
     @media (max-width: 1024px) {
-      display: block;
+      display: flex;
     }
     position: fixed;
     width: 100%;
     height: 4rem;
     background: ${theme.grey[500]};
     z-index: 10;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 1rem;
+    border-bottom: 1px solid ${theme.grey[600]};
 	`};
+`;
+
+export const MenuButton = styled(DropdownMenu.Trigger)`
+  font-size: 1.5rem;
+  padding: .5rem .7rem;
+	${({ theme }) => css`
+    background: ${theme.grey[400]};
+    color: ${theme.white[100]};
+	`};
+  border-radius: 10px;
+`;
+
+export const DropdownContent = styled(DropdownMenu.Content)`
+  ${({ theme }) => css`
+    margin-top: .5rem;
+    width: 100vw !important;
+    background: ${theme.grey[500]};
+    border: 1px solid ${theme.grey[600]};
+    border-radius: 0px 0px 15px 15px;
+    padding: 1rem;
+    gap: 1rem;
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+  `}
+`;
+
+export const MobileIcon = styled.span`
+  ${({ theme }) => css`
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${theme.white[100]};
+    font-size: 1.25rem;
+    padding-block: .2rem;
+    cursor: pointer;
+    margin-right: 1rem;
+
+    svg {
+      margin-left: 1rem;
+    }
+	`};
+`;
+
+export const MobileLinks = styled.a`
+  width: fit-content;
 `;
