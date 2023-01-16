@@ -5,6 +5,11 @@ export const Select = styled(ReactSelect)`
   ${({ theme }) => css`
     color: ${theme.white[100]};
     width: 15rem;
+
+    @media (max-width: 1024px) {
+      width: 100%;
+    }
+
     .react-select__single-value {
       color: ${theme.white[100]};
     }

@@ -6,6 +6,10 @@ ${({ theme }) => css`
 		font-size: 4rem;
 		font-weight: bold;
 		transform: translateX(-2px);
+
+		@media (max-width: 1024px) {
+			font-size: 3rem;
+		}
 	`}
 `;
 
@@ -22,6 +26,10 @@ ${({ theme }) => css`
 		color: ${theme.blue};
 		font-size: 5.5rem;
 		line-height: 4rem;
+
+		@media (max-width: 1024px) {
+			font-size: 4rem;
+		}
 	`}
 `;
 

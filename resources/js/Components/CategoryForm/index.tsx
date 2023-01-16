@@ -1,6 +1,5 @@
-import { Container } from "./styles";
+import { Container, HexColorPickerComponent } from "./styles";
 import { useEffect, useState } from "react";
-import { HexColorPicker } from "react-colorful";
 import { FieldValues, SubmitHandler, UseFormReturn, useWatch } from "react-hook-form";
 import { ButtonComponent } from "../Button";
 import { InputControlled } from "../Input";
@@ -31,12 +30,7 @@ export function CategoryForm({ form, onSubmit, category, buttonName, closeModal 
     if (closeModal) closeModal();
     reset();
   }
-
-  const colorSelectorStyle = {
-    width: '18.625rem',
-    height: '14.95rem',
-  }
-
+  
   const categoryName = useWatch({
     control,
     name: "name",
@@ -78,7 +72,7 @@ export function CategoryForm({ form, onSubmit, category, buttonName, closeModal 
     <>
       <ProductCard product={product} />
       <Container>
-        <HexColorPicker style={colorSelectorStyle} color={color} onChange={setColor} />
+        <HexColorPickerComponent color={color} onChange={setColor} />
         <form onSubmit={handleSubmit(submitHandler as SubmitHandler<FieldValues>)}>
           <InputControlled control={control} label={t('inputs:name')} type="text" name="name" max={12} />
           <ButtonComponent name={buttonName} />

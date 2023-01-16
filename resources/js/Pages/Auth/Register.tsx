@@ -36,7 +36,7 @@ export default function Register({ errors: apiErrors }: RegisterProps) {
 	return (
 		<FluidContainer>
 			<div>
-				<AuthTitleComponent>{t('Create new account')}</AuthTitleComponent>
+				<AuthTitleComponent>{t('titles:create-new-account')}</AuthTitleComponent>
 				<AuthAccountSpan content={t('titles:already-a-member')} link="/login" linkTitle={t('inputs:login')} />
 				<Form onSubmit={handleSubmit(register)}>
 					<InputControlled control={control} label={t('inputs:full-name')} type="text" name="name" />

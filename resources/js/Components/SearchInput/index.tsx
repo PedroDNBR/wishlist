@@ -13,7 +13,7 @@ export function SearchInputControlled({ type, name, max, control, ...rest }: Sea
 	const error = fieldState.error?.message;
 
 	return (
-		<div>
+		<>
 			<Container isError={!!error}>
 				<Input
 					{...(field || {})}
@@ -26,6 +26,6 @@ export function SearchInputControlled({ type, name, max, control, ...rest }: Sea
 				<SearchIcon />
 			</Container>
 			{/* <Error>{error}</Error> */}
-		</div>
+		</>
 	);
 }

@@ -33,6 +33,10 @@ export const Menu = styled.section`
     }
 	`};
   z-index: 10;
+
+  @media (max-width: 1024px) {
+    display: none !important;
+  }
 `;
 
 export interface MenuDarkProps {
@@ -52,7 +56,6 @@ export const MenuDark = styled.div`
   top: 0;
   left: 0;
 `;
-
 
 export const MenuContent = styled.section`
   ${({ theme }) => css`
@@ -82,17 +85,21 @@ export const MenuTitle = styled.span`
   -moz-transition: width .25s ease-in-out;
   -o-transition: width .25s ease-in-out;
   transition: width .25s ease-in-out;
-
-
 `;
 
 export const Content = styled.article`
   display: flex;
   flex-direction: column;
-  margin-left: 7.75rem;
   width: 100%;
   padding-inline: 3rem;
-  
+
+  @media (min-width: 1024px) {
+    margin-left: 7.75rem;
+  }
+
+  @media (max-width: 1024px) {
+    padding-inline: .7rem;
+  }
 `;
 
 export const LogoW = styled.h3`
@@ -146,9 +153,10 @@ export const ProfileImageContainer = styled.div`
 export const ProductsContainer = styled.div`
   display: grid;
   width: 100%;
+  align-items: center;
 
   @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 18.625rem);
+    grid-template-columns: repeat(2, 49%);
   }
 
   @media (min-width: 1024px) {
@@ -171,4 +179,18 @@ export const ProductsContainer = styled.div`
     grid-template-columns: repeat(5, 18.625rem);
   }
   justify-content: space-between;
+`;
+
+export const MenuMobile = styled.button`
+	${({ theme }) => css`
+    display: none;
+    @media (max-width: 1024px) {
+      display: block;
+    }
+    position: fixed;
+    width: 100%;
+    height: 4rem;
+    background: ${theme.grey[500]};
+    z-index: 10;
+	`};
 `;

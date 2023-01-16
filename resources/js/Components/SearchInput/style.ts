@@ -9,6 +9,14 @@ export const Input = styled.input`
     color: ${theme.white[100]};
     background-color: ${theme.grey[400]};
     padding: 0;
+
+    @media (max-width: 1300px) {
+      width: 10rem;
+    }
+    @media (max-width: 1024px) {
+      width: 100%;
+    }
+
     &:focus {
       border-color: inherit;
       -webkit-box-shadow: none;
@@ -28,6 +36,9 @@ export const Container = styled.div<InputStyleProps>`
     justify-content: center;
     align-items: center;
 		${isError && borderModifiers.error(theme)}
+    @media (max-width: 1024px) {
+      width: 100%;
+    }
 	`} 
 `;
 

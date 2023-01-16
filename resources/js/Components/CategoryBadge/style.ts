@@ -25,6 +25,11 @@ ${({ color, asButton }: CategoryBadgeProps) => css`
   height: 1.35rem;
   position: relative;
   ${asButton && css`cursor: pointer;`}  
+
+  @media (max-width: 1024px) {
+    font-size: .7rem;
+    padding: 2px 4px;
+  }
 `}
 `;
 
@@ -34,6 +39,11 @@ ${({ color }: BadgeBallProps) => css`
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 100px;
+
+  @media (max-width: 1024px) {
+    width: 0.3rem;
+    height: 0.3rem;
+  }
 `}
 `;
 

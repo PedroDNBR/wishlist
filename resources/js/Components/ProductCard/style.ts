@@ -11,11 +11,20 @@ export const Card = styled.div`
     flex-direction: column;
     gap: .2rem;
     margin-bottom: 2rem;
+
+    @media (max-width: 600px) {
+      width: 100%;
+      height: 23rem;
+    }
   `}
+
 `;
 
 export const CardInList = styled.div`
   margin: 0 auto;
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 export const ImageContainer = styled.div`
@@ -50,6 +59,10 @@ export const Title = styled.h3`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    @media (max-width: 1024px) {
+      font-size: 1rem;
+    }
   `}
 `;
 
@@ -58,6 +71,9 @@ export const Price = styled.h4`
     color: ${theme.white[100]};
     font-weight: normal;
     font-size: 1.16rem;
+    @media (max-width: 1024px) {
+      font-size: 1rem;
+    }
   `}
 `;
 

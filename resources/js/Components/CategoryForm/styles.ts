@@ -16,6 +16,10 @@ export const CategoryFormLayout = styled.div`
   justify-content: center;
   gap: 3rem;
 
+  @media (max-width: 1024px) {
+    gap: 1rem;
+  }
+
   form {
     width: 100%;
   }
@@ -48,4 +52,14 @@ export const SearchCategoryForm = styled.div`
   width: 60%;
   flex-wrap: wrap;
   align-self: center;
+`;
+
+export const HexColorPickerComponent = styled(HexColorPicker)`
+    width: 18.625rem !important;
+    height: 14.95rem !important;
+
+    @media (max-width: 1024px) {
+      width: 14rem !important;
+      height: 14rem !important;
+    }
 `;

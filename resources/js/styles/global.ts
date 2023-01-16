@@ -19,6 +19,9 @@ export const Form = styled.form`
 	width: 70%;
 	display: flex;
 	flex-direction: column;
+	@media (max-width: 1024px) {
+		width: 100%;
+  }
 `;
 
 export const FluidContainer = styled.div`
@@ -32,6 +35,10 @@ export const FluidContainer = styled.div`
 		justify-content: space-between;
 		align-items: center;
 
+		@media (max-width: 1024px) {
+			padding: 0 8%;
+		}
+
 		div {
 				flex-direction: column;
 				display: flex;
@@ -41,4 +48,7 @@ export const FluidContainer = styled.div`
 `;
 
 export const ImgAuth = styled.img`
+	@media (max-width: 1024px) {
+    display: none;
+  }
 `;

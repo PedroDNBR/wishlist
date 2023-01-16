@@ -1,15 +1,14 @@
 import { Category } from "@/Types/Category";
 import { Inertia } from "@inertiajs/inertia";
-import { request } from "http";
-import { t } from "i18next";
-import { readableColor } from "polished";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { SearchInputControlled } from "../SearchInput";
 import { Select } from "../Select/style";
-import { colorStyles, SearchHeader } from "./style";
+import { colorStyles, Content, Portal, SearchButtonMobile, SearchHeader, Root } from "./style";
 import { useTranslation } from "react-i18next";
 import '@/i18n';
+import { FaFilter } from "react-icons/fa";
+import useWindowDimensions from "@/Hooks/useWindowDimensions";
 
 interface SearchProps {
   categories: Category[];
@@ -76,8 +75,8 @@ export function HomeSearchBar({ categories = [], request}: SearchProps) {
     return selectedCategories;
   }
 
-  return (
-    <SearchHeader>
+  const menuOptions = (
+    <>
       <Select 
         classNamePrefix="react-select" 
         options={categoriesSelect()} 
@@ -96,6 +95,33 @@ export function HomeSearchBar({ categories = [], request}: SearchProps) {
         hideSelectedOptions={false} 
         onChange={(choice: any) => setSort(choice.value)}
       />
-    </SearchHeader>
+    </>
+  );
+
+  function menu() {
+    if(useWindowDimensions().width > 1024) {
+      return <>
+        <SearchHeader>
+          {menuOptions}
+        </SearchHeader>
+      </>
+    } else {
+      return <>
+        <Root>
+          <SearchButtonMobile><FaFilter /></SearchButtonMobile>
+          <Portal style={{width: "100% !important"}}>
+            <Content side="bottom" align="center" style={{width: "100% !important"}}>
+              {menuOptions}
+            </Content>
+          </Portal>
+        </Root>
+      </>
+    }
+  }
+
+  return (
+    <>
+      {menu()}
+    </>
   )
 }
