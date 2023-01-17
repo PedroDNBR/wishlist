@@ -32,6 +32,14 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
+
+  @media (min-width: 1024px) {
+    width: 18.625rem;
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 export const CategoryListingContainer = styled.div`
