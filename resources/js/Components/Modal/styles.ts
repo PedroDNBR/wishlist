@@ -23,5 +23,14 @@ export const Content = styled(Dialog.Content)`
     min-width: 300px;
     padding: 30px;
     border-radius: 30px;
+
+    @media (max-width: 1024px) {
+      min-width: 90vw;
+      width: 90vw;
+      gap: .5rem;
+      display: flex;
+      flex-direction: column;
+      margin: 1rem;
+    }
   `}
 `;

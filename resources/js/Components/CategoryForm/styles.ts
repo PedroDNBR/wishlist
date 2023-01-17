@@ -1,5 +1,5 @@
 import { HexColorPicker } from "react-colorful";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const CategoryLayout = styled.div`
   display: flex;
@@ -17,7 +17,8 @@ export const CategoryFormLayout = styled.div`
   gap: 3rem;
 
   @media (max-width: 1024px) {
-    gap: 1rem;
+    gap: 0rem;
+    flex-direction: column;
   }
 
   form {
@@ -31,7 +32,6 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  width: 18.625rem;
 `;
 
 export const CategoryListingContainer = styled.div`
