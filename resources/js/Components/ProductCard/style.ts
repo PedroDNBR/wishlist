@@ -11,6 +11,11 @@ export const Card = styled.div`
     flex-direction: column;
     gap: .2rem;
     margin-bottom: 2rem;
+    position: relative;
+
+    &:hover ${EditMenu} {
+      display: block;
+    }
 
     @media (max-width: 600px) {
       width: 100%;
@@ -81,4 +86,24 @@ export const CategoryWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+`;
+
+export const EditMenu = styled.div`
+  ${({ theme }) => css`
+    display: none;
+    position: absolute;
+    color: ${theme.white[100]};
+    font-size: 2rem;
+    right: 0;
+    padding-inline: 0.9rem;
+    top: 5%;
+    svg {
+      stroke: #323644;
+      stroke-width: .8;
+    }
+  `}
+
+  &:focus {
+    display: block;
+  }
 `;

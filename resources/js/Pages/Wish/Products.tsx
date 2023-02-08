@@ -158,7 +158,7 @@ export default function Products({ errors, categories }: CreateProductProps) {
     <>
       <Layout>
         <CategoryFormLayout>
-          <ProductCard product={product} deletableCategory={true} onDelete={deleteCategory} isEditing={true} setProductImageAndImageFile={setProductImageAndImageFile}>
+          <ProductCard product={product} deletableCategory={true} onDelete={deleteCategory} isEditingImage={true} setProductImageAndImageFile={setProductImageAndImageFile}>
             {productCategories.length < 4 && (
             <DropdownMenu.Root open={open} onOpenChange={setOpen}>
                 <div>

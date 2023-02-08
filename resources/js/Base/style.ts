@@ -194,7 +194,7 @@ export const ProductsContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const MenuMobile = styled.button`
+export const MenuMobile = styled.section`
 	${({ theme }) => css`
     display: none;
     @media (max-width: 1024px) {

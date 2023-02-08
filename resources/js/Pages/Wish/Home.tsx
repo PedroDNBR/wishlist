@@ -30,7 +30,7 @@ export default function Home({ errors, products = [], categories = [], request }
 					{products.map((product) => {
 						return (
 							<CardInList key={product.id}>
-								<ProductCard key={product.id} product={product} />
+								<ProductCard key={product.id} product={product} canEditingProduct={true} />
 							</CardInList>
 						);
 					})}

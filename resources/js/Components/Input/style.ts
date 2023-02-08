@@ -8,6 +8,7 @@ export interface InputStyleProps {
 export const Input = styled.input`
 	${({ theme }) => css`
 			border: 0px;
+			outline: none;
 			color: ${theme.white[100]};
 			background-color: ${theme.grey[500]};
 			padding: 0;

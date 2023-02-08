@@ -6,6 +6,7 @@ export const Input = styled.input`
   ${({ theme }) => css`
     width: 30rem;
     border: 0px;
+    outline: none;
     color: ${theme.white[100]};
     background-color: ${theme.grey[400]};
     padding: 0;
