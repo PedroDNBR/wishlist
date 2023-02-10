@@ -13,9 +13,9 @@ export const Card = styled.div`
     margin-bottom: 2rem;
     position: relative;
 
-    &:hover ${EditMenu} {
+    /* &:hover ${EditMenu} {
       display: block;
-    }
+    } */
 
     @media (max-width: 600px) {
       width: 100%;
@@ -90,7 +90,7 @@ export const CategoryWrapper = styled.div`
 
 export const EditMenu = styled.div`
   ${({ theme }) => css`
-    display: none;
+    display: block;
     position: absolute;
     color: ${theme.white[100]};
     font-size: 2rem;

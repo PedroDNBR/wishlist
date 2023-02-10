@@ -10,6 +10,11 @@ import { useTranslation } from "react-i18next";
 import { Content, Overlay } from '../Modal/styles';
 import { DeleteButton, EditButton, ProductDropdownContent } from '../ProductDropdown/style';
 import { FaPencilAlt, FaTrash } from 'react-icons/fa';
+import ProductEditForm from '../ProductForm';
+import { Category as CategoryType } from '@/Types/Category';
+import ProductForm from '../ProductForm';
+import { CloseModal } from '../OpenImageModal/styles';
+import { AiOutlineClose } from 'react-icons/ai';
 
 interface ProductCardProps {
   children?: ReactNode;
@@ -19,9 +24,21 @@ interface ProductCardProps {
   isEditingImage?: boolean;
   setProductImageAndImageFile?: ((preview: string ,file?: File) => void) | null;
   canEditingProduct?: boolean;
+  errors?: Record<string, string>;
+  categories?: CategoryType[];
 }
 
-export function ProductCard({ children = null, product, deletableCategory = false, onDelete = null, isEditingImage = false, setProductImageAndImageFile, canEditingProduct = false }: ProductCardProps) {
+export function ProductCard({
+  children = null, 
+  product, 
+  deletableCategory = false, 
+  onDelete = null, 
+  isEditingImage = false, 
+  setProductImageAndImageFile, 
+  canEditingProduct = false, 
+  categories,
+  errors
+}: ProductCardProps) {
   const { t } = useTranslation();
   return (
     <Card>
@@ -30,7 +47,7 @@ export function ProductCard({ children = null, product, deletableCategory = fals
         { isEditingImage && setProductImageAndImageFile ? <OpenImageModal setProductImageAndImageFile={setProductImageAndImageFile} /> : ''}
       </ImageContainer>
       {canEditingProduct && (
-        <DropdownMenu.Root>
+        <DropdownMenu.Root modal={false}>
           <EditMenu>
             <DropdownMenu.Trigger>
               <BiDotsVerticalRounded />
@@ -38,24 +55,25 @@ export function ProductCard({ children = null, product, deletableCategory = fals
           </EditMenu>
 
         <DropdownMenu.Portal>
-          <ProductDropdownContent side="left" align="start">
-          <Dialog.Root>
-            <Dialog.Trigger>
-              <EditButton>
-                <FaPencilAlt /> Editar
-              </EditButton>
-            </Dialog.Trigger>
-            <Dialog.Portal>
-              <Overlay>
-                <Content>
-                  Editar
-                </Content>
-              </Overlay>
-            </Dialog.Portal>
-          </Dialog.Root>
-            <DeleteButton>
-              <FaTrash />Excluir
-            </DeleteButton>
+          <ProductDropdownContent  side="left" align="start">
+              <Dialog.Root>
+                <EditButton>
+                  <FaPencilAlt /> Editar
+                </EditButton>
+                <Dialog.Portal>
+                  <Overlay>
+                    <Content>
+                      <CloseModal>
+                        <AiOutlineClose />
+                      </CloseModal>
+                      <ProductForm editProduct={product} categories={categories ?? []} errors={errors}  />
+                    </Content>
+                  </Overlay>
+                </Dialog.Portal>
+              </Dialog.Root>
+              <DeleteButton>
+                <FaTrash />Excluir
+              </DeleteButton>
           </ProductDropdownContent>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
@@ -73,18 +91,3 @@ export function ProductCard({ children = null, product, deletableCategory = fals
     </Card>
   )
 }
-
-{/* <Dialog.Root>
-<Dialog.Trigger>
-  <EditMenu>
-    <BiDotsVerticalRounded />
-  </EditMenu>
-</Dialog.Trigger>
-<Dialog.Portal>
-  <Overlay>
-    <Content>
-      teste
-    </Content>
-  </Overlay>
-</Dialog.Portal>
-</Dialog.Root> */}

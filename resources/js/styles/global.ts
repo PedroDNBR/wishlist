@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle, css } from "styled-components";
 
-const GlobalStyles = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
 	@media (max-width: 1080px) {
       html: {
         font-size: 93.75%;
@@ -12,6 +12,30 @@ const GlobalStyles = createGlobalStyle`
         font-size: 87.5%;
       }
 		}
+
+		${({theme}) => css`
+			/* ===== Scrollbar CSS ===== */
+		/* Firefox */
+		* {
+			scrollbar-width: auto;
+			scrollbar-color: ${theme.grey[400]} ${theme.grey[600]};
+		}
+
+		/* Chrome, Edge, and Safari */
+		*::-webkit-scrollbar {
+			width: 16px;
+		}
+
+		*::-webkit-scrollbar-track {
+			background: ${theme.grey[600]};;
+		}
+
+		*::-webkit-scrollbar-thumb {
+			background-color: ${theme.grey[400]};
+			border-radius: 10px;
+			border: 3px solid ${theme.grey[600]};;
+		}
+	`}
 `
 
 export const Form = styled.form`

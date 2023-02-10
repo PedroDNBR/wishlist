@@ -1,5 +1,6 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import styled, { css } from 'styled-components';
+import * as Dialog from '@radix-ui/react-dialog';
 
 export const ProductDropdownContent = styled(DropdownMenu.Content)`
   ${({theme}) => css`
@@ -9,7 +10,7 @@ export const ProductDropdownContent = styled(DropdownMenu.Content)`
   `}
 `;
 
-export const EditButton = styled.button`
+export const EditButton = styled(Dialog.Trigger)`
   ${({theme}) => css`
     all: unset;
     color: ${theme.white[100]};

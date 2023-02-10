@@ -10,7 +10,6 @@ export const CategoryLayout = styled.div`
 export const CategoryFormLayout = styled.div`
   display: flex;
   padding: 3rem;
-  padding-top: 6rem;
   width: 100%;
   align-items: center;
   justify-content: center;
