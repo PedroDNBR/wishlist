@@ -37,6 +37,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categoryDestroy');
 
     Route::post('/product', [ProductController::class, 'store'])->name('productStore');
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('categoryDestroy');
 
     Route::get('/create-product', [ProductController::class, 'create'])->name('product');
 });

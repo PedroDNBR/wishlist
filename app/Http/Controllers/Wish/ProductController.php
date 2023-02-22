@@ -5,12 +5,10 @@ namespace App\Http\Controllers\Wish;
 use App\Http\Controllers\Controller;
 use App\Models\Wish\Category;
 use App\Models\Wish\Product;
-use App\Models\Wish\ProductCategory;
 use DOMDocument;
 use DOMXPath;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Kovah\HtmlMeta\Facades\HtmlMeta;
 use Intervention\Image\Facades\Image;
 
@@ -37,6 +35,11 @@ class ProductController extends Controller
         $product = Product::createProductAndCategories($request->all());
 
         return Inertia::render('Wish/Products');
+    }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
     }
 
     public function getImage(Request $request)
