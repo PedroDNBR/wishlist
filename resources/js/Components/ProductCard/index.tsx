@@ -16,6 +16,7 @@ import ProductForm from '../ProductForm';
 import { CloseModal } from '../OpenImageModal/styles';
 import { AiOutlineClose } from 'react-icons/ai';
 import { router } from '@inertiajs/react';
+import Swal from 'sweetalert2';
 
 interface ProductCardProps {
   children?: ReactNode;
@@ -43,10 +44,29 @@ export function ProductCard({
   const { t } = useTranslation();
 
   function deleteProduct() {
-    router.delete(`/products/${product.id}`, {
-      preserveState: true,
-      preserveScroll: true,
-    });
+    Swal.fire({
+      title: 'Deseja apagar este produto?',
+      text: "Você não poderá reverter esta opção!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, deletar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        router.delete(`/products/${product.id}`, {
+          preserveState: true,
+          preserveScroll: true,
+        });
+        Swal.fire(
+          'Concluido!',
+          'Seu produto foi deletado com sucesso.',
+          'success'
+        )
+      }
+    })
+
   }
 
   return (

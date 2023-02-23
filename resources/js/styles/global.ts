@@ -2,18 +2,18 @@ import styled, { createGlobalStyle, css } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
 	@media (max-width: 1080px) {
-      html: {
-        font-size: 93.75%;
-      }
-    }
-
-    @media (max-width: 720px) {
-      html: {
-        font-size: 87.5%;
-      }
+		html: {
+			font-size: 93.75%;
 		}
+	}
 
-		${({theme}) => css`
+	@media (max-width: 720px) {
+		html: {
+			font-size: 87.5%;
+		}
+	}
+
+	${({theme}) => css`
 			/* ===== Scrollbar CSS ===== */
 		/* Firefox */
 		* {
@@ -34,6 +34,34 @@ export const GlobalStyles = createGlobalStyle`
 			background-color: ${theme.grey[400]};
 			border-radius: 10px;
 			border: 3px solid ${theme.grey[600]};;
+		}
+
+		.swal2-popup {
+			color: ${theme.white[100]};
+			background: ${theme.grey[600]};
+			border-radius: 15px;
+		}
+
+		.swal2-deny {
+			background: ${theme.red} !important;
+		}
+		.swal2-confirm {
+			background: ${theme.blue} !important;
+		}
+
+		.swal2-confirm:focus {
+			box-shadow: 0 0 0 0 #fff !important;
+		}
+
+		.swal2-deny:focus {
+			box-shadow: 0 0 0 0 #fff !important;
+		}
+
+		.swal2-confirm:hover {
+			filter: brightness(1.1);
+		}
+		.swal2-deny:hover {
+			filter: brightness(1.1);
 		}
 	`}
 `

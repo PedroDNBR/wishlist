@@ -39,6 +39,7 @@
         "react-icons": "^4.4.0",
         "react-select": "^5.7.0",
         "styled-components": "^5.3.5",
+        "sweetalert2": "^11.7.2",
         "yup": "^0.32.11"
     }
 }
