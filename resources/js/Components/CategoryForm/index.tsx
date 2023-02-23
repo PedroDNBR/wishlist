@@ -5,7 +5,7 @@ import { ButtonComponent } from "../Button";
 import { InputControlled } from "../Input";
 import { ProductCard } from "../ProductCard";
 import { Category } from "@/Types/Category";
-import { RequestPayload } from "@inertiajs/inertia";
+import { router } from '@inertiajs/react';
 import { Product } from "@/Types/Product";
 import { useTranslation } from "react-i18next";
 

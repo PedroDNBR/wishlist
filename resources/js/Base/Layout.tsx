@@ -1,7 +1,7 @@
 import { Container, Menu, Content, LogoW, LogoL, Icon, ProfileImageContainer, ProfileImage, MenuContent, MenuTitle, MenuDark, MenuDarkProps, MenuMobile, ProfileImageContainerMobile, MenuButton, DropdownContent, MobileIcon, MobileLinks } from "./style";
 import { MdLabel, MdOutlineAddCircle } from 'react-icons/md';
 import { FaBars, FaShoppingBasket } from 'react-icons/fa';
-import { Inertia } from "@inertiajs/inertia";
+import { router } from '@inertiajs/react';
 import { ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
@@ -17,7 +17,7 @@ export function Layout({ children }: LayoutProps) {
   const [ visible, setVisible ] = useState<string>('hidden');
 
   function logout() {
-    Inertia.delete('/users/logout')
+    router.delete('/users/logout')
   }
   
 

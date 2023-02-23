@@ -5,7 +5,7 @@ import { FluidContainer, Form, ImgAuth } from "@/styles/global";
 import { ButtonComponent } from "@/Components/Button";
 import { AuthTitleComponent } from "@/Components/AuthTitle";
 import { AuthAccountSpan } from "@/Components/AuthAccountSpan";
-import { Inertia, RequestPayload } from "@inertiajs/inertia";
+import { router } from '@inertiajs/react';
 import { useFormErrors } from "@/Hooks/useFormErrors";
 import { useTranslation } from "react-i18next";
 import '@/i18n';
@@ -25,8 +25,8 @@ export default function Register({ errors: apiErrors }: RegisterProps) {
 
 	useFormErrors({errors: apiErrors, setError: setError});
 
-	async function register(data: RequestPayload) {
-		await Inertia.post('/users/register', data, {
+	async function register(data: any) {
+		await router.post('/users/register', data, {
       headers: {
         'Content-Language': localStorage.getItem('i18nextLng') ?? 'en',
       },

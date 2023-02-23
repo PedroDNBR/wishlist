@@ -10,7 +10,7 @@ import { Dropdown } from "@/Components/Dropdown";
 import { Item, Trigger } from "@/Components/Dropdown/styles";
 import { GoPlus } from 'react-icons/go'
 import axios from "axios";
-import { Inertia, RequestPayload } from "@inertiajs/inertia";
+import { router } from '@inertiajs/react';
 import { useFormErrors } from "@/Hooks/useFormErrors";
 import { Category } from "@/Types/Category";
 import { Product } from "@/Types/Product";
@@ -146,9 +146,9 @@ export default function ProductForm({ errors, categories, editProduct }: CreateP
         }
       });
       setProductImage(response.data.location)
-      await Inertia.post('/product', {...product, image_url: response?.data.location } as unknown as RequestPayload);
+      await router.post('/product', {...product, image_url: response?.data.location } as any);
   } else {
-    await Inertia.post('/product', product as unknown as RequestPayload);
+    await router.post('/product', product as any);
   }
 
 

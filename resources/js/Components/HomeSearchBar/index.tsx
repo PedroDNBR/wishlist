@@ -1,5 +1,5 @@
 import { Category } from "@/Types/Category";
-import { Inertia } from "@inertiajs/inertia";
+import { router } from '@inertiajs/react';
 import { useEffect, useRef, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { SearchInputControlled } from "../SearchInput";
@@ -40,7 +40,7 @@ export function HomeSearchBar({ categories = [], request}: SearchProps) {
   });
 
   useEffect(() => {
-    return Inertia.get('/wishes', {
+    return router.get('/wishes', {
       sort,
       "filter[name]": search,
       "filter[categories]": categoriesId

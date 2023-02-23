@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Inertia, RequestPayload } from "@inertiajs/inertia";
+import { router } from '@inertiajs/react';
 import { FluidContainer, Form, ImgAuth } from "@/styles/global";
 import { AuthTitleComponent } from "@/Components/AuthTitle";
 import { AuthAccountSpan } from "@/Components/AuthAccountSpan";
@@ -25,8 +25,8 @@ export default function Login({ errors: apiErrors }: LoginProps) {
 
   useFormErrors({errors: apiErrors, setError: setError});
 
-  function login(data: RequestPayload) {
-    Inertia.post('/users/login', data, {
+  function login(data: any) {
+    router.post('/users/login', data, {
       headers: {
         'Content-Language': localStorage.getItem('i18nextLng') ?? 'en',
       },

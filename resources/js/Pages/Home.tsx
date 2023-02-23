@@ -1,9 +1,9 @@
-import { Inertia } from "@inertiajs/inertia";
+import { router } from '@inertiajs/react';
 import React from "react";
 
 export default function Home() {
   function start() {
-    Inertia.get('/wishes')
+    router.get('/wishes')
   }
   return (
     <>

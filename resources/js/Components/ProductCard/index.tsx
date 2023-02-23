@@ -15,7 +15,7 @@ import { Category as CategoryType } from '@/Types/Category';
 import ProductForm from '../ProductForm';
 import { CloseModal } from '../OpenImageModal/styles';
 import { AiOutlineClose } from 'react-icons/ai';
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/react';
 
 interface ProductCardProps {
   children?: ReactNode;
@@ -43,8 +43,9 @@ export function ProductCard({
   const { t } = useTranslation();
 
   function deleteProduct() {
-    Inertia.delete(`/products/${product.id}`, {
-      preserveState: true
+    router.delete(`/products/${product.id}`, {
+      preserveState: true,
+      preserveScroll: true,
     });
   }
 

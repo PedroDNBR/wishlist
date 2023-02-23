@@ -2,7 +2,7 @@ import { Layout } from "@/Base/Layout";
 import { useForm, useWatch } from "react-hook-form";
 import React, { useEffect, useState } from "react";
 import { InputControlled } from "@/Components/Input";
-import { Inertia, RequestPayload } from "@inertiajs/inertia";
+import { router } from '@inertiajs/react';
 import { CategoryForm } from "@/Components/CategoryForm";
 import { CategoryFormLayout, CategoryLayout, CategoryListingContainer, SearchCategoryForm } from "@/Components/CategoryForm/styles";
 import { EditCategory } from "@/Components/EditCategory";
@@ -41,7 +41,7 @@ export default function Categories({ errors: apiErrors, categories }: CategoryPr
   }, [apiErrors, isEditing])
 
   async function create(data: CategoryInterface) {
-    await Inertia.post('/categories', data as unknown as RequestPayload);
+    await router.post('/categories', data as any);
   }
 
   function closeModal() {

@@ -1,12 +1,12 @@
 import { useFormErrors } from "@/Hooks/useFormErrors";
 import { Category } from "@/Types/Category";
-import { Inertia, RequestPayload } from "@inertiajs/inertia";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineClose } from "react-icons/ai";
 import { CategoryForm } from "../CategoryForm";
 import { Modal } from "../Modal";
 import { CloseModal } from "../OpenImageModal/styles";
+import { router } from '@inertiajs/react';
 
 interface EditCategoryProps {
   errors: Record<string, string>;
@@ -35,7 +35,7 @@ export function EditCategory({ errors, setIsEditing, isEditing, category, button
 
   async function update(data: Category, id: number | undefined) {
     try {
-      await Inertia.put(`/categories/${id}`, data as unknown as RequestPayload);
+      await router.put(`/categories/${id}`, data as any);
     } catch (e) {
       console.error(e);
     }

@@ -1,5 +1,5 @@
 import { Category as CategoryInterface } from '@/Types/Category';
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/react';
 import { BadgeBall, CategoryBadge, CategoryName, CrossIcon, DeleteButton } from './style';
 
 interface CategoryBadgeProps{
@@ -13,7 +13,7 @@ export function Category({ category, canDelete = false, onDelete = null }: Categ
     event.stopPropagation();
     if (onDelete) return onDelete(id);
 
-    await Inertia.delete(`/categories/${id}`);
+    await router.delete(`/categories/${id}`);
   }
 
   return (

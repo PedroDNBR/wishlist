@@ -5,7 +5,7 @@ import { ProductCard } from "@/Components/ProductCard";
 import { CardInList } from "@/Components/ProductCard/style";
 import { Category } from "@/Types/Category";
 import { Product } from "@/Types/Product";
-import { Inertia } from "@inertiajs/inertia";
+import { router } from '@inertiajs/react';
 import React from "react";
 
 interface HomeProps {
