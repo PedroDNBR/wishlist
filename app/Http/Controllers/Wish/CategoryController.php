@@ -31,23 +31,25 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+        $request->session()->put('category', 'creating');
         Category::create([
             'color' => $request['color'],
             'name' => $request['name'],
             'user_id' =>  Auth::user()->id,
         ]);
-        return redirect('/categories');
+        return redirect()->back();
     }
 
     public function update(Category $category, Request $request)
     {
+        $request->session()->put('category', 'editing');
         $category->update($request->all());
-        return redirect('/categories');
+        return redirect()->back();
     }
 
     public function destroy(Category $category)
     {
         $category->forceDelete();
-        return redirect('/categories');
+        return redirect()->back();
     }
 }

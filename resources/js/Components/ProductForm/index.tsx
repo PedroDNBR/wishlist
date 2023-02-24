@@ -85,7 +85,6 @@ export default function ProductForm({ errors, categories, editProduct }: CreateP
     setProductImage(editProduct.image_url)
 
     editProduct.categories.forEach((category) => {
-      console.log(category);
       if(category.id) setCategoriesId(category.id);
     })
   }, [editProduct])

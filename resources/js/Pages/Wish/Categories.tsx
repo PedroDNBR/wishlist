@@ -16,9 +16,12 @@ import { useTranslation } from "react-i18next";
 interface CategoryProps {
   errors: Record<string, string>;
   categories: CategoryInterface[];
+  forms: {
+    category: 'creating' | 'editing' | null;
+  }
 }
 
-export default function Categories({ errors: apiErrors, categories }: CategoryProps) {
+export default function Categories({ errors: apiErrors, categories, forms: { category: categoryForm } }: CategoryProps) {
   const createForm = useForm(); EditCategory
   const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
@@ -32,13 +35,15 @@ export default function Categories({ errors: apiErrors, categories }: CategoryPr
     reset,
   } = createForm;
 
-  const { handleErrors } = useFormErrors({errors: apiErrors, setError: setError, enabled: false});
+    const { handleErrors } = useFormErrors({errors: apiErrors, setError: setError, enabled: false});
 
   useEffect(() => {
     if (isEditing || !apiErrors) return;
 
+  if(categoryForm == 'creating') {
     handleErrors();
-  }, [apiErrors, isEditing])
+  }
+}, [apiErrors, isEditing])
 
   async function create(data: CategoryInterface) {
     await router.post('/categories', data as any);
@@ -79,7 +84,7 @@ export default function Categories({ errors: apiErrors, categories }: CategoryPr
       <Layout>
         <CategoryLayout>
           <CategoryFormLayout>
-            <CategoryForm form={createForm} onSubmit={create} buttonName={t('inputs:create')} />
+            <CategoryForm isSent={false} form={createForm} onSubmit={create} buttonName={t('inputs:create')} errors={apiErrors} />
           </CategoryFormLayout>
           <SearchCategoryForm>
             <InputControlled control={control} label={t('inputs:search')} type="text" name="search" max={12} />
@@ -97,7 +102,7 @@ export default function Categories({ errors: apiErrors, categories }: CategoryPr
                 )
               })}
               <Dialog.Portal>
-                <EditCategory closeModal={closeModal} buttonName={t('inputs:update')} category={editCategory} setIsEditing={setIsEditing} isEditing={isEditing} errors={apiErrors} />
+                <EditCategory closeModal={closeModal} buttonName={t('inputs:update')} category={editCategory} setIsEditing={setIsEditing} isEditing={isEditing} errors={apiErrors} categoryForm={categoryForm} />
               </Dialog.Portal>
             </Dialog.Root>
           </CategoryListingContainer>

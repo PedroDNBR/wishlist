@@ -34,7 +34,8 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
-        return array_merge(parent::share($request), [
+        $category = $request->session()->get('category');
+        $array =  array_merge(parent::share($request), [
             'auth' => [
                 'user' => $request->user(),
             ],
@@ -43,7 +44,14 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
-            'user' => fn () => $request->session()->get('user')
+            'user' => fn () => $request->session()->get('user'),
+            'teste' => fn () => $request->session()->get('teste'),
+            'forms' => [
+                'category' => fn () => $category
+            ],
         ]);
+        $request->session()->remove('category');
+
+        return $array;
     }
 }

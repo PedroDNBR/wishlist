@@ -1,6 +1,6 @@
 import { useFormErrors } from "@/Hooks/useFormErrors";
 import { Category } from "@/Types/Category";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineClose } from "react-icons/ai";
 import { CategoryForm } from "../CategoryForm";
@@ -15,18 +15,21 @@ interface EditCategoryProps {
   category: Category | null;
   buttonName: string;
   closeModal: () => void;
+  categoryForm: 'creating' | 'editing' | null;
 }
 
-export function EditCategory({ errors, setIsEditing, isEditing, category, buttonName, closeModal }: EditCategoryProps) {
+export function EditCategory({ errors, setIsEditing, isEditing, category, buttonName, closeModal, categoryForm }: EditCategoryProps) {
   const editForm = useForm();
   const { setError } = editForm;
+  const [isSent, setIsSent] = useState(false);
 
   const { handleErrors } = useFormErrors({errors, setError, enabled: false});
 
   useEffect(() => {
     if (!isEditing && !errors) return;
-
-    handleErrors();
+    if(categoryForm == 'editing') {
+      handleErrors();
+    }
   }, [errors, isEditing])
 
   function handleOpenChange(open: boolean) {
@@ -34,11 +37,8 @@ export function EditCategory({ errors, setIsEditing, isEditing, category, button
   }
 
   async function update(data: Category, id: number | undefined) {
-    try {
-      await router.put(`/categories/${id}`, data as any);
-    } catch (e) {
-      console.error(e);
-    }
+    await router.put(`/categories/${id}`, data as any);
+    setIsSent(true);
   }
 
   return (
@@ -48,7 +48,7 @@ export function EditCategory({ errors, setIsEditing, isEditing, category, button
       <CloseModal onClick={closeModal}>
         <AiOutlineClose />
       </CloseModal>
-      <CategoryForm closeModal={closeModal} buttonName={buttonName} category={category ?? undefined} form={editForm} onSubmit={update} />
+      <CategoryForm isSent={isSent} setIsSent={setIsSent} closeModal={closeModal} buttonName={buttonName} category={category ?? undefined} form={editForm} onSubmit={update} errors={errors} />
     </Modal>
   );
 }

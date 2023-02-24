@@ -15,9 +15,12 @@ interface CategoryFormProps {
   buttonName: string;
   closeModal?: () => void;
   onSubmit: (data: Category, id: number | undefined) => Promise<void>;
+  errors: Record<string, string>;
+  isSent: boolean;
+  setIsSent?: (value: boolean) => void;
 }
 
-export function CategoryForm({ form, onSubmit, category, buttonName, closeModal }: CategoryFormProps) {
+export function CategoryForm({ form, onSubmit, category, buttonName, closeModal, errors, isSent, setIsSent }: CategoryFormProps) {
   const { control, handleSubmit, reset, setValue } = form;
   const { t } = useTranslation();
   const [color, setColor] = useState(category?.color ?? '#ffffff');
@@ -27,9 +30,14 @@ export function CategoryForm({ form, onSubmit, category, buttonName, closeModal 
     setColor("#ffffff");
     data.color = color;
     await onSubmit(data, category?.id);
-    if (closeModal) closeModal();
-    reset();
   }
+
+  useEffect(() => {
+    if(!Object.entries(errors).length && closeModal && isSent) {
+      closeModal();
+      reset();
+    }
+  }, [errors])
   
   const categoryName = useWatch({
     control,
