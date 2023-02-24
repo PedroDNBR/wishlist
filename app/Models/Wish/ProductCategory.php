@@ -31,6 +31,8 @@ class ProductCategory extends BaseModel
 
     public static function createCategoriesFromArray(array $categories, string $productId)
     {
+        ProductCategory::where('product_id', $productId)->delete();
+
         foreach ($categories as $category) {
             ProductCategory::create([
                 'product_id' =>  $productId,

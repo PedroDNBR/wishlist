@@ -24,10 +24,6 @@ export function OpenImageModal({ setProductImageAndImageFile }: OpenImageModalPr
 
   const [sentImage, setSentImage] = useState<File | undefined>(undefined);
 
-  useEffect(() => {
-    console.log(sentImage);
-  }, [sentImage])
-
   const { pastedFiles } = usePaste();
 
   const { t } = useTranslation();

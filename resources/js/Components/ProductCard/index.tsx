@@ -84,25 +84,25 @@ export function ProductCard({
           </EditMenu>
 
         <DropdownMenu.Portal>
-          <ProductDropdownContent  side="left" align="start">
-              <Dialog.Root>
-                <EditButton>
-                  <FaPencilAlt /> Editar
-                </EditButton>
-                <Dialog.Portal>
-                  <Overlay>
-                    <Content>
-                      <CloseModal>
-                        <AiOutlineClose />
-                      </CloseModal>
-                      <ProductForm editProduct={product} categories={categories ?? []} errors={errors}  />
-                    </Content>
-                  </Overlay>
-                </Dialog.Portal>
-              </Dialog.Root>
-              <DeleteButton onClick={() => deleteProduct()}>
-                <FaTrash />Excluir
-              </DeleteButton>
+          <ProductDropdownContent side="left" align="start">
+            <Dialog.Root modal={true}>
+              <EditButton>
+                <FaPencilAlt /> Editar
+              </EditButton>
+              <Dialog.Portal>
+                <Overlay>
+                  <Content>
+                    <CloseModal>
+                      <AiOutlineClose />
+                    </CloseModal>
+                    <ProductForm editProduct={product} categories={categories ?? []} errors={errors}  />
+                  </Content>
+                </Overlay>
+              </Dialog.Portal>
+            </Dialog.Root>
+            <DeleteButton onClick={() => deleteProduct()}>
+              <FaTrash />Excluir
+            </DeleteButton>
           </ProductDropdownContent>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>

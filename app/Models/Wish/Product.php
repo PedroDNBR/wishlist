@@ -63,6 +63,24 @@ class Product extends BaseModel
         $user_id = Auth::user()->id;
 
         $product = Product::create([
+            'name' => $data['name'] ?? null,
+            'url' => $data['url'] ?? null,
+            'lowest_price' => str_replace(',', '', $data['lowest_price']) ?? null,
+            'image_url' => $data['image_url'] ?? null,
+            'user_id' =>  $user_id,
+        ]);
+
+        ProductCategory::createCategoriesFromArray($data['categories'], $product->id);
+
+        $product->load('categories');
+        return $product;
+    }
+
+    public static function updateProductAndCategories(array $data, $product)
+    {
+        $user_id = Auth::user()->id;
+
+        $product->update([
             'name' => $data['name'],
             'url' => $data['url'],
             'lowest_price' => str_replace(',', '', $data['lowest_price']),
@@ -75,6 +93,7 @@ class Product extends BaseModel
         $product->load('categories');
         return $product;
     }
+
 
     public static function getAuthenticatedProductsWithCategories()
     {

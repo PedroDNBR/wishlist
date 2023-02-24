@@ -37,6 +37,17 @@ class ProductController extends Controller
         return Inertia::render('Wish/Products');
     }
 
+    public function update(Product $product, Request $request)
+    {
+        $request->validate([
+            'categories' => ['required', 'array'],
+            'categories.*.id' => ['required', 'integer'],
+        ]);
+        $product = Product::updateProductAndCategories($request->all(), $product);
+
+        return redirect()->back();
+    }
+
     public function destroy(Product $product)
     {
         $product->delete();

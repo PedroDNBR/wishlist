@@ -21,6 +21,10 @@ export const Select = styled(ReactSelect)`
       border: 2px solid transparent;
     }
 
+    .react-select__input {
+      color: ${theme.white[100]} !important;
+    }
+
     .react-select__menu{
       padding: 5px;
       background-color: ${theme.grey[450]};

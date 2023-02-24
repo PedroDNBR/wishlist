@@ -12,12 +12,14 @@ export const Content = styled(DropdownMenu.Content)`
     display: flex;
     flex-direction: column;
     gap: 5px;
+    z-index: 9999;
   `}
 `;
 
 export const Portal = styled(DropdownMenu.Portal)`
   ${({ theme }) => css`
     background: ${theme.white[100]};
+    z-index: 9999;
   `}
 `;
 

@@ -17,6 +17,8 @@ import { Product } from "@/Types/Product";
 import { Select } from "@/Components/Select/style";
 import { colorStyles } from "@/Components/HomeSearchBar/style";
 import { useTranslation } from "react-i18next";
+import * as Dialog from '@radix-ui/react-dialog';
+
 
 interface CreateProductProps {
   errors: Record<string, string> | undefined | null;
@@ -35,9 +37,13 @@ export default function ProductForm({ errors, categories, editProduct }: CreateP
 
   const { t } = useTranslation();
 
-  if(errors) {
-    useFormErrors({errors, setError: setError});
-  }
+  const { handleErrors } = useFormErrors({errors, setError, enabled: false});
+  
+  useEffect(() => {
+    if (!errors) return;
+
+    handleErrors();
+  }, [errors])
 
   const placeholderImage = "https://lolitajoias.com.br/wp-content/uploads/2020/09/no-image.jpg"
 
@@ -45,13 +51,15 @@ export default function ProductForm({ errors, categories, editProduct }: CreateP
   const [productImage, setProductImage] = useState<string>(placeholderImage);
   const [productImageFile, setProductImageFile] = useState<File | undefined>(undefined);
 
-  const [product, setProduct] = useState<Product>({
+  const defaultProduct = {
     name: t('labels:favorite-product'),
     lowest_price: 3000,
     image_url: productImage,
     categories: productCategories,
     url: '',
-  });
+  };
+  
+  const [product, setProduct] = useState<Product>(editProduct ? editProduct : defaultProduct);
 
   const productName = useWatch({
     control,
@@ -69,12 +77,31 @@ export default function ProductForm({ errors, categories, editProduct }: CreateP
   });
 
   useEffect(() => {
+    if(!editProduct) return;
+    setValue('name', editProduct.name);
+    setValue('lowest_price', editProduct.lowest_price);
+    formatPrice(editProduct.lowest_price.toString());
+    setValue('url', editProduct.url);
+    setProductImage(editProduct.image_url)
+
+    editProduct.categories.forEach((category) => {
+      console.log(category);
+      if(category.id) setCategoriesId(category.id);
+    })
+  }, [editProduct])
+
+  useEffect(() => {
+    if (!productPrice) return;
+    formatPrice(productPrice);
+  }, [productPrice]);
+
+  function formatPrice(productPrice: string)  {
     let price = productPrice ?? '';
     price = price.replace(/\D/g, "");
     price = price.replace(/(\d)(\d{2})$/, "$1.$2");
     price = price.replace(/(?=(\d{3})+(\D))\B/g, ",");
     setValue('lowest_price', price);
-  }, [productPrice]);
+  }
 
   async function getImage() {
     if (!productUrl) return;
@@ -110,8 +137,8 @@ export default function ProductForm({ errors, categories, editProduct }: CreateP
     setOpen(false);
     if (productCategories.length > 3) return;
     const foundCategory: Category|undefined = categories.find((arrayCategory: Category) => arrayCategory.id === id)
-      if(foundCategory)
-        setProductCategories([...productCategories, foundCategory]);
+    if(foundCategory)
+        setProductCategories((prevItems) => [...prevItems, foundCategory]);
   
   }
 
@@ -146,12 +173,17 @@ export default function ProductForm({ errors, categories, editProduct }: CreateP
         }
       });
       setProductImage(response.data.location)
-      await router.post('/product', {...product, image_url: response?.data.location } as any);
-  } else {
-    await router.post('/product', product as any);
-  }
+      if(!editProduct)
+        await router.post('/product', {...product, image_url: response?.data.location } as any);
+      else
+        await router.put(`/product/${editProduct.id}`, {...product, image_url: response?.data.location } as any, {preserveState: true, preserveScroll: true});
 
-
+    } else {
+      if(!editProduct)
+        await router.post('/product', product as any);
+      else
+      await router.put(`/product/${editProduct.id}`, product as any, {preserveState: true, preserveScroll: true});
+    }
     reset();
   }
 
@@ -161,7 +193,7 @@ export default function ProductForm({ errors, categories, editProduct }: CreateP
       <CategoryFormLayout>
         <ProductCard product={product} deletableCategory={true} onDelete={deleteCategory} isEditingImage={true} setProductImageAndImageFile={setProductImageAndImageFile}>
           {productCategories.length < 4 && (
-          <DropdownMenu.Root open={open} onOpenChange={setOpen}>
+          <DropdownMenu.Root open={open} onOpenChange={setOpen} modal={true}>
               <div>
                 <Trigger><GoPlus /></Trigger>
               </div>
@@ -182,7 +214,11 @@ export default function ProductForm({ errors, categories, editProduct }: CreateP
             <InputControlled control={control} label={t('inputs:name')} type="text" name="name" max={55} />
             <InputControlled control={control} label={t('inputs:url')} type="text" name="url" onPaste={getImage} />
             <InputControlled control={control} label={t('inputs:lowest-price')} type="text" max={10} name="lowest_price" />
-            <ButtonComponent name="Create" />
+            {editProduct ?
+              <ButtonComponent name={t('inputs:update')} />
+            :
+             <ButtonComponent name={t('inputs:create')} />
+            }
           </form>
         </Container>
       </CategoryFormLayout>
