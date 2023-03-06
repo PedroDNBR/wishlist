@@ -10,7 +10,7 @@ export const ProductDropdownContent = styled(DropdownMenu.Content)`
   `}
 `;
 
-export const EditButton = styled(Dialog.Trigger)`
+export const EditButton = styled.button`
   ${({theme}) => css`
     all: unset;
     color: ${theme.white[100]};

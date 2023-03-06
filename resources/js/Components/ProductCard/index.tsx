@@ -21,25 +21,19 @@ import Swal from 'sweetalert2';
 interface ProductCardProps {
   children?: ReactNode;
   product: Product;
-  deletableCategory?: boolean,
   onDelete?: ((id: number | undefined) => void) | null;
   isEditingImage?: boolean;
   setProductImageAndImageFile?: ((preview: string ,file?: File) => void) | null;
   canEditingProduct?: boolean;
-  errors?: Record<string, string>;
-  categories?: CategoryType[];
 }
 
 export function ProductCard({
   children = null, 
   product, 
-  deletableCategory = false, 
   onDelete = null, 
   isEditingImage = false, 
   setProductImageAndImageFile, 
   canEditingProduct = false, 
-  categories,
-  errors
 }: ProductCardProps) {
   const { t } = useTranslation();
 
@@ -85,21 +79,9 @@ export function ProductCard({
 
         <DropdownMenu.Portal>
           <ProductDropdownContent side="left" align="start">
-            <Dialog.Root modal={true}>
-              <EditButton>
-                <FaPencilAlt /> Editar
-              </EditButton>
-              <Dialog.Portal>
-                <Overlay>
-                  <Content>
-                    <CloseModal>
-                      <AiOutlineClose />
-                    </CloseModal>
-                    <ProductForm editProduct={product} categories={categories ?? []} errors={errors}  />
-                  </Content>
-                </Overlay>
-              </Dialog.Portal>
-            </Dialog.Root>
+            <EditButton>
+              <FaPencilAlt /> Editar
+            </EditButton>
             <DeleteButton onClick={() => deleteProduct()}>
               <FaTrash />Excluir
             </DeleteButton>
@@ -112,7 +94,7 @@ export function ProductCard({
         <Price>{t('labels:lowest-price')}: R$ {product.lowest_price}</Price>
         <CategoryWrapper>
           {product?.categories?.map((category) => (
-              <Category category={category} canDelete={deletableCategory} key={category.id ? category.id : "1"} onDelete={onDelete} />
+              <Category category={category} key={category.id ? category.id : "1"} onDelete={onDelete} />
           ))}
           {children}
         </CategoryWrapper>

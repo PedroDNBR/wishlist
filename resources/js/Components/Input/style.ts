@@ -20,7 +20,7 @@ export const Input = styled.input`
 	`};
 `;
 
-const labelModifiers = {
+export const labelModifiers = {
 	active: (theme: DefaultTheme) => css`
 		color: ${theme.blue};
 	`,

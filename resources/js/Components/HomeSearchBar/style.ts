@@ -40,7 +40,7 @@ export const SearchHeader = styled.section`
 `;
 
 export const colorStyles = {
-  control: (styles: any) => ({...styles, backgroundColor: 'white'}),
+  control: (styles: any) => ({...styles, backgroundColor: 'white', boxShadow: "none"}),
   option: (styles: any, { data }: any) => {
     return {
       ...styles, 

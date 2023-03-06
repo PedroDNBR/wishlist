@@ -1,3 +1,4 @@
+import { Theme } from '@/styles/styled';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { readableColor } from 'polished';
 import styled, { css } from 'styled-components';
@@ -23,8 +24,13 @@ export const Portal = styled(DropdownMenu.Portal)`
   `}
 `;
 
+interface TriggerProps {
+  theme: Theme;
+  error?: boolean;
+}
+
 export const Trigger = styled(DropdownMenu.Trigger)`
-  ${({ theme }) => css`
+  ${({ theme, error }: TriggerProps) => css`
     background: ${theme.white[100]};
     color: #000;
     border-radius: 100rem;
@@ -34,6 +40,9 @@ export const Trigger = styled(DropdownMenu.Trigger)`
     display: flex;
     justify-content: center;
     align-items: center;
+    ${error && css`
+      border: 1px solid ${theme.red};
+    `}
   `}
 `;
 

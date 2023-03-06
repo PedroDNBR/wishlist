@@ -4,33 +4,34 @@ import ReactSelect from "react-select";
 export const Select = styled(ReactSelect)`
   ${({ theme }) => css`
     color: ${theme.white[100]};
-    width: 15rem;
-
+    width: 100%;
+    
     @media (max-width: 1024px) {
       width: 100%;
     }
 
-    .react-select__single-value {
+    .react-select-categories__single-value {
       color: ${theme.white[100]};
-    }
-    
-    .react-select__control {
-      color: ${theme.white[100]};
-      padding: 5px;
-      background-color: ${theme.grey[450]};
-      border-radius: 15px;
-      border: 2px solid transparent;
     }
 
-    .react-select__input {
+    .react-select-categories__control {
+      color: ${theme.white[100]};
+      background-color: transparent;
+      border: 0;
+      border-radius: 15px;
+    }
+
+    .react-select-categories__input {
       color: ${theme.white[100]} !important;
+      &:focus {
+        border-color: inherit !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+			}
     }
 
-    .react-select__menu{
-      padding: 5px;
+    .react-select-categories__menu{
       background-color: ${theme.grey[450]};
-      border-radius: 15px;
-      border: 2px solid transparent;
 
       *::-webkit-scrollbar {
         width: 2px;
@@ -66,7 +67,7 @@ export const Select = styled(ReactSelect)`
         background: transparent;
       }
     }
-    .react-select__option:not(:last-child) {
+    .react-select-categories__option:not(:last-child) {
       margin-bottom: 10px;
     }
 
@@ -75,31 +76,47 @@ export const Select = styled(ReactSelect)`
       background: ${theme.grey[300]};
     }
 
-    .react-select__option:active,
-    .react-select__option--is-selected,
-    .react-select__option--is-selected:active {
+    .react-select-categories__option:active,
+    .react-select-categories__option--is-selected,
+    .react-select-categories__option--is-selected:active {
       background: ${theme.grey[100]};
     }
     
-    .react-select__multi-value {
+    .react-select-categories__multi-value {
       background: none;
     }
 
-    .react-select__multi-value__label {
+    .react-select-categories__multi-value__label {
       color: ${theme.white[100]};
-    } 
+      width: 4rem;
+    }
 
-    .react-select__multi-value__remove {
+    .react-select-categories__multi-value__remove {
       /* display: none; */
       /* width: 0px; */
     }
 
-    .react-select__value-container {
-      flex-wrap: nowrap !important;
+    .react-select-categories__indicator-separator {
+      display: none;
     }
 
-    .react-select__multi-value {
-      min-width: 40% !important;
+    .react-select-categories__value-container {
+      padding: 0;
+    }
+
+    .react-select-categories__multi-value {
+    }
+
+    .react-select-categories__indicator {
+      padding: 0;
+    }
+
+    .react-select-categories__option--is-focused:active,
+    .react-select-categories__option--is-focused {
+      background: ${theme.grey[300]};
+      border-color: inherit;
+      -webkit-box-shadow: none;
+      box-shadow: none;
     }
   `} 
 `;
