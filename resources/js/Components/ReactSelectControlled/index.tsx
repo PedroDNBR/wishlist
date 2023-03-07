@@ -10,12 +10,13 @@ interface InputControlledProps  {
   placeHolder: string;
   options: any;
   setValue: any;
+  isOptionDisabled: () => boolean;
+  selected: object; 
 }
 
-export function ReactSelectControlled({ label, name, control, options, setValue, placeHolder}: InputControlledProps) {
+export function ReactSelectControlled({ label, name, control, options, setValue, placeHolder, isOptionDisabled, selected }: InputControlledProps) {
 	const { field, fieldState } = useController({ name, control });
 	const error = fieldState.error?.message;
-
 	return (
 		<div>
 			<Container isError={!!error}>
@@ -26,10 +27,12 @@ export function ReactSelectControlled({ label, name, control, options, setValue,
           name={name}
           render={({  field: { onChange, value, name, ref } }) => (
             <Select
+                isOptionDisabled={isOptionDisabled}
                 classNamePrefix={`react-select-${name}`} 
                 options={options()} 
                 placeholder={placeHolder}
                 isMulti
+                defaultValue={selected}
                 // onChange={(choice: any) => {setCategoriesId(choice.value);}}
                 onChange={(choice: any)=> {
                   onChange(choice.value);

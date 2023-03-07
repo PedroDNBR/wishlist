@@ -41,6 +41,16 @@ class ProductController extends Controller
         return Inertia::render('Wish/Products');
     }
 
+    public function edit(Product $product)
+    {
+        $categories = Category::fromLoggedUser()->orderBy('name')->get();
+        $product->load('categories');
+        return Inertia::render('Wish/ProductEdit', [
+            'categories' => $categories,
+            'product' => $product
+        ]);
+    }
+
     public function update(Product $product, Request $request)
     {
         $request->validate([
@@ -48,13 +58,12 @@ class ProductController extends Controller
             'url' => ['required', 'url', 'max:255'],
             'lowest_price'  => ['required', 'string', 'max:255'],
             'image_url'  => ['required', 'string'],
-            'user_id'  => ['required', 'integer'],
             'categories' => ['required', 'array'],
             'categories.*.id' => ['required', 'integer'],
         ]);
         $product = Product::updateProductAndCategories($request->all(), $product);
 
-        return redirect()->back();
+        return redirect()->route('dashboard');
     }
 
     public function destroy(Product $product)

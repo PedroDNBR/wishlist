@@ -1,6 +1,6 @@
 import { Layout } from "@/Base/Layout";
 import { Category } from "@/Types/Category";
-import ProductForm from "@/Components/ProductForm";
+import CreateProduct from "@/Components/Forms/Product/CreateProduct";
 
 interface CreateProductProps {
   errors: Record<string, string>;
@@ -11,7 +11,7 @@ export default function Products({ errors, categories }: CreateProductProps) {
   return (
     <>
       <Layout>
-        <ProductForm errors={errors} categories={categories} />
+        <CreateProduct errors={errors} categories={categories} />
       </Layout>
     </>
   )

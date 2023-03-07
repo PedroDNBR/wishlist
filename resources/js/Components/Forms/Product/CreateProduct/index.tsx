@@ -4,18 +4,14 @@ import { CategoryFormLayout, Container } from "@/Components/CategoryForm/styles"
 import { InputControlled } from "@/Components/Input";
 import { ProductCard } from "@/Components/ProductCard";
 import { useEffect, useState } from "react";
-import { Controller, useController, useForm, useWatch } from "react-hook-form";
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { Dropdown } from "@/Components/Dropdown";
-import { Item, Trigger } from "@/Components/Dropdown/styles";
-import { GoPlus } from 'react-icons/go'
+import { useForm, useWatch } from "react-hook-form";
 import axios from "axios";
 import { router } from '@inertiajs/react';
 import { useFormErrors } from "@/Hooks/useFormErrors";
 import { Category } from "@/Types/Category";
 import { Product } from "@/Types/Product";
 import { useTranslation } from "react-i18next";
-import { ReactSelectControlled } from "../ReactSelectControlled";
+import { ReactSelectControlled } from "@/Components/ReactSelectControlled";
 
 
 interface CreateProductProps {
@@ -23,7 +19,7 @@ interface CreateProductProps {
   categories: Category[];
 }
 
-export default function ProductForm({ errors, categories }: CreateProductProps) {
+export default function CreateProduct({ errors, categories }: CreateProductProps) {
   const {
     control,
     setError,
@@ -207,7 +203,7 @@ export default function ProductForm({ errors, categories }: CreateProductProps) 
               <InputControlled control={control} label={t('inputs:name')} type="text" name="name" max={55} />
               <InputControlled control={control} label={t('inputs:url')} type="text" name="url" onPaste={getImage} />
               <InputControlled control={control} label={t('inputs:lowest-price')} type="text" max={10} name="lowest_price" />
-              <ReactSelectControlled control={control} placeHolder={t('inputs:select-categories')} label={t('inputs:categories')} name="categories" setValue={setProductCategories} options={categoriesSelect} />
+              <ReactSelectControlled control={control} placeHolder={t('inputs:select-categories')} label={t('inputs:categories')} name="categories" setValue={setProductCategories} options={categoriesSelect} isOptionDisabled={() => productCategories.length > 3} selected={[]} />
               <ButtonComponent name={t('inputs:create')} />
             </form>
           </Container>

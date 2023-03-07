@@ -1,20 +1,14 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { Product } from "@/Types/Product";
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import { ReactNode } from "react";
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { Category } from "../CategoryBadge";
 import { OpenImageModal } from "../OpenImageModal";
 import { Card, CategoryWrapper, Image, ImageContainer, Info, Price, Title, EditMenu } from "./style";
 import { useTranslation } from "react-i18next";
-import { Content, Overlay } from '../Modal/styles';
 import { DeleteButton, EditButton, ProductDropdownContent } from '../ProductDropdown/style';
 import { FaPencilAlt, FaTrash } from 'react-icons/fa';
-import ProductEditForm from '../ProductForm';
-import { Category as CategoryType } from '@/Types/Category';
-import ProductForm from '../ProductForm';
-import { CloseModal } from '../OpenImageModal/styles';
-import { AiOutlineClose } from 'react-icons/ai';
 import { router } from '@inertiajs/react';
 import Swal from 'sweetalert2';
 
@@ -79,7 +73,7 @@ export function ProductCard({
 
         <DropdownMenu.Portal>
           <ProductDropdownContent side="left" align="start">
-            <EditButton>
+            <EditButton href={ `/update-product/${product.id}` }>
               <FaPencilAlt /> Editar
             </EditButton>
             <DeleteButton onClick={() => deleteProduct()}>
