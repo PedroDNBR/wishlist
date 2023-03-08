@@ -17,5 +17,7 @@
   "lowest-price": "Lowest price",
   "highest-price": "Highest price",
   "url": "URL",
-  "drag-drop-here": "Drag and drop here!"
+  "drag-drop-here": "Drag and drop here!",
+  "delete": "Delete",
+  "edit": "Edit"
 }

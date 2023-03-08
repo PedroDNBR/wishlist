@@ -7,6 +7,9 @@ export const ProductDropdownContent = styled(DropdownMenu.Content)`
     background-color: ${theme.grey[500]};
     border-radius: 15px;
     padding: .75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   `}
 `;
 

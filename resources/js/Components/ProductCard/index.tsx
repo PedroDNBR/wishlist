@@ -74,10 +74,10 @@ export function ProductCard({
         <DropdownMenu.Portal>
           <ProductDropdownContent side="left" align="start">
             <EditButton href={ `/update-product/${product.id}` }>
-              <FaPencilAlt /> Editar
+              <FaPencilAlt /> {t('inputs:edit')}
             </EditButton>
             <DeleteButton onClick={() => deleteProduct()}>
-              <FaTrash />Excluir
+              <FaTrash /> {t('inputs:delete')}
             </DeleteButton>
           </ProductDropdownContent>
         </DropdownMenu.Portal>

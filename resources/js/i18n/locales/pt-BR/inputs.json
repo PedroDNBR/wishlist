@@ -17,5 +17,7 @@
   "lowest-price": "Menor preço",
   "highest-price": "Maior preço",
   "url": "URL",
-  "drag-drop-here": "Arraste e solte!"
+  "drag-drop-here": "Arraste e solte!",
+  "delete": "Excluir",
+  "edit": "Editar"
 }

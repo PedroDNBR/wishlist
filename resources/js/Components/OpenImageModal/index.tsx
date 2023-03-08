@@ -9,6 +9,7 @@ import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { usePaste } from '@/Hooks/usePaste';
 import { AiOutlineClose } from 'react-icons/ai';
+import { Button } from '../Button/style';
 
 interface OpenImageModalProps {
   setProductImageAndImageFile: ((preview: string ,file?: File) => void) | null;
@@ -72,21 +73,25 @@ export function OpenImageModal({ setProductImageAndImageFile }: OpenImageModalPr
 
   function submitImage(e: any) {
     e.preventDefault();
-    if(setProductImageAndImageFile)
+    if(setProductImageAndImageFile && (imagePreviewUrl || sentImage))
       setProductImageAndImageFile(imagePreviewUrl, sentImage);
+
+    setIsModalOpen(false);
   }
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
-      <Dialog.Root>
-        <Trigger>
+      <Dialog.Root open={isModalOpen}>
+        <Trigger onClick={() => setIsModalOpen(true)}>
         </Trigger>
         <Dialog.Portal>
           <Overlay>
-            <Content>
+            <Content onPointerDownOutside={() => setIsModalOpen(false)}>
               <form onSubmit={submitImage}>
                   <Container>
-                    <CloseModal>
+                    <CloseModal onClick={() => setIsModalOpen(false)}>
                       <AiOutlineClose />
                     </CloseModal>
                     <ImageInputLabel htmlFor="image-file" url={imagePreviewUrl} onDrop={(e) => dragDropImage(e)} {...preventDragEvents}>
@@ -100,7 +105,10 @@ export function OpenImageModal({ setProductImageAndImageFile }: OpenImageModalPr
                       }}
                     />
                     <InputControlled label='Url ou Imagem copiada' type='text' name='image-url' max={512} control={control} />
-                    <ButtonComponent name='Aplicar' />
+                    <Dialog.Close asChild>
+                      {/* <ButtonComponent name='Aplicar' /> */}
+		                  <Button type="submit">Aplicar</Button>
+                    </Dialog.Close>
                   </Container>
                 </form>
             </Content>
