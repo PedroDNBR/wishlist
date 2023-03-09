@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { MdLogout } from "react-icons/md";
 
 export const Container = styled.section`
   display: flex;
@@ -70,7 +71,9 @@ export const MenuContent = styled.section`
 `;
 
 export const MenuTitle = styled.span`
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   position: absolute;
   width: 0rem;
   font-size: 1rem;
@@ -257,4 +260,13 @@ export const MobileIcon = styled.span`
 
 export const MobileLinks = styled.a`
   width: fit-content;
+`;
+
+export const Logout = styled(MdLogout)`
+  ${({ theme }) => css`
+    font-size: 1.5rem;
+    color: ${theme.red};
+    cursor: pointer;
+    font-weight: bold;
+	`};
 `;

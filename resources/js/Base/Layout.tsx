@@ -1,4 +1,4 @@
-import { Container, Menu, Content, LogoW, LogoL, Icon, ProfileImageContainer, ProfileImage, MenuContent, MenuTitle, MenuDark, MenuDarkProps, MenuMobile, ProfileImageContainerMobile, MenuButton, DropdownContent, MobileIcon, MobileLinks } from "./style";
+import { Container, Menu, Content, LogoW, LogoL, Icon, ProfileImageContainer, ProfileImage, MenuContent, MenuTitle, MenuDark, MenuDarkProps, MenuMobile, ProfileImageContainerMobile, MenuButton, DropdownContent, MobileIcon, MobileLinks, Logout } from "./style";
 import { MdLabel, MdOutlineAddCircle } from 'react-icons/md';
 import { FaBars, FaShoppingBasket } from 'react-icons/fa';
 import { router } from '@inertiajs/react';
@@ -54,8 +54,7 @@ export function Layout({ children }: LayoutProps) {
               <ProfileImageContainer>
                 <ProfileImage src="https://i.pinimg.com/736x/ec/e2/b0/ece2b0f541d47e4078aef33ffd22777e.jpg" />
               </ProfileImageContainer>
-              <MenuTitle style={{top: '30%'}}>{t('labels:profile')}</MenuTitle>
-			        <button style={{position: 'absolute', left: '170%', top: '27%'}} onClick={logout}>{t('labels:logout')}</button>
+              <MenuTitle style={{top: '30%'}} onClick={() => logout()}>{t('labels:profile')} <Logout/></MenuTitle>
             </div>
           </MenuContent>
         </Menu>
