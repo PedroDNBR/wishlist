@@ -98,7 +98,7 @@ export const EditMenu = styled.div`
     padding-inline: 0.9rem;
     top: 5%;
     svg {
-      stroke: #323644;
+      stroke: ${theme.grey[500]};
       stroke-width: .8;
     }
   `}

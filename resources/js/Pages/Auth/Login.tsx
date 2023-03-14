@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { useFormErrors } from "@/Hooks/useFormErrors";
 import { useTranslation } from "react-i18next";
 import '@/i18n';
+import { Checkbox } from "@/Components/Checkbox/style";
 
 interface LoginProps {
   errors: Record<string, string>;
@@ -19,6 +20,7 @@ export default function Login({ errors: apiErrors }: LoginProps) {
     control,
     handleSubmit,
     setError,
+    register
   } = useForm();
 
   const { t } = useTranslation();
@@ -41,6 +43,13 @@ export default function Login({ errors: apiErrors }: LoginProps) {
           <Form onSubmit={handleSubmit(login)}>
             <InputControlled control={control} label={t('inputs:email')} type="text" name="email" />
             <InputControlled control={control} label={t('inputs:password')} type="password" name="password" />
+            <Checkbox>
+              <label className="b-contain">
+                <span>{t('inputs:remember-me')}</span>
+                <input type="checkbox" id="remember" {...register('remember')} />
+                <div className="b-input"></div>
+              </label>
+            </Checkbox>
             <ButtonComponent name={t('inputs:login')} />
           </Form>
         </div>
