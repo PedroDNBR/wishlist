@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { router } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { FluidContainer, Form, ImgAuth } from "@/styles/global";
 import { AuthTitleComponent } from "@/Components/AuthTitle";
 import { AuthAccountSpan } from "@/Components/AuthAccountSpan";
@@ -37,6 +37,7 @@ export default function Login({ errors: apiErrors }: LoginProps) {
   return (
     <>
       <FluidContainer>
+        <Head title="Login"/>
         <div>
           <AuthTitleComponent>{t('titles:login-your-account')}</AuthTitleComponent>
           <AuthAccountSpan content={t("titles:doesnt-have-an-account")} link="/register" linkTitle={t('inputs:register')} />

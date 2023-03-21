@@ -1,4 +1,4 @@
-import { router } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import React from "react";
 
 export default function Home() {
@@ -7,6 +7,7 @@ export default function Home() {
   }
   return (
     <>
+      <Head title="Home"/>
       <button onClick={() => start()}>Start</button>
     </>
   )

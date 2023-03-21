@@ -6,7 +6,7 @@ import { CardInList } from "@/Components/ProductCard/style";
 import { Category } from "@/Types/Category";
 import { Product } from "@/Types/Product";
 import { User } from "@/Types/User";
-import { router } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import React from "react";
 
 interface HomeProps {
@@ -29,6 +29,7 @@ export default function Home({ errors, products = [], categories = [], request, 
 	return (
 		<>
 			<Layout user={user}>
+        <Head title="Wishes"/>
 				<HomeSearchBar categories={categories} request={request} />
 				<ProductsContainer>
 					{products.map((product) => {

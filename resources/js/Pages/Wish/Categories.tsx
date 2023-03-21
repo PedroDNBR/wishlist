@@ -2,7 +2,7 @@ import { Layout } from "@/Base/Layout";
 import { useForm, useWatch } from "react-hook-form";
 import React, { useEffect, useState } from "react";
 import { InputControlled } from "@/Components/Input";
-import { router } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { CategoryForm } from "@/Components/CategoryForm";
 import { FormLayout, CategoryLayout, CategoryListingContainer, SearchCategoryForm } from "@/Components/CategoryForm/styles";
 import { EditCategory } from "@/Components/EditCategory";
@@ -86,6 +86,7 @@ export default function Categories({ errors: apiErrors, categories, forms: { cat
   return (
     <>
       <Layout user={user}>
+        <Head title="Categories"/>
         <CategoryLayout>
           <FormLayout>
             <CategoryForm isSent={false} form={createForm} onSubmit={create} buttonName={t('inputs:create')} errors={apiErrors} />

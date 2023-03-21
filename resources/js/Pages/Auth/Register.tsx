@@ -5,7 +5,7 @@ import { FluidContainer, Form, ImgAuth } from "@/styles/global";
 import { ButtonComponent } from "@/Components/Button";
 import { AuthTitleComponent } from "@/Components/AuthTitle";
 import { AuthAccountSpan } from "@/Components/AuthAccountSpan";
-import { router } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { useFormErrors } from "@/Hooks/useFormErrors";
 import { useTranslation } from "react-i18next";
 import '@/i18n';
@@ -35,6 +35,7 @@ export default function Register({ errors: apiErrors }: RegisterProps) {
 
 	return (
 		<FluidContainer>
+			<Head title="Register"/>
 			<div>
 				<AuthTitleComponent>{t('titles:create-new-account')}</AuthTitleComponent>
 				<AuthAccountSpan content={t('titles:already-a-member')} link="/login" linkTitle={t('inputs:login')} />
