@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { InputControlled } from "@/Components/Input";
 import { router } from '@inertiajs/react';
 import { CategoryForm } from "@/Components/CategoryForm";
-import { CategoryFormLayout, CategoryLayout, CategoryListingContainer, SearchCategoryForm } from "@/Components/CategoryForm/styles";
+import { FormLayout, CategoryLayout, CategoryListingContainer, SearchCategoryForm } from "@/Components/CategoryForm/styles";
 import { EditCategory } from "@/Components/EditCategory";
 import { useFormErrors } from "@/Hooks/useFormErrors";
 import * as Dialog from '@radix-ui/react-dialog';
@@ -12,6 +12,7 @@ import { Category } from "@/Components/CategoryBadge";
 import axios from "axios";
 import { Category as CategoryInterface } from "@/Types/Category";
 import { useTranslation } from "react-i18next";
+import { User } from "@/Types/User";
 
 interface CategoryProps {
   errors: Record<string, string>;
@@ -19,9 +20,12 @@ interface CategoryProps {
   forms: {
     category: 'creating' | 'editing' | null;
   }
+  auth: {
+    user: User;
+  }
 }
 
-export default function Categories({ errors: apiErrors, categories, forms: { category: categoryForm } }: CategoryProps) {
+export default function Categories({ errors: apiErrors, categories, forms: { category: categoryForm }, auth: { user } }: CategoryProps) {
   const createForm = useForm(); EditCategory
   const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
@@ -81,11 +85,11 @@ export default function Categories({ errors: apiErrors, categories, forms: { cat
 
   return (
     <>
-      <Layout>
+      <Layout user={user}>
         <CategoryLayout>
-          <CategoryFormLayout>
+          <FormLayout>
             <CategoryForm isSent={false} form={createForm} onSubmit={create} buttonName={t('inputs:create')} errors={apiErrors} />
-          </CategoryFormLayout>
+          </FormLayout>
           <SearchCategoryForm>
             <InputControlled control={control} label={t('inputs:search')} type="text" name="search" max={12} />
           </SearchCategoryForm>

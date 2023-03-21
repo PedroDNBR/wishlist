@@ -38,7 +38,7 @@ class ProductController extends Controller
         ]);
         $product = Product::createProductAndCategories($request->all());
 
-        return Inertia::render('Wish/Products');
+        return redirect()->route('dashboard');
     }
 
     public function edit(Product $product)

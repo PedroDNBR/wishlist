@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\Wish\CategoryController;
 use App\Http\Controllers\Wish\ProductController;
 use App\Http\Controllers\Wish\WishController;
@@ -31,17 +32,20 @@ Route::prefix('/users')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/wishes', [WishController::class, 'index'])->name('dashboard');
     Route::get('/categories', [CategoryController::class, 'create'])->name('categories');
-    Route::get('/categories/search', [CategoryController::class, 'search'])->name('categoriesSearch');
-    Route::post('/categories', [CategoryController::class, 'store'])->name('categoryStore');
-    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categoryDestroy');
-    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categoryDestroy');
+    Route::get('/categories/search', [CategoryController::class, 'search'])->name('categories.search');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('category.store');
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('category.destroy');
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
 
-    Route::post('/product', [ProductController::class, 'store'])->name('productStore');
-    Route::put('/product/{product}', [ProductController::class, 'update'])->name('productUpdate');
-    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('categoryDestroy');
+    Route::post('/product', [ProductController::class, 'store'])->name('product.store');
+    Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('category.destroy');
 
     Route::get('/create-product', [ProductController::class, 'create'])->name('product');
-    Route::get('/update-product/{product}', [ProductController::class, 'edit'])->name('productEdit');
+    Route::get('/update-product/{product}', [ProductController::class, 'edit'])->name('product.edit');
+
+    Route::get('/profile', [ProfileController::class, 'create'])->name('profile');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 Route::get('/', function () {

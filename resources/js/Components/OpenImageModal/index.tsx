@@ -12,10 +12,10 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { Button } from '../Button/style';
 
 interface OpenImageModalProps {
-  setProductImageAndImageFile: ((preview: string ,file?: File) => void) | null;
+  setImageAndImageFile: ((preview: string ,file?: File) => void) | null;
 }
 
-export function OpenImageModal({ setProductImageAndImageFile }: OpenImageModalProps) {
+export function OpenImageModal({ setImageAndImageFile }: OpenImageModalProps) {
   const {
     control,
     handleSubmit,
@@ -73,8 +73,8 @@ export function OpenImageModal({ setProductImageAndImageFile }: OpenImageModalPr
 
   function submitImage(e: any) {
     e.preventDefault();
-    if(setProductImageAndImageFile && (imagePreviewUrl || sentImage))
-      setProductImageAndImageFile(imagePreviewUrl, sentImage);
+    if(setImageAndImageFile && (imagePreviewUrl || sentImage))
+      setImageAndImageFile(imagePreviewUrl, sentImage);
 
     setIsModalOpen(false);
   }
@@ -106,7 +106,6 @@ export function OpenImageModal({ setProductImageAndImageFile }: OpenImageModalPr
                     />
                     <InputControlled label='Url ou Imagem copiada' type='text' name='image-url' max={512} control={control} />
                     <Dialog.Close asChild>
-                      {/* <ButtonComponent name='Aplicar' /> */}
 		                  <Button type="submit">Aplicar</Button>
                     </Dialog.Close>
                   </Container>

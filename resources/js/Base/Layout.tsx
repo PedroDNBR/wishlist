@@ -6,12 +6,14 @@ import { ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import '@/i18n';
+import { User } from "@/Types/User";
 
 interface LayoutProps {
   children: ReactNode;
+  user: User;
 }
 
-export function Layout({ children }: LayoutProps) {
+export function Layout({ children, user }: LayoutProps) {
   const { t } = useTranslation();
 
   const [ visible, setVisible ] = useState<string>('hidden');
@@ -51,10 +53,12 @@ export function Layout({ children }: LayoutProps) {
               <a href='/create-product'><Icon><MdOutlineAddCircle /> <MenuTitle>{t('labels:create-product')}</MenuTitle></Icon></a>
             </div>
             <div style={{position: 'relative'}}>
-              <ProfileImageContainer>
-                <ProfileImage src="https://i.pinimg.com/736x/ec/e2/b0/ece2b0f541d47e4078aef33ffd22777e.jpg" />
-              </ProfileImageContainer>
-              <MenuTitle style={{top: '30%'}} onClick={() => logout()}>{t('labels:profile')} <Logout/></MenuTitle>
+              <a href='/profile'>
+                <ProfileImageContainer>
+                  <ProfileImage src={user.profile_picture} />
+                </ProfileImageContainer>
+              </a>
+              <MenuTitle style={{top: '30%'}}><a href='/profile'>{t('labels:profile')}</a> <Logout onClick={() => logout()}/></MenuTitle>
             </div>
           </MenuContent>
         </Menu>

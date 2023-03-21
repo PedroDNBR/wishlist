@@ -61,7 +61,7 @@ export function ProductCard({
     <Card>
       <ImageContainer>
         <Image src={product.image_url} />
-        { isEditingImage && setProductImageAndImageFile ? <OpenImageModal setProductImageAndImageFile={setProductImageAndImageFile} /> : ''}
+        { isEditingImage && setProductImageAndImageFile ? <OpenImageModal setImageAndImageFile={setProductImageAndImageFile} /> : ''}
       </ImageContainer>
       {canEditingProduct && (
         <DropdownMenu.Root modal={false}>

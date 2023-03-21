@@ -7,7 +7,7 @@ export const CategoryLayout = styled.div`
   width: 100%;
 `;
 
-export const CategoryFormLayout = styled.div`
+export const FormLayout = styled.div`
   display: flex;
   padding: 3rem;
   width: 100%;

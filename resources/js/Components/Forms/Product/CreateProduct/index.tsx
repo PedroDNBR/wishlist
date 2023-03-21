@@ -1,6 +1,6 @@
 import { Layout } from "@/Base/Layout";
 import { ButtonComponent } from "@/Components/Button";
-import { CategoryFormLayout, Container } from "@/Components/CategoryForm/styles";
+import { FormLayout, Container } from "@/Components/CategoryForm/styles";
 import { InputControlled } from "@/Components/Input";
 import { ProductCard } from "@/Components/ProductCard";
 import { useEffect, useState } from "react";
@@ -163,40 +163,8 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
 
   return (
     <>
-        <CategoryFormLayout>
+        <FormLayout>
           <ProductCard product={product} onDelete={deleteCategory} isEditingImage={true} setProductImageAndImageFile={setProductImageAndImageFile}>
-            {productCategories.length < 4 && (
-              <>
-                {/* <DropdownMenu.Root open={open} onOpenChange={setOpen} modal={true}>
-                    <div>
-                      <Trigger error={error ? true : false}><GoPlus /></Trigger>
-                    </div>
-                  <Dropdown side="right" align="start">
-                    {/* <Select
-                      classNamePrefix="react-select" 
-                      options={categoriesSelect()} 
-                      placeholder={t('inputs:select-categories')}
-                      onChange={(choice: any) => {setCategoriesId(choice.value);}}
-                      styles={colorStyles}
-                    /> */}
-
-                    {/* <Controller
-                        control={control}
-                        defaultValue={[]}
-                        name="categories"
-                        render={({ onChange, value, name, ref }) => (
-                            <Select
-                                inputRef={ref}
-                                classNamePrefix="react-select" 
-                                options={categoriesSelect()} 
-                                onChange={(choice: any) => {setCategoriesId(choice.value);}}
-                            />
-                        )}
-                    /> *
-                  </Dropdown>
-                </DropdownMenu.Root> */}
-              </>
-            )}
           </ProductCard>
           <Container>
             <form onSubmit={handleSubmit(sendProduct)}>
@@ -207,7 +175,7 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
               <ButtonComponent name={t('inputs:create')} />
             </form>
           </Container>
-        </CategoryFormLayout>
+        </FormLayout>
     </>
   )
 }

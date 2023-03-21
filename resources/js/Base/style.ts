@@ -141,6 +141,7 @@ export const Icon = styled.span`
 export const ProfileImage = styled.img`
   width: 100%;
   height: 100%;
+  object-fit: cover;
 `;
 
 export const ProfileImageContainer = styled.div`
@@ -154,7 +155,6 @@ export const ProfileImageContainer = styled.div`
 	`};
 `;
 
-
 export const ProfileImageContainerMobile = styled.div`
    ${({ theme }) => css`
     overflow: hidden;
@@ -165,6 +165,16 @@ export const ProfileImageContainerMobile = styled.div`
 	`};
 `;
 
+export const BigProfileImageContainer = styled.div`
+  ${({ theme }) => css`
+    overflow: hidden;
+    border-radius: 1000px;
+    width: 15rem;
+    height: 15rem;
+    border: 2px solid ${theme.blue};
+    position: relative;
+  `};
+`;
 
 export const ProductsContainer = styled.div`
   display: grid;

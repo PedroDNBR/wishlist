@@ -35,6 +35,7 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
         'name',
         'email',
         'password',
+        'profile_picture',
     ];
 
     /**
@@ -73,6 +74,7 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'unique:users,email'],
+            'profile_picture' => ['nullable', 'string', 'max:255'],
         ];
     }
 

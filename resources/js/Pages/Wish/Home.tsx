@@ -5,6 +5,7 @@ import { ProductCard } from "@/Components/ProductCard";
 import { CardInList } from "@/Components/ProductCard/style";
 import { Category } from "@/Types/Category";
 import { Product } from "@/Types/Product";
+import { User } from "@/Types/User";
 import { router } from '@inertiajs/react';
 import React from "react";
 
@@ -19,12 +20,15 @@ interface HomeProps {
     },
     sort?: string;
   };
+	auth: {
+    user: User;
+  }
 }
 
-export default function Home({ errors, products = [], categories = [], request }: HomeProps) {
+export default function Home({ errors, products = [], categories = [], request, auth: { user } }: HomeProps) {
 	return (
 		<>
-			<Layout>
+			<Layout user={user}>
 				<HomeSearchBar categories={categories} request={request} />
 				<ProductsContainer>
 					{products.map((product) => {

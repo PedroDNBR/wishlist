@@ -1,6 +1,6 @@
 import { Layout } from "@/Base/Layout";
 import { ButtonComponent } from "@/Components/Button";
-import { CategoryFormLayout, Container } from "@/Components/CategoryForm/styles";
+import { FormLayout, Container } from "@/Components/CategoryForm/styles";
 import { InputControlled } from "@/Components/Input";
 import { ProductCard } from "@/Components/ProductCard";
 import { useEffect, useState } from "react";
@@ -181,7 +181,7 @@ export default function UpdateProduct({ errors, categories, product: editProduct
 
   return (
     <>
-        <CategoryFormLayout>
+        <FormLayout>
           <ProductCard product={product} onDelete={deleteCategory} isEditingImage={true} setProductImageAndImageFile={setProductImageAndImageFile}>
           </ProductCard>
           <Container>
@@ -193,7 +193,7 @@ export default function UpdateProduct({ errors, categories, product: editProduct
               <ButtonComponent name={t('inputs:update')} />
             </form>
           </Container>
-        </CategoryFormLayout>
+        </FormLayout>
     </>
   )
 }
