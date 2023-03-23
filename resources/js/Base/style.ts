@@ -280,3 +280,14 @@ export const Logout = styled(MdLogout)`
     font-weight: bold;
 	`};
 `;
+
+export const LanguageText = styled.span`
+${({ theme }) => css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${theme.white[100]};
+  font-size: 2.18rem;
+  cursor: pointer;
+`};
+`;

@@ -4,7 +4,7 @@ import { Content, Overlay } from "./styles";
 interface ModelProps {
   children: ReactNode;
   closeModal: () => void;
-  rootProps: {
+  rootProps?: {
     onOpenChange: (open: boolean) => void;
   };
 }

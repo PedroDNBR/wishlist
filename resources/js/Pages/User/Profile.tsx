@@ -1,5 +1,4 @@
 import { Layout } from "@/Base/Layout";
-
 import { ProfileForm } from "@/Components/Forms/User/Profile";
 import { User } from "@/Types/User";
 import { Head } from "@inertiajs/react";

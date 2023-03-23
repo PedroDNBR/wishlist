@@ -1,12 +1,17 @@
-import { Container, Menu, Content, LogoW, LogoL, Icon, ProfileImageContainer, ProfileImage, MenuContent, MenuTitle, MenuDark, MenuDarkProps, MenuMobile, ProfileImageContainerMobile, MenuButton, DropdownContent, MobileIcon, MobileLinks, Logout } from "./style";
+import { Container, Menu, Content, LogoW, LogoL, Icon, ProfileImageContainer, ProfileImage, MenuContent, MenuTitle, MenuDark, MenuMobile, ProfileImageContainerMobile, MenuButton, DropdownContent, MobileIcon, MobileLinks, Logout, BigProfileImageContainer, LanguageText } from "./style";
 import { MdLabel, MdOutlineAddCircle } from 'react-icons/md';
 import { FaBars, FaShoppingBasket } from 'react-icons/fa';
 import { router } from '@inertiajs/react';
 import { ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import * as Dialog from '@radix-ui/react-dialog';
 import '@/i18n';
 import { User } from "@/Types/User";
+import { Modal } from "@/Components/Modal";
+import { Container as DivContainer } from "@/Components/CategoryForm/styles";
+import { CloseModal } from "@/Components/OpenImageModal/styles";
+import { AiOutlineClose } from "react-icons/ai";
 
 interface LayoutProps {
   children: ReactNode;
@@ -14,14 +19,23 @@ interface LayoutProps {
 }
 
 export function Layout({ children, user }: LayoutProps) {
-  const { t } = useTranslation();
+  const [openModal, setOpenModal] = useState(false);
+
+  const { t, i18n } = useTranslation();
 
   const [ visible, setVisible ] = useState<string>('hidden');
 
   function logout() {
     router.delete('/users/logout')
   }
-  
+
+  function closeModal() {
+    setOpenModal(false);
+  }
+
+  function changeLanguage(language: string) {
+    i18n.changeLanguage(language);
+  }
 
   return (
     <>
@@ -42,7 +56,6 @@ export function Layout({ children, user }: LayoutProps) {
               </DropdownContent>
           </DropdownMenu.Portal>
           </DropdownMenu.Root>
-          
         </MenuMobile>
         <Menu onMouseEnter={() => setVisible('visible')} onMouseLeave={() => setVisible('hidden')}>
           <MenuContent>
@@ -52,13 +65,49 @@ export function Layout({ children, user }: LayoutProps) {
               <a href='/categories'><Icon><MdLabel /> <MenuTitle>{t('labels:categories')}</MenuTitle></Icon></a>
               <a href='/create-product'><Icon><MdOutlineAddCircle /> <MenuTitle>{t('labels:create-product')}</MenuTitle></Icon></a>
             </div>
-            <div style={{position: 'relative'}}>
-              <a href='/profile'>
-                <ProfileImageContainer>
-                  <ProfileImage src={user.profile_picture} />
-                </ProfileImageContainer>
-              </a>
-              <MenuTitle style={{top: '30%'}}><a href='/profile'>{t('labels:profile')}</a> <Logout onClick={() => logout()}/></MenuTitle>
+            <div>
+              <div style={{position: 'relative'}}>
+                
+                <a href='/profile'>
+                  <ProfileImageContainer>
+                    <ProfileImage src={user.profile_picture} />
+                  </ProfileImageContainer>
+                </a>
+                <MenuTitle style={{top: '30%'}}><a href='/profile'>{t('labels:profile')}</a> <Logout onClick={() => logout()}/></MenuTitle>
+              </div>
+              <div>
+                <Dialog.Root open={openModal}>
+                  <Dialog.Trigger onClick={() => {setOpenModal(true); setVisible('hidden');} }>
+                    <div style={{position: 'relative', marginTop: '2rem'}}>
+                      <ProfileImageContainer>
+                          {localStorage.getItem('i18nextLng') ?? 'en' === 'en' ? 
+                            <ProfileImage src="/assets/imgs/us-uk.png" width="40" />
+                          :
+                            <ProfileImage src="/assets/imgs/br-pt.png" width="40" />
+                          }
+                      </ProfileImageContainer>
+                      <MenuTitle style={{top: '30%'}}>{t('inputs:language')}</MenuTitle>
+                    </div>
+                  </Dialog.Trigger>
+                  <Modal closeModal={closeModal}>
+                    <CloseModal onClick={closeModal}>
+                      <AiOutlineClose />
+                    </CloseModal>
+                    <DivContainer onClick={() => changeLanguage('pt-BR')} style={{cursor: 'pointer'}}>
+                      <BigProfileImageContainer>
+                        <img src="/assets/imgs/br-pt.png" alt={t('titles:portuguese') ?? 'language 1'} width="300" />
+                      </BigProfileImageContainer>
+                      <LanguageText>{t('titles:portuguese')}</LanguageText>
+                    </DivContainer>
+                    <DivContainer onClick={() => changeLanguage('en')} style={{cursor: 'pointer'}}>
+                      <BigProfileImageContainer>
+                        <img src="/assets/imgs/us-uk.png" alt={t('titles:english') ?? 'language 2'} width="300" />
+                      </BigProfileImageContainer>
+                      <LanguageText>{t('titles:english')}</LanguageText>
+                    </DivContainer>
+                  </Modal>
+                </Dialog.Root>
+              </div>
             </div>
           </MenuContent>
         </Menu>
