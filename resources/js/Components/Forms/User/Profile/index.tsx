@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { OpenImageModal } from "@/Components/OpenImageModal";
-import { ProfileImage, BigProfileImageContainer } from "@/Base/style";
 import { FormLayout, Container } from "@/Components/CategoryForm/styles";
 import axios from "axios";
 import { router } from "@inertiajs/react";
 import { useFormErrors } from "@/Hooks/useFormErrors";
+import { BigProfileImageContainer, ProfileImage } from "@/Components/Menus/style";
 
 interface ProfileFormProps {
   user: User;

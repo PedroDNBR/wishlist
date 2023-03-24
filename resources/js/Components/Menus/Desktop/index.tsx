@@ -8,7 +8,6 @@ import { BigProfileImageContainer, Icon, LogoL, Logout, LogoW, ProfileImage, Pro
 import { MenuContent, MenuDesktop, MenuTitle } from "./style";
 import { Container as DivContainer } from "@/Components/CategoryForm/styles";
 import * as Dialog from '@radix-ui/react-dialog';
-import { router } from "@inertiajs/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MenuProps } from "../types";
@@ -17,14 +16,10 @@ interface MenuDesktopProps extends MenuProps {
   setVisible: (value: string) => void;
 }
 
-export function MenuDesktopComponent({ user, setVisible}: MenuDesktopProps) {
+export function MenuDesktopComponent({ user, setVisible, logout }: MenuDesktopProps) {
   const [openModal, setOpenModal] = useState(false);
 
   const { t, i18n } = useTranslation();
-
-  function logout() {
-    router.delete('/users/logout')
-  }
 
   function closeModal() {
     setOpenModal(false);

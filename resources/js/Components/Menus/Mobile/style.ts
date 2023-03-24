@@ -1,11 +1,16 @@
-import styled, { css } from "styled-components";
+import styled, { css, DefaultTheme } from "styled-components";
 
 export const MobileLinks = styled.a`
   width: fit-content;
 `;
 
+interface MobileIconProps {
+  direction: 'right' | 'left';
+  theme: DefaultTheme;
+}
+
 export const MobileIcon = styled.span`
-  ${({ theme }) => css`
+  ${({ theme, direction }: MobileIconProps) => css`
     position: relative;
     display: flex;
     align-items: center;
@@ -14,11 +19,23 @@ export const MobileIcon = styled.span`
     font-size: 1.25rem;
     padding-block: .2rem;
     cursor: pointer;
-    margin-right: 1rem;
 
-    svg {
+    ${direction === 'right' && css`
+      margin-right: 1rem;
+
+      svg {
+        margin-left: 1rem;
+      }
+    `}
+
+    ${direction === 'left' && css`
       margin-left: 1rem;
-    }
+
+      svg {
+        margin-right: 1rem;
+      }
+    `}
+    
 	`};
 `;
 

@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css, DefaultTheme } from "styled-components";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { MdLogout } from "react-icons/md";
 
@@ -71,8 +71,13 @@ export const ProductsContainer = styled.div`
   justify-content: space-between;
 `;
 
+interface DropdownContentProps {
+  theme: DefaultTheme;
+  items: 'start' | 'end';
+}
+
 export const DropdownContent = styled(DropdownMenu.Content)`
-  ${({ theme }) => css`
+  ${({ theme, items }: DropdownContentProps) => css`
     margin-top: .5rem;
     width: 100vw !important;
     background: ${theme.grey[500]};
@@ -81,7 +86,7 @@ export const DropdownContent = styled(DropdownMenu.Content)`
     padding: 1rem;
     gap: 1rem;
     display: flex;
-    align-items: end;
+    align-items: ${items};
     flex-direction: column;
   `}
 `;
