@@ -10,6 +10,7 @@ import axios from "axios";
 import { router } from "@inertiajs/react";
 import { useFormErrors } from "@/Hooks/useFormErrors";
 import { BigProfileImageContainer, ProfileImage } from "@/Components/Menus/style";
+import { PasswordInputControlled } from "@/Components/PasswordInput";
 
 interface ProfileFormProps {
   user: User;
@@ -91,7 +92,7 @@ export function ProfileForm({ user, errors }: ProfileFormProps) {
         <form onSubmit={handleSubmit(updateProfile)}>
           <InputControlled control={control} label={t('inputs:name')} type="text" name="name" />
           <InputControlled control={control} label={t('inputs:email')} type="email" name="email" />
-          <InputControlled control={control} label={t('inputs:password')} type="password" name="password" />
+          <PasswordInputControlled control={control} label={t('inputs:password')} name="password" />
           <InputControlled control={control} label={t('inputs:confirm-password')} type="password" name="password_confirmation" />
           <ButtonComponent name={t('inputs:update')} />
         </form>

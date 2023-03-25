@@ -88,18 +88,15 @@ export const FluidContainer = styled.div`
 		align-items: center;
 
 		@media (max-width: 1024px) {
+			justify-content: center;
 			padding: 0 8%;
-		}
-
-		div {
-				flex-direction: column;
-				display: flex;
-				width: 100%;
 		}
 	`};
 `;
 
 export const ImgAuth = styled.img`
+	width: 50%;
+
 	@media (max-width: 1024px) {
     display: none;
   }

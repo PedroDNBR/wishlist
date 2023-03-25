@@ -10,6 +10,7 @@ import { useFormErrors } from "@/Hooks/useFormErrors";
 import { useTranslation } from "react-i18next";
 import '@/i18n';
 import { Checkbox } from "@/Components/Checkbox/style";
+import { PasswordInputControlled } from "@/Components/PasswordInput";
 
 interface LoginProps {
   errors: Record<string, string>;
@@ -43,7 +44,7 @@ export default function Login({ errors: apiErrors }: LoginProps) {
           <AuthAccountSpan content={t("titles:doesnt-have-an-account")} link="/register" linkTitle={t('inputs:register')} />
           <Form onSubmit={handleSubmit(login)}>
             <InputControlled control={control} label={t('inputs:email')} type="text" name="email" />
-            <InputControlled control={control} label={t('inputs:password')} type="password" name="password" />
+            <PasswordInputControlled control={control} label={t('inputs:password')} name="password" />
             <Checkbox>
               <label className="b-contain">
                 <span>{t('inputs:remember-me')}</span>

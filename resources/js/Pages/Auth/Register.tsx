@@ -9,6 +9,7 @@ import { Head, router } from '@inertiajs/react';
 import { useFormErrors } from "@/Hooks/useFormErrors";
 import { useTranslation } from "react-i18next";
 import '@/i18n';
+import { PasswordInputControlled } from "@/Components/PasswordInput";
 
 interface RegisterProps {
   errors: Record<string, string>;
@@ -42,7 +43,7 @@ export default function Register({ errors: apiErrors }: RegisterProps) {
 				<Form onSubmit={handleSubmit(register)}>
 					<InputControlled control={control} label={t('inputs:full-name')} type="text" name="name" />
 					<InputControlled control={control} label={t('inputs:email')} type="text" name="email" />
-					<InputControlled control={control} label={t('inputs:password')} type="password" name="password" />
+					<PasswordInputControlled control={control} label={t('inputs:password')} name="password" />
 					<InputControlled control={control} label={t('inputs:confirm-password')} type="password" name="password_confirmation" />
 					<ButtonComponent name={t('inputs:create-account')} />
 				</Form>
