@@ -23,7 +23,7 @@ export const MobileIcon = styled.span`
     ${direction === 'right' && css`
       margin-right: 1rem;
 
-      svg {
+      svg, div {
         margin-left: 1rem;
       }
     `}
@@ -31,7 +31,7 @@ export const MobileIcon = styled.span`
     ${direction === 'left' && css`
       margin-left: 1rem;
 
-      svg {
+      svg, div {
         margin-right: 1rem;
       }
     `}

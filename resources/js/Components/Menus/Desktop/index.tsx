@@ -11,6 +11,8 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MenuProps } from "../types";
+import { LanguageModal } from "@/Components/LanguageModal";
+import { LanguageModalTrigger } from "@/Components/LanguageModalTrigger";
 
 interface MenuDesktopProps extends MenuProps {
   setVisible: (value: string) => void;
@@ -23,10 +25,6 @@ export function MenuDesktopComponent({ user, setVisible, logout }: MenuDesktopPr
 
   function closeModal() {
     setOpenModal(false);
-  }
-
-  function changeLanguage(language: string) {
-    i18n.changeLanguage(language);
   }
 
   return (
@@ -49,35 +47,8 @@ export function MenuDesktopComponent({ user, setVisible, logout }: MenuDesktopPr
               </div>
               <div>
                 <Dialog.Root open={openModal}>
-                  <Dialog.Trigger onClick={() => {setOpenModal(true); setVisible('hidden');} }>
-                    <div style={{position: 'relative', marginTop: '2rem'}}>
-                      <ProfileImageContainer>
-                          {localStorage.getItem('i18nextLng') ?? 'en' === 'en' ? 
-                            <ProfileImage src="/assets/imgs/us-uk.png" width="40" />
-                          :
-                            <ProfileImage src="/assets/imgs/br-pt.png" width="40" />
-                          }
-                      </ProfileImageContainer>
-                      <MenuTitle style={{top: '30%'}}>{t('inputs:language')}</MenuTitle>
-                    </div>
-                  </Dialog.Trigger>
-                  <Modal closeModal={closeModal}>
-                    <CloseModal onClick={closeModal}>
-                      <AiOutlineClose />
-                    </CloseModal>
-                    <DivContainer onClick={() => changeLanguage('pt-BR')} style={{cursor: 'pointer'}}>
-                      <BigProfileImageContainer>
-                        <img src="/assets/imgs/br-pt.png" alt={t('titles:portuguese') ?? 'language 1'} width="300" />
-                      </BigProfileImageContainer>
-                      <LanguageText>{t('titles:portuguese')}</LanguageText>
-                    </DivContainer>
-                    <DivContainer onClick={() => changeLanguage('en')} style={{cursor: 'pointer'}}>
-                      <BigProfileImageContainer>
-                        <img src="/assets/imgs/us-uk.png" alt={t('titles:english') ?? 'language 2'} width="300" />
-                      </BigProfileImageContainer>
-                      <LanguageText>{t('titles:english')}</LanguageText>
-                    </DivContainer>
-                  </Modal>
+                  <LanguageModalTrigger setOpenModal={setOpenModal} setVisible={setVisible} />
+                  <LanguageModal closeModal={closeModal} />
                 </Dialog.Root>
               </div>
             </div>
