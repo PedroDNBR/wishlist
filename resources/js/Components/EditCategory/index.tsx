@@ -37,7 +37,11 @@ export function EditCategory({ errors, setIsEditing, isEditing, category, button
   }
 
   async function update(data: Category, id: number | undefined) {
-    await router.put(`/categories/${id}`, data as any);
+    await router.put(`/categories/${id}`, data as any, {
+      headers: {
+        'Content-Language': localStorage.getItem('i18nextLng') ?? 'en',
+      },
+    });
     setIsSent(true);
   }
 

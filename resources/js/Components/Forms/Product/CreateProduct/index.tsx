@@ -154,9 +154,17 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
         }
       });
       setProductImage(response.data.location)
-        await router.post('/product', {...productToSend, image_url: response?.data.location } as any);
+        await router.post('/product', {...productToSend, image_url: response?.data.location } as any, {
+          headers: {
+            'Content-Language': localStorage.getItem('i18nextLng') ?? 'en',
+          },
+        });
     } else {
-        await router.post('/product', productToSend as any);
+        await router.post('/product', productToSend as any, {
+          headers: {
+            'Content-Language': localStorage.getItem('i18nextLng') ?? 'en',
+          },
+        });
     }
     // reset();
   }

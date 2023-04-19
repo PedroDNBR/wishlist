@@ -152,9 +152,17 @@ export default function UpdateProduct({ errors, categories, product: editProduct
         }
       });
       setProductImage(response.data.location)
-        await router.put(`/product/${editProduct.id}`, {...productToSend, image_url: response?.data.location } as any);
+        await router.put(`/product/${editProduct.id}`, {...productToSend, image_url: response?.data.location } as any, {
+          headers: {
+            'Content-Language': localStorage.getItem('i18nextLng') ?? 'en',
+          },
+        });
     } else {
-        await router.put(`/product/${editProduct.id}`, productToSend as any);
+        await router.put(`/product/${editProduct.id}`, productToSend as any, {
+          headers: {
+            'Content-Language': localStorage.getItem('i18nextLng') ?? 'en',
+          },
+        });
     }
     // reset();
   }

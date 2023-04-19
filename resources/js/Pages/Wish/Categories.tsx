@@ -50,7 +50,11 @@ export default function Categories({ errors: apiErrors, categories, forms: { cat
 }, [apiErrors, isEditing])
 
   async function create(data: CategoryInterface) {
-    await router.post('/categories', data as any);
+    await router.post('/categories', data as any, {
+      headers: {
+        'Content-Language': localStorage.getItem('i18nextLng') ?? 'en',
+      },
+    });
   }
 
   function closeModal() {

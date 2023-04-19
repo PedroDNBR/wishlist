@@ -76,9 +76,17 @@ export function ProfileForm({ user, errors }: ProfileFormProps) {
         }
       });
       setProfileImage(response.data.location)
-        await router.put('/profile', {...profile, profile_picture: response?.data.location } as any);
+        await router.put('/profile', {...profile, profile_picture: response?.data.location } as any, {
+          headers: {
+            'Content-Language': localStorage.getItem('i18nextLng') ?? 'en',
+          },
+        });
     } else {
-        await router.put('/profile', profile as any);
+        await router.put('/profile', profile as any, {
+          headers: {
+            'Content-Language': localStorage.getItem('i18nextLng') ?? 'en',
+          },
+        });
     }
     // reset();
   }
