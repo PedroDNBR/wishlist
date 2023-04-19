@@ -48,6 +48,11 @@ class Category extends BaseModel
         return $query->where('user_id', Auth::user()->id);
     }
 
+    public function scopeFromUser($query, string $userId)
+    {
+        return $query->where('user_id', $userId);
+    }
+
     public function products()
     {
         return $this->belongsToMany(Product::class, 'product_categories');

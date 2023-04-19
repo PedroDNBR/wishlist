@@ -41,6 +41,7 @@ export function ProfileForm({ user, errors }: ProfileFormProps) {
   useEffect(() => {
     setValue('name', user.name);
     setValue('email', user.email);
+    setValue('username', user.username);
   }, [user])
 
   function setProfileImageAndImageFile(preview: string, file?: File) {
@@ -50,14 +51,16 @@ export function ProfileForm({ user, errors }: ProfileFormProps) {
   
   type updateProfileProps = {
     name: string;
+    username: string;
     email: string;
     password: string;
     password_confirmation: string;
   }
 
-  async function updateProfile({ name, email, password, password_confirmation }: updateProfileProps) {
+  async function updateProfile({ username, name, email, password, password_confirmation }: updateProfileProps) {
     const profile = {
       name: name,
+      username: username,
       email: email,
       password: password,
       password_confirmation: password_confirmation,
@@ -91,6 +94,7 @@ export function ProfileForm({ user, errors }: ProfileFormProps) {
       <Container>
         <form onSubmit={handleSubmit(updateProfile)}>
           <InputControlled control={control} label={t('inputs:name')} type="text" name="name" />
+          <InputControlled control={control} label={t('inputs:username')} type="text" name="username" />
           <InputControlled control={control} label={t('inputs:email')} type="email" name="email" />
           <PasswordInputControlled control={control} label={t('inputs:password')} name="password" />
           <InputControlled control={control} label={t('inputs:confirm-password')} type="password" name="password_confirmation" />

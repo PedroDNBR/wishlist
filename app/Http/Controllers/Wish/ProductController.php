@@ -11,6 +11,7 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Kovah\HtmlMeta\Facades\HtmlMeta;
 use Intervention\Image\Facades\Image;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductController extends Controller
 {
@@ -43,6 +44,7 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
+        $this->checkUserCompatibility($product->user_id);
         $categories = Category::fromLoggedUser()->orderBy('name')->get();
         $product->load('categories');
         return Inertia::render('Wish/ProductEdit', [
@@ -53,6 +55,7 @@ class ProductController extends Controller
 
     public function update(Product $product, Request $request)
     {
+        $this->checkUserCompatibility($product->user_id);
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'url' => ['required', 'url', 'max:255'],
@@ -68,6 +71,7 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
+        $this->checkUserCompatibility($product->user_id);
         $product->delete();
         return redirect()->back();
     }
@@ -127,5 +131,10 @@ class ProductController extends Controller
         return [
             'location' => asset('media/images/' . $imageName)
         ];
+    }
+
+    private function checkUserCompatibility($user_id)
+    {
+        if ($user_id !== auth()->user()->id) throw new NotFoundHttpException();
     }
 }

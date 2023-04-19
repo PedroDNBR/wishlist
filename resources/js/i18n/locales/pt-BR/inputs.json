@@ -1,6 +1,7 @@
 {
   "register": "Cadastrar",
   "full-name": "Nome completo",
+  "username": "Nome de usuário",
   "name": "Nome",
   "email": "Email",
   "password": "Senha",

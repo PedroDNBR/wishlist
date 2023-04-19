@@ -1,6 +1,7 @@
 {
   "register": "Register",
   "full-name": "Full name",
+  "username": "Username",
   "name": "Name",
   "email": "Email",
   "password": "Password",

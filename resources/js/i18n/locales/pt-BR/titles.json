@@ -5,5 +5,9 @@
   "doesnt-have-an-account": "Não tem uma conta? ",
   "already-a-member": "Já é membro? ",
   "portuguese": "Português",
-  "english": "Inglês"
+  "english": "Inglês",
+  "wishlist-from": "Lista de desejos de {{name}}",
+  "user-since": "Usuário desde",
+  "total-products": "Total de produtos:",
+  "total-categories": "Total de categorias:"
 }

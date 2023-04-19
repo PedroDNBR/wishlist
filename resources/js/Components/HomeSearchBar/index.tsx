@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import '@/i18n';
 import { FaFilter } from "react-icons/fa";
 import useWindowDimensions from "@/Hooks/useWindowDimensions";
+import { User } from "@/Types/User";
 
 interface SearchProps {
   categories: Category[];
@@ -19,9 +20,10 @@ interface SearchProps {
     },
     sort?: string;
   };
+  public_user?: User;
 }
 
-export function HomeSearchBar({ categories = [], request}: SearchProps) {
+export function HomeSearchBar({ categories = [], request, public_user }: SearchProps) {
   const {
     control,
     handleSubmit,
@@ -40,7 +42,7 @@ export function HomeSearchBar({ categories = [], request}: SearchProps) {
   });
 
   useEffect(() => {
-    return router.get('/wishes', {
+    return router.get(!public_user ? '/wishes' : '/wishes/' + public_user.username, {
       sort,
       "filter[name]": search,
       "filter[categories]": categoriesId

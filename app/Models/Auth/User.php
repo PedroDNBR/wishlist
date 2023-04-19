@@ -5,6 +5,7 @@ namespace App\Models\Auth;
 use App\Models\BaseModel;
 use App\Models\Wish\Category;
 use App\Models\Wish\Product;
+use Carbon\Carbon;
 use Database\Factories\UserFactory;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -36,6 +37,7 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
         'email',
         'password',
         'profile_picture',
+        'username',
     ];
 
     /**
@@ -74,6 +76,7 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'unique:users,email'],
+            'username' => ['required', 'string', 'unique:users,username'],
             'profile_picture' => ['nullable', 'string', 'max:255'],
         ];
     }
@@ -86,6 +89,11 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     public function setPasswordConfirmationAttribute(string $value)
     {
         $this->attributes['password_confirmation'] = bcrypt($value);
+    }
+
+    public function getCreatedAtAttribute(string $value)
+    {
+        return Carbon::parse($value)->format('d/m/Y');
     }
 
     public static function createUserAndAuthenticate(array $values)

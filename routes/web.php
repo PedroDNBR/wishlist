@@ -23,6 +23,8 @@ use Inertia\Inertia;
 Route::get('/register', 'Auth/RegisteredUserController@create')->name('auth.register');
 Route::get('/login', 'Auth/AuthenticatedSessionController@create')->name('auth.login');
 
+Route::get('/wishes/{user:username}', [WishController::class, 'indexPublicProfile'])->name('public_dashboard');
+
 Route::prefix('/users')->group(function () {
     Route::post('/register', [RegisteredUserController::class, 'store']);
     Route::post('/login', [AuthenticatedSessionController::class, 'store']);

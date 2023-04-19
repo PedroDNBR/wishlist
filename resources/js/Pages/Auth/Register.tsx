@@ -42,6 +42,7 @@ export default function Register({ errors: apiErrors }: RegisterProps) {
 				<AuthAccountSpan content={t('titles:already-a-member')} link="/login" linkTitle={t('inputs:login')} />
 				<Form onSubmit={handleSubmit(register)}>
 					<InputControlled control={control} label={t('inputs:full-name')} type="text" name="name" />
+					<InputControlled control={control} label={t('inputs:username')} type="text" name="username" />
 					<InputControlled control={control} label={t('inputs:email')} type="text" name="email" />
 					<PasswordInputControlled control={control} label={t('inputs:password')} name="password" />
 					<InputControlled control={control} label={t('inputs:confirm-password')} type="password" name="password_confirmation" />
