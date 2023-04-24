@@ -66,7 +66,6 @@ export const BigProfileImageContainer = styled.div`
     overflow: hidden;
     border-radius: 1000px;
     width: 15rem;
-    height: 15rem;
     border: 2px solid ${theme.blue};
     position: relative;
   `};
