@@ -7,7 +7,7 @@ import { router } from "@inertiajs/react";
 
 interface LayoutProps {
   children: ReactNode;
-  user: User;
+  user?: User;
 }
 
 export function Layout({ children, user }: LayoutProps) {

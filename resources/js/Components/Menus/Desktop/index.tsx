@@ -40,10 +40,19 @@ export function MenuDesktopComponent({ user, setVisible, logout }: MenuDesktopPr
               <div style={{position: 'relative'}}>
                 <a href='/profile'>
                   <ProfileImageContainer>
-                    <ProfileImage src={user.profile_picture} />
+                    <ProfileImage src={user?.profile_picture ? user.profile_picture : 'https://i.pinimg.com/736x/ec/e2/b0/ece2b0f541d47e4078aef33ffd22777e.jpg'} />
                   </ProfileImageContainer>
                 </a>
-                <MenuTitle style={{top: '30%'}}><a href='/profile'>{t('labels:profile')}</a> <Logout onClick={() => logout()}/></MenuTitle>
+                { 
+                user ?
+                  <>
+                    <MenuTitle style={{top: '30%'}}><a href='/profile'>{t('labels:profile')}</a> <Logout onClick={() => logout()}/></MenuTitle>
+                  </>
+                :
+                  <>
+                    <MenuTitle style={{top: '30%'}}><a href='/login'>{t('inputs:login')}</a></MenuTitle>
+                  </>
+                }
               </div>
               <div>
                 <Dialog.Root open={openModal}>

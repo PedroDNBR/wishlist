@@ -1,4 +1,4 @@
-import { MdLabel, MdOutlineAddCircle, MdPerson2 } from "react-icons/md";
+import { MdAssignment, MdLabel, MdOutlineAddCircle, MdPerson2 } from "react-icons/md";
 import { FaBars, FaShoppingBasket } from 'react-icons/fa';
 import { useTranslation } from "react-i18next";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
@@ -27,13 +27,23 @@ export function MenuMobileComponent({ user, logout}: MenuProps) {
       <DropdownMenu.Root>
         <DropdownMenu.Trigger>
           <ProfileImageContainerMobile>
-            <ProfileImage src={user.profile_picture} />
+            <ProfileImage src={user?.profile_picture ? user.profile_picture : 'https://i.pinimg.com/736x/ec/e2/b0/ece2b0f541d47e4078aef33ffd22777e.jpg'} />
           </ProfileImageContainerMobile>
         </DropdownMenu.Trigger>
         <DropdownMenu.Portal>
           <DropdownContent side="bottom" align="center" items="start">
-            <MobileLinks href='/profile'><MobileIcon direction='left' ><MdPerson2 /> {t('labels:profile')}</MobileIcon></MobileLinks>
-            <MobileLinks onClick={() => logout()}><MobileIcon direction='left'><Logout /> {t('labels:logout')}</MobileIcon></MobileLinks>
+            { 
+              user ?
+              <>
+              <MobileLinks href='/profile'><MobileIcon direction='left' ><MdPerson2 /> {t('labels:profile')}</MobileIcon></MobileLinks>
+              <MobileLinks onClick={() => logout()}><MobileIcon direction='left'><Logout /> {t('labels:logout')}</MobileIcon></MobileLinks>
+              </>
+            :
+              <>
+                <MobileLinks href='/register'><MobileIcon direction='left' ><MdAssignment /> {t('inputs:create-account')}</MobileIcon></MobileLinks>
+                <MobileLinks href='/login'><MobileIcon direction='left' ><MdPerson2 /> {t('inputs:login')}</MobileIcon></MobileLinks>
+              </>
+            }
             <LanguageModalTrigger setOpenModal={setOpenModal} />
           </DropdownContent>
       </DropdownMenu.Portal>

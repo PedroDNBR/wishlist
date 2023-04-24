@@ -1,6 +1,6 @@
 import { User } from "@/Types/User"
 
 export interface MenuProps {
-  user: User;
+  user?: User;
   logout: () => void;
 }
