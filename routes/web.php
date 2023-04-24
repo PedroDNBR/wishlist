@@ -36,12 +36,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/categories', [CategoryController::class, 'create'])->name('categories');
     Route::get('/categories/search', [CategoryController::class, 'search'])->name('categories.search');
     Route::post('/categories', [CategoryController::class, 'store'])->name('category.store');
-    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('category.destroy');
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('category.edit');
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
 
     Route::post('/product', [ProductController::class, 'store'])->name('product.store');
     Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
-    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('category.destroy');
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
 
     Route::get('/create-product', [ProductController::class, 'create'])->name('product');
     Route::get('/update-product/{product}', [ProductController::class, 'edit'])->name('product.edit');
