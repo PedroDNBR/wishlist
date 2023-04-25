@@ -17,7 +17,7 @@ export function SharePublicProfile({user, url}: PublicProfileHeaderProps) {
   function shareProfile()
   {
     console.log(url+'/'+user.username);
-    navigator.clipboard.writeText(url+'/'+user.username)
+    navigator.clipboard.writeText(url+'/wishes/'+user.username)
     const title: string = t('titles:url-copied');
     Swal.fire({
       title: title,
