@@ -133,7 +133,7 @@ class ProductController extends Controller
         ];
     }
 
-    private function checkUserCompatibility($user_id)
+    private function checkUserCompatibility(int $user_id)
     {
         if ($user_id !== auth()->user()->id) throw new NotFoundHttpException();
     }
