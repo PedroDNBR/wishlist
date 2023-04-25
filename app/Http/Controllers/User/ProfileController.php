@@ -20,7 +20,8 @@ class ProfileController extends Controller
         $categories = Category::getOrSearchCategory($request['search']);
 
         return Inertia::render('User/Profile', [
-            'user' => auth()->user()
+            'user' => auth()->user(),
+            'url' => config('app.url'),
         ]);
     }
 

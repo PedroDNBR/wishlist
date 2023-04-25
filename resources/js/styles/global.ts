@@ -36,11 +36,13 @@ export const GlobalStyles = createGlobalStyle`
 			border: 3px solid ${theme.grey[600]};;
 		}
 
-		.swal2-popup {
+		.swal2-container .swal2-popup {
 			color: ${theme.white[100]};
 			background: ${theme.grey[600]};
 			border-radius: 15px;
 		}
+
+		
 
 		.swal2-deny {
 			background: ${theme.red} !important;
