@@ -33,21 +33,23 @@ export default function Categories({ errors: apiErrors, categories, forms: { cat
   const [openModal, setOpenModal] = useState(false);
   const [listCategories, setListCategories] = useState(categories);
 
+	const title: string = t('labels:categories');
+
   const {
     control,
     setError,
     reset,
   } = createForm;
 
-    const { handleErrors } = useFormErrors({errors: apiErrors, setError: setError, enabled: false});
+  const { handleErrors } = useFormErrors({errors: apiErrors, setError: setError, enabled: false});
 
   useEffect(() => {
     if (isEditing || !apiErrors) return;
 
-  if(categoryForm == 'creating') {
-    handleErrors();
-  }
-}, [apiErrors, isEditing])
+    if(categoryForm == 'creating') {
+      handleErrors();
+    }
+  }, [apiErrors, isEditing])
 
   async function create(data: CategoryInterface) {
     await router.post('/categories', data as any, {
@@ -90,7 +92,7 @@ export default function Categories({ errors: apiErrors, categories, forms: { cat
   return (
     <>
       <Layout user={user}>
-        <Head title="Categories"/>
+        <Head title={title}/>
         <CategoryLayout>
           <FormLayout>
             <CategoryForm isSent={false} form={createForm} onSubmit={create} buttonName={t('inputs:create')} errors={apiErrors} />

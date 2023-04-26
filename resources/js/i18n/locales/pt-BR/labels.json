@@ -2,8 +2,10 @@
   "my-list": "Lista de desejos",
   "categories": "Categorias",
   "create-product": "Cadastrar produtos",
+  "edit-product": "Editar produto",
   "profile": "Perfil",
   "logout": "Sair",
   "lowest-price": "Menor preço",
-  "favorite-product": "Produto favorito"
+  "favorite-product": "Produto favorito",
+  "wishes": "Desejos"
 }

@@ -8,6 +8,7 @@ import { Product } from "@/Types/Product";
 import { User } from "@/Types/User";
 import { Head, router } from '@inertiajs/react';
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface HomeProps {
   errors: Record<string, string>;
@@ -26,10 +27,12 @@ interface HomeProps {
 }
 
 export default function Home({ errors, products = [], categories = [], request, auth: { user } }: HomeProps) {
+	const { t } = useTranslation();
+	const title: string = t('labels:wishes');
 	return (
 		<>
 			<Layout user={user}>
-        <Head title="Wishes"/>
+        <Head title={title}/>
 				<HomeSearchBar categories={categories} request={request} />
 				<ProductsContainer>
 					{products.map((product) => {

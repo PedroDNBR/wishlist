@@ -2,8 +2,10 @@
   "my-list": "My list",
   "categories": "Categories",
   "create-product": "Create product",
+  "edit-product": "Edit product",
   "profile": "Profile",
   "logout": "Log out",
   "lowest-price": "Lowest price",
-  "favorite-product": "Favorite product"
+  "favorite-product": "Favorite product",
+  "wishes": "Wishes"
 }
