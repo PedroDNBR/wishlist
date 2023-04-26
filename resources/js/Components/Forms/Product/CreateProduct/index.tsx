@@ -176,7 +176,7 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
           </ProductCard>
           <Container>
             <form onSubmit={handleSubmit(sendProduct)}>
-              <InputControlled control={control} label={t('inputs:name')} type="text" name="name" max={55} />
+              <InputControlled control={control} label={t('inputs:name')} type="text" name="name" max={255} />
               <InputControlled control={control} label={t('inputs:url')} type="text" name="url" onPaste={getImage} />
               <InputControlled control={control} label={t('inputs:lowest-price')} type="text" max={10} name="lowest_price" />
               <ReactSelectControlled control={control} placeHolder={t('inputs:select-categories')} label={t('inputs:categories')} name="categories" setValue={setProductCategories} options={categoriesSelect} isOptionDisabled={() => productCategories.length > 3} selected={[]} />
