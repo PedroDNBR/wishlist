@@ -19,6 +19,7 @@ export const GlobalStyles = createGlobalStyle`
 		* {
 			scrollbar-width: auto;
 			scrollbar-color: ${theme.grey[400]} ${theme.grey[600]};
+			font-family: 'Inter', sans-serif;
 		}
 
 		/* Chrome, Edge, and Safari */
