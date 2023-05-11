@@ -1,7 +1,7 @@
 import { LandingPageItem, LandingPageItemText } from "./style";
 
 interface LandingPageContentItemProps {
-  children: string | JSX.Element | JSX.Element[];
+  children: string | JSX.Element | JSX.Element[] | DefaultTFuncReturn; 
   imageUrl: string;
   isVertical?: boolean;
 }

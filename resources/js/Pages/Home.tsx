@@ -4,11 +4,14 @@ import { LandingPageHeader } from '@/Components/LandingPage/LandingPageHeader';
 import { LandingPageItemsContainer } from '@/Components/LandingPage/LandingPageItemsContainer';
 import { Head, router } from '@inertiajs/react';
 import React from "react";
+import { useTranslation } from 'react-i18next';
 
 export default function Home() {
   function start() {
     router.get('/wishes')
   }
+
+  const { t } = useTranslation();
 
   return (
     <>
