@@ -53,10 +53,12 @@ export function HomeSearchBar({ categories = [], request, public_user }: SearchP
   }, [sort, search, categoriesId])
 
   const filters = [
-    { value: 'name', label: t('inputs:title-a-z') },
-    { value: '-name', label: t('inputs:title-z-a') },
+    { value: '-created_at', label: t('inputs:create-date-ascending') },
+    { value: 'created_at', label: t('inputs:create-date-descending') },
     { value: 'lowest_price', label: t('inputs:lowest-price') },
     { value: '-lowest_price', label: t('inputs:highest-price') },
+    { value: 'name', label: t('inputs:title-a-z') },
+    { value: '-name', label: t('inputs:title-z-a') },
   ];
 
   const categoriesSelect = () => {
