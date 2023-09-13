@@ -50,7 +50,7 @@ class WishController extends Controller
                 'lowest_price',
                 AllowedFilter::custom('categories', new FilterByCategories),
             ])
-            ->defaultSort('created_at', 'desc')
+            ->defaultSort('-created_at')
             ->allowedSorts([
                 'name',
                 'lowest_price',
