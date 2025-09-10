@@ -1,7 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { Product } from "@/Types/Product";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { Category } from "../CategoryBadge";
 import { OpenImageModal } from "../OpenImageModal";
@@ -11,6 +11,7 @@ import { DeleteButton, EditButton, ProductDropdownContent } from '../ProductDrop
 import { FaPencilAlt, FaTrash } from 'react-icons/fa';
 import { router } from '@inertiajs/react';
 import Swal from 'sweetalert2';
+import { Trigger } from '../OpenImageModal/styles';
 
 interface ProductCardProps {
   children?: ReactNode;
@@ -19,6 +20,7 @@ interface ProductCardProps {
   isEditingImage?: boolean;
   setProductImageAndImageFile?: ((preview: string ,file?: File) => void) | null;
   canEditingProduct?: boolean;
+	setIsModalOpen: ((isActive: boolean) => void) | null;
 }
 
 export function ProductCard({
@@ -28,6 +30,7 @@ export function ProductCard({
   isEditingImage = false, 
   setProductImageAndImageFile, 
   canEditingProduct = false, 
+  setIsModalOpen,
 }: ProductCardProps) {
   const { t } = useTranslation();
 
@@ -53,15 +56,13 @@ export function ProductCard({
           'success'
         )
       }
-    })
-
+    })    
   }
 
   return (
     <Card>
       <ImageContainer>
         <Image src={product.image_url} />
-        { isEditingImage && setProductImageAndImageFile ? <OpenImageModal setImageAndImageFile={setProductImageAndImageFile} /> : ''}
       </ImageContainer>
       {canEditingProduct && (
         <DropdownMenu.Root modal={false}>

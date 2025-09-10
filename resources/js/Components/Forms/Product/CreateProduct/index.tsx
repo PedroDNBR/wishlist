@@ -12,12 +12,20 @@ import { Category } from "@/Types/Category";
 import { Product } from "@/Types/Product";
 import { useTranslation } from "react-i18next";
 import { ReactSelectControlled } from "@/Components/ReactSelectControlled";
-
+import {OpenImageModalInputButton} from "@/Components/OpenImageModalInputButton"
+import * as Dialog from '@radix-ui/react-dialog';
+import { TextEditorMenuBar } from "@/Components/TextEditor";
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from '@tiptap/starter-kit'
+import { DescriptionEditorContainer, DescriptionEditorContent } from "@/Components/TextEditor/style";
+import { Label } from "@/Components/Input/style";
 
 interface CreateProductProps {
   errors: Record<string, string> | undefined | null;
   categories: Category[];
 }
+
+const extensions = [StarterKit]
 
 export default function CreateProduct({ errors, categories }: CreateProductProps) {
   const {
@@ -39,6 +47,7 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
 
   const placeholderImage = "https://lolitajoias.com.br/wp-content/uploads/2020/09/no-image.jpg"
 
+  const [productDescription, setProductDescription] = useState<string>("");
   const [productCategories, setProductCategories] = useState<Category[]>([]);
   const [productImage, setProductImage] = useState<string>(placeholderImage);
   const [productImageFile, setProductImageFile] = useState<File | undefined>(undefined);
@@ -142,7 +151,8 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
       lowest_price: productPrice,
       url: productUrl,
       image_url: productImage,
-      categories: productCategories
+      categories: productCategories,
+      description: productDescription
     };
     let response;
     if(productImageFile) {
@@ -169,21 +179,47 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
     // reset();
   }
 
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function handleClose()
+  {
+    setIsModalOpen(false);
+  }
+
+  const editor = useEditor({
+    extensions,
+    onUpdate({ editor }) {
+        setProductDescription(editor.getHTML());
+    },
+  })
+
   return (
     <>
+        <Dialog.Root open={isModalOpen}>
         <FormLayout>
-          <ProductCard product={product} onDelete={deleteCategory} isEditingImage={true} setProductImageAndImageFile={setProductImageAndImageFile}>
-          </ProductCard>
           <Container>
-            <form onSubmit={handleSubmit(sendProduct)}>
+            <form>
               <InputControlled control={control} label={t('inputs:name')} type="text" name="name" max={255} />
               <InputControlled control={control} label={t('inputs:url')} type="text" name="url" onPaste={getImage} />
               <InputControlled control={control} label={t('inputs:lowest-price')} type="text" max={10} name="lowest_price" />
               <ReactSelectControlled control={control} placeHolder={t('inputs:select-categories')} label={t('inputs:categories')} name="categories" setValue={setProductCategories} options={categoriesSelect} isOptionDisabled={() => productCategories.length > 3} selected={[]} />
+                <OpenImageModalInputButton setIsModalOpen={setIsModalOpen} setProductImageAndImageFile={setProductImageAndImageFile} handleClose={handleClose}/>
+                
+              <DescriptionEditorContainer>
+                <Label isError={false} htmlFor="Descrição" >Descrição</Label>
+                <TextEditorMenuBar editor={editor} />
+                <DescriptionEditorContent editor={editor} />
+              </DescriptionEditorContainer>
+
+                <div style={{display: "flex", justifyContent: "center"}}>
+                  <ProductCard setIsModalOpen={setIsModalOpen} product={product} onDelete={deleteCategory} isEditingImage={true} setProductImageAndImageFile={setProductImageAndImageFile}></ProductCard>
+                </div>
               <ButtonComponent name={t('inputs:create')} />
             </form>
           </Container>
         </FormLayout>
+              </Dialog.Root>
     </>
   )
 }

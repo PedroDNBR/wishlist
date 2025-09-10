@@ -24,5 +24,6 @@
   "remember-me": "Remember me",
   "language": "Language",
   "create-date-ascending": "Newest",
-  "create-date-descending": "Oldest"
+  "create-date-descending": "Oldest",
+  "image-upload": "Upload image"
 }

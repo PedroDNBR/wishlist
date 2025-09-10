@@ -2,63 +2,63 @@ import { HexColorPicker } from "react-colorful";
 import styled, { css } from "styled-components";
 
 export const CategoryLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 `;
 
 export const FormLayout = styled.div`
-  display: flex;
-  padding: 3rem;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  gap: 3rem;
-
-  @media (max-width: 1024px) {
-    gap: 0rem;
-    flex-direction: column;
-  }
-
-  form {
+    display: flex;
+    padding: 3rem;
     width: 100%;
-  }
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+
+    @media (max-width: 1024px) {
+        gap: 0rem;
+        flex-direction: column;
+    }
+
+    form {
+        width: 100%;
+    }
 `;
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 
-  @media (min-width: 1024px) {
-    width: 18.625rem;
-  }
+    @media (min-width: 1024px) {
+        width: 24rem;
+    }
 
-  @media (max-width: 1024px) {
-    width: 100%;
-  }
+    @media (max-width: 1024px) {
+        width: 100%;
+    }
 `;
 
 export const CategoryListingContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  width: 60%;
-  flex-wrap: wrap;
-  align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 60%;
+    flex-wrap: wrap;
+    align-self: center;
 `;
 
 export const SearchCategoryForm = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  width: 60%;
-  flex-wrap: wrap;
-  align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 60%;
+    flex-wrap: wrap;
+    align-self: center;
 `;
 
 export const HexColorPickerComponent = styled(HexColorPicker)`
@@ -66,7 +66,7 @@ export const HexColorPickerComponent = styled(HexColorPicker)`
     height: 14.95rem !important;
 
     @media (max-width: 1024px) {
-      width: 14rem !important;
-      height: 14rem !important;
+        width: 14rem !important;
+        height: 14rem !important;
     }
 `;

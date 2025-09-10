@@ -13,9 +13,10 @@ import { Button } from '../Button/style';
 
 interface OpenImageModalProps {
   setImageAndImageFile: ((preview: string ,file?: File) => void) | null;
+  onClose: () => void;
 }
 
-export function OpenImageModal({ setImageAndImageFile }: OpenImageModalProps) {
+export function OpenImageModal({ setImageAndImageFile, onClose }: OpenImageModalProps) {
   const {
     control,
     handleSubmit,
@@ -76,44 +77,36 @@ export function OpenImageModal({ setImageAndImageFile }: OpenImageModalProps) {
     if(setImageAndImageFile && (imagePreviewUrl || sentImage))
       setImageAndImageFile(imagePreviewUrl, sentImage);
 
-    setIsModalOpen(false);
+    onClose();
   }
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
-    <>
-      <Dialog.Root open={isModalOpen}>
-        <Trigger onClick={() => setIsModalOpen(true)}>
-        </Trigger>
-        <Dialog.Portal>
-          <Overlay>
-            <Content onPointerDownOutside={() => setIsModalOpen(false)}>
-              <form onSubmit={submitImage}>
-                  <Container>
-                    <CloseModal onClick={() => setIsModalOpen(false)}>
-                      <AiOutlineClose />
-                    </CloseModal>
-                    <ImageInputLabel htmlFor="image-file" url={imagePreviewUrl} onDrop={(e) => dragDropImage(e)} {...preventDragEvents}>
-                      <DragAndDropOverlay isDragging={isDragging}>{t('inputs:drag-drop-here')}</DragAndDropOverlay>
-                    </ImageInputLabel>
-                    <ImageInput type='file' id="image-file" name="image-file" accept="image/*"
-                      onChange={(e) => {
-                        if(e.target.files)
-                          setImageInputFile(e.target.files[0]);
-                        e.target.value = '';
-                      }}
-                    />
-                    <InputControlled label='Url ou Imagem copiada' type='text' name='image-url' max={512} control={control} />
-                    <Dialog.Close asChild>
-		                  <Button type="submit">Aplicar</Button>
-                    </Dialog.Close>
-                  </Container>
-                </form>
-            </Content>
-          </Overlay>
-        </Dialog.Portal>
-      </Dialog.Root>
-    </>
+    <Dialog.Portal>
+      <Overlay>
+        <Content onPointerDownOutside={() => onClose()}>
+          <form onSubmit={submitImage}>
+              <Container>
+                <CloseModal onClick={() => onClose() }>
+                  <AiOutlineClose />
+                </CloseModal>
+                <ImageInputLabel htmlFor="image-file" url={imagePreviewUrl} onDrop={(e) => dragDropImage(e)} {...preventDragEvents}>
+                  <DragAndDropOverlay isDragging={isDragging}>{t('inputs:drag-drop-here')}</DragAndDropOverlay>
+                </ImageInputLabel>
+                <ImageInput type='file' id="image-file" name="image-file" accept="image/*"
+                  onChange={(e) => {
+                    if(e.target.files)
+                      setImageInputFile(e.target.files[0]);
+                    e.target.value = '';
+                  }}
+                />
+                <InputControlled label='Url ou Imagem copiada' type='text' name='image-url' max={512} control={control} />
+                <Dialog.Close asChild>
+                  <Button type="submit">Aplicar</Button>
+                </Dialog.Close>
+              </Container>
+            </form>
+        </Content>
+      </Overlay>
+    </Dialog.Portal>
   )
 }
