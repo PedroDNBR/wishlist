@@ -51,6 +51,7 @@ export default function UpdateProduct({ errors, categories, product: editProduct
 
   const placeholderImage = "https://lolitajoias.com.br/wp-content/uploads/2020/09/no-image.jpg"
 
+  const [productDescription, setProductDescription] = useState<string>("");
   const [productCategories, setProductCategories] = useState<Category[]>([]);
   const [productImage, setProductImage] = useState<string>(placeholderImage);
   const [productImageFile, setProductImageFile] = useState<File | undefined>(undefined);
@@ -147,7 +148,8 @@ export default function UpdateProduct({ errors, categories, product: editProduct
       lowest_price: productPrice,
       url: productUrl,
       image_url: productImage,
-      categories: productCategories
+      categories: productCategories,
+      description: productDescription
     };
     let response;
     if(productImageFile) {
@@ -192,6 +194,8 @@ export default function UpdateProduct({ errors, categories, product: editProduct
     setValue('url', editProduct.url);
     setValue('lowest_price', editProduct.lowest_price);
     setProductCategories(editProduct.categories);
+    setProductDescription(editProduct.description ?? '');
+    editor.commands.setContent(editProduct.description as Content);
   }, [])
 
     const extensions = [StarterKit]
@@ -200,13 +204,10 @@ export default function UpdateProduct({ errors, categories, product: editProduct
 
     const editor = useEditor({
       extensions,
-      // onUpdate({ editor }) {
-      //     setProductDescription(editor.getHTML());
-      // },
+      onUpdate({ editor }) {
+          setProductDescription(editor.getHTML());
+      },
     });
-
-    editor.commands.setContent(editProduct.description as Content);
-
 
   return (
     <>
