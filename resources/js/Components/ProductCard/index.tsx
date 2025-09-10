@@ -20,7 +20,6 @@ interface ProductCardProps {
   isEditingImage?: boolean;
   setProductImageAndImageFile?: ((preview: string ,file?: File) => void) | null;
   canEditingProduct?: boolean;
-	setIsModalOpen: ((isActive: boolean) => void) | null;
 }
 
 export function ProductCard({
@@ -30,7 +29,6 @@ export function ProductCard({
   isEditingImage = false, 
   setProductImageAndImageFile, 
   canEditingProduct = false, 
-  setIsModalOpen,
 }: ProductCardProps) {
   const { t } = useTranslation();
 

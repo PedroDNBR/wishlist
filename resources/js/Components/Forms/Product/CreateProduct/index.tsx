@@ -19,6 +19,11 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from '@tiptap/starter-kit'
 import { DescriptionEditorContainer, DescriptionEditorContent } from "@/Components/TextEditor/style";
 import { Label } from "@/Components/Input/style";
+import { OpenImageModal } from "@/Components/OpenImageModal";
+import { MdFileUpload } from "react-icons/md";
+
+import { Container as ImageSubmitContainer } from '@/Components/OpenImageModalInputButton/style';
+
 
 interface CreateProductProps {
   errors: Record<string, string> | undefined | null;
@@ -198,28 +203,32 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
     <>
         <Dialog.Root open={isModalOpen}>
         <FormLayout>
+          <ProductCard product={product} onDelete={deleteCategory} isEditingImage={true} setProductImageAndImageFile={setProductImageAndImageFile}></ProductCard>
           <Container>
-            <form>
+            <form onSubmit={handleSubmit(sendProduct)}>
               <InputControlled control={control} label={t('inputs:name')} type="text" name="name" max={255} />
               <InputControlled control={control} label={t('inputs:url')} type="text" name="url" onPaste={getImage} />
               <InputControlled control={control} label={t('inputs:lowest-price')} type="text" max={10} name="lowest_price" />
               <ReactSelectControlled control={control} placeHolder={t('inputs:select-categories')} label={t('inputs:categories')} name="categories" setValue={setProductCategories} options={categoriesSelect} isOptionDisabled={() => productCategories.length > 3} selected={[]} />
-                <OpenImageModalInputButton setIsModalOpen={setIsModalOpen} setProductImageAndImageFile={setProductImageAndImageFile} handleClose={handleClose}/>
+              
+              {/* <OpenImageModalInputButton setIsModalOpen={setIsModalOpen} setProductImageAndImageFile={setProductImageAndImageFile} handleClose={handleClose}/> */}
                 
+              <ImageSubmitContainer onClick={() => setIsModalOpen(true)}>
+                <MdFileUpload/> {t('inputs:image-upload')}
+              </ImageSubmitContainer>
+
               <DescriptionEditorContainer>
                 <Label isError={false} htmlFor="Descrição" >Descrição</Label>
                 <TextEditorMenuBar editor={editor} />
                 <DescriptionEditorContent editor={editor} />
               </DescriptionEditorContainer>
-
-                <div style={{display: "flex", justifyContent: "center"}}>
-                  <ProductCard setIsModalOpen={setIsModalOpen} product={product} onDelete={deleteCategory} isEditingImage={true} setProductImageAndImageFile={setProductImageAndImageFile}></ProductCard>
-                </div>
               <ButtonComponent name={t('inputs:create')} />
             </form>
           </Container>
         </FormLayout>
-              </Dialog.Root>
+        { setProductImageAndImageFile ? <OpenImageModal onClose={handleClose} setImageAndImageFile={setProductImageAndImageFile} /> : ''}
+
+        </Dialog.Root>
     </>
   )
 }

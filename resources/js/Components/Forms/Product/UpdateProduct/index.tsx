@@ -16,7 +16,14 @@ import { Category } from "@/Types/Category";
 import { Product } from "@/Types/Product";
 import { useTranslation } from "react-i18next";
 import { ReactSelectControlled } from "@/Components/ReactSelectControlled";
-
+import { Container as ImageSubmitContainer } from '@/Components/OpenImageModalInputButton/style';
+import { TextEditorMenuBar } from "@/Components/TextEditor";
+import { DescriptionEditorContainer, DescriptionEditorContent } from "@/Components/TextEditor/style";
+import { MdFileUpload } from "react-icons/md";
+import { useEditor, EditorContent, Content } from "@tiptap/react";
+import { Label } from "@/Components/Input/style";
+import StarterKit from '@tiptap/starter-kit'
+import * as Dialog from '@radix-ui/react-dialog';
 
 interface UpdateProductProps {
   product: Product;
@@ -103,7 +110,7 @@ export default function UpdateProduct({ errors, categories, product: editProduct
       lowest_price: productPrice ?? 3000,
       url: productUrl,
       image_url: productImage,
-      categories: productCategories
+      categories: productCategories,
     };
     setProduct(newProduct);
   }
@@ -187,21 +194,46 @@ export default function UpdateProduct({ errors, categories, product: editProduct
     setProductCategories(editProduct.categories);
   }, [])
 
+    const extensions = [StarterKit]
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const editor = useEditor({
+      extensions,
+      // onUpdate({ editor }) {
+      //     setProductDescription(editor.getHTML());
+      // },
+    });
+
+    editor.commands.setContent(editProduct.description as Content);
+
+
   return (
     <>
-        <FormLayout>
-          <ProductCard product={product} onDelete={deleteCategory} isEditingImage={true} setProductImageAndImageFile={setProductImageAndImageFile}>
-          </ProductCard>
-          <Container>
-            <form onSubmit={handleSubmit(sendProduct)}>
-              <InputControlled control={control} label={t('inputs:name')} type="text" name="name" max={55} />
-              <InputControlled control={control} label={t('inputs:url')} type="text" name="url" onPaste={getImage} />
-              <InputControlled control={control} label={t('inputs:lowest-price')} type="text" max={10} name="lowest_price" />
-              <ReactSelectControlled control={control} placeHolder={t('inputs:select-categories')} label={t('inputs:categories')} name="categories" setValue={setProductCategories} options={categoriesSelect} isOptionDisabled={() => productCategories.length > 3} selected={formattedCategories()} />
-              <ButtonComponent name={t('inputs:update')} />
-            </form>
-          </Container>
-        </FormLayout>
+        <Dialog.Root open={isModalOpen}>
+          <FormLayout>
+            <ProductCard product={product} onDelete={deleteCategory} isEditingImage={true} setProductImageAndImageFile={setProductImageAndImageFile}>
+            </ProductCard>
+            <Container>
+              <form onSubmit={handleSubmit(sendProduct)}>
+                <InputControlled control={control} label={t('inputs:name')} type="text" name="name" max={55} />
+                <InputControlled control={control} label={t('inputs:url')} type="text" name="url" onPaste={getImage} />
+                <InputControlled control={control} label={t('inputs:lowest-price')} type="text" max={10} name="lowest_price" />
+                <ReactSelectControlled control={control} placeHolder={t('inputs:select-categories')} label={t('inputs:categories')} name="categories" setValue={setProductCategories} options={categoriesSelect} isOptionDisabled={() => productCategories.length > 3} selected={formattedCategories()} />
+                <ImageSubmitContainer onClick={() => setIsModalOpen(true)}>
+                  <MdFileUpload/> {t('inputs:image-upload')}
+                </ImageSubmitContainer>
+
+                <DescriptionEditorContainer>
+                  <Label isError={false} htmlFor="Descrição" >Descrição</Label>
+                  <TextEditorMenuBar editor={editor} />
+                  <DescriptionEditorContent editor={editor} />
+                </DescriptionEditorContainer>
+                <ButtonComponent name={t('inputs:update')} />
+              </form>
+            </Container>
+          </FormLayout>
+        </Dialog.Root>
     </>
   )
 }
