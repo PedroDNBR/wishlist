@@ -202,31 +202,29 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
   return (
     <>
         <Dialog.Root open={isModalOpen}>
-        <FormLayout>
-          <ProductCard product={product} onDelete={deleteCategory} isEditingImage={true} setProductImageAndImageFile={setProductImageAndImageFile}></ProductCard>
-          <Container>
-            <form onSubmit={handleSubmit(sendProduct)}>
-              <InputControlled control={control} label={t('inputs:name')} type="text" name="name" max={255} />
-              <InputControlled control={control} label={t('inputs:url')} type="text" name="url" onPaste={getImage} />
-              <InputControlled control={control} label={t('inputs:lowest-price')} type="text" max={10} name="lowest_price" />
-              <ReactSelectControlled control={control} placeHolder={t('inputs:select-categories')} label={t('inputs:categories')} name="categories" setValue={setProductCategories} options={categoriesSelect} isOptionDisabled={() => productCategories.length > 3} selected={[]} />
-              
-              {/* <OpenImageModalInputButton setIsModalOpen={setIsModalOpen} setProductImageAndImageFile={setProductImageAndImageFile} handleClose={handleClose}/> */}
+          <FormLayout>
+            <ProductCard product={product} onDelete={deleteCategory} isEditingImage={true} setProductImageAndImageFile={setProductImageAndImageFile}></ProductCard>
+            <Container>
+              <form onSubmit={handleSubmit(sendProduct)}>
+                <InputControlled control={control} label={t('inputs:name')} type="text" name="name" max={255} />
+                <InputControlled control={control} label={t('inputs:url')} type="text" name="url" onPaste={getImage} />
+                <InputControlled control={control} label={t('inputs:lowest-price')} type="text" max={10} name="lowest_price" />
+                <ReactSelectControlled control={control} placeHolder={t('inputs:select-categories')} label={t('inputs:categories')} name="categories" setValue={setProductCategories} options={categoriesSelect} isOptionDisabled={() => productCategories.length > 3} selected={[]} />
                 
-              <ImageSubmitContainer onClick={() => setIsModalOpen(true)}>
-                <MdFileUpload/> {t('inputs:image-upload')}
-              </ImageSubmitContainer>
+                <ImageSubmitContainer onClick={() => setIsModalOpen(true)}>
+                  <MdFileUpload/> {t('inputs:image-upload')}
+                </ImageSubmitContainer>
 
-              <DescriptionEditorContainer>
-                <Label isError={false} htmlFor="Descrição" >Descrição</Label>
-                <TextEditorMenuBar editor={editor} />
-                <DescriptionEditorContent editor={editor} />
-              </DescriptionEditorContainer>
-              <ButtonComponent name={t('inputs:create')} />
-            </form>
-          </Container>
-        </FormLayout>
-        { setProductImageAndImageFile ? <OpenImageModal onClose={handleClose} setImageAndImageFile={setProductImageAndImageFile} /> : ''}
+                <DescriptionEditorContainer>
+                  <Label isError={false} htmlFor="Descrição" >Descrição</Label>
+                  <TextEditorMenuBar editor={editor} />
+                  <DescriptionEditorContent editor={editor} />
+                </DescriptionEditorContainer>
+                <ButtonComponent name={t('inputs:create')} />
+              </form>
+            </Container>
+          </FormLayout>
+          { setProductImageAndImageFile ? <OpenImageModal onClose={handleClose} setImageAndImageFile={setProductImageAndImageFile} /> : ''}
 
         </Dialog.Root>
     </>

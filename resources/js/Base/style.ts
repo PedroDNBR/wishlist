@@ -1,6 +1,5 @@
 import styled, { css, DefaultTheme } from "styled-components";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { MdLogout } from "react-icons/md";
 
 export const Container = styled.section`
   display: flex;
