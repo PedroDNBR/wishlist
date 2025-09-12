@@ -119,14 +119,15 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
       lowest_price: productPrice ?? 3000,
       url: productUrl,
       image_url: productImage,
-      categories: productCategories
+      categories: productCategories,
+      description: productDescription
     };
     setProduct(newProduct);
   }
 
   useEffect(() => {
     defineProduct();
-  }, [productName, productPrice, productCategories, productImage]);
+  }, [productName, productPrice, productCategories, productImage, productDescription]);
 
   function deleteCategory(id?: number) {
     const newItems = productCategories.filter((category: Category) => category.id !== id);
@@ -216,7 +217,7 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
                 </ImageSubmitContainer>
 
                 <DescriptionEditorContainer>
-                  <Label isError={false} htmlFor="Descrição" >Descrição</Label>
+                  <Label isError={false} htmlFor="Descrição" >{t('inputs:description')}</Label>
                   <TextEditorMenuBar editor={editor} />
                   <DescriptionEditorContent editor={editor} />
                 </DescriptionEditorContainer>

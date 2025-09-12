@@ -130,5 +130,8 @@ export const ModalProductDescription = styled.div`
         cursor: text;
 
         color: ${theme.white[100]};
+
+        max-height: 40vh;
+        overflow-y: scroll;
     `};
 `;

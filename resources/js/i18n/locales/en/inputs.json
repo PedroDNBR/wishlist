@@ -25,5 +25,8 @@
   "language": "Language",
   "create-date-ascending": "Newest",
   "create-date-descending": "Oldest",
-  "image-upload": "Upload image"
+  "image-upload": "Upload image",
+  "description": "Description",
+  "url-or-copied-image": "Url or copied Image",
+  "apply": "Apply"
 }

@@ -99,9 +99,9 @@ export function OpenImageModal({ setImageAndImageFile, onClose }: OpenImageModal
                     e.target.value = '';
                   }}
                 />
-                <InputControlled label='Url ou Imagem copiada' type='text' name='image-url' max={512} control={control} />
+                <InputControlled label={t('inputs:url-or-copied-image')} type='text' name='image-url' max={512} control={control} />
                 <Dialog.Close asChild>
-                  <Button type="submit">Aplicar</Button>
+                  <Button type="submit">{t('inputs:apply')}</Button>
                 </Dialog.Close>
               </Container>
             </form>
