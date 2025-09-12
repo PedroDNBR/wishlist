@@ -11,6 +11,7 @@ import { router } from "@inertiajs/react";
 import { useFormErrors } from "@/Hooks/useFormErrors";
 import { BigProfileImageContainer, ProfileImage } from "@/Components/Menus/style";
 import { PasswordInputControlled } from "@/Components/PasswordInput";
+import * as Dialog from '@radix-ui/react-dialog';
 
 interface ProfileFormProps {
   user: User;
@@ -90,13 +91,16 @@ export function ProfileForm({ user, errors }: ProfileFormProps) {
     }
     // reset();
   }
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <FormLayout>
       <Container>
         <BigProfileImageContainer>
           <ProfileImage src={profileImage} />
-          <OpenImageModal setImageAndImageFile={setProfileImageAndImageFile} />
+          <Dialog.Root open={isModalOpen}>
+            <OpenImageModal onClose={() => setIsModalOpen(false)} setImageAndImageFile={setProfileImageAndImageFile} />
+          </Dialog.Root>
         </BigProfileImageContainer>
       </Container>
       <Container>

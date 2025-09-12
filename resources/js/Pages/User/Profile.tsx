@@ -3,7 +3,6 @@ import { ProfileForm } from "@/Components/Forms/User/Profile";
 import { SharePublicProfile } from "@/Components/SharePublicProfile";
 import { User } from "@/Types/User";
 import { Head } from "@inertiajs/react";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface ProfileProps {

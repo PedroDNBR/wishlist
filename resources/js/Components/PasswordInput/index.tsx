@@ -29,7 +29,7 @@ export function PasswordInputControlled({ label, name, max, control, ...rest }: 
             maxLength={max}
             {...rest}
           />
-          <EyeIcon onClick={ () => type === 'password' ? setType('text') : setType('password') } changeColor={type} />
+          <EyeIcon onClick={ () => type === 'password' ? setType('text') : setType('password') } changecolor={type} />
         </InputWrapper>
 			</Container>
 			<Error>{error}</Error>
