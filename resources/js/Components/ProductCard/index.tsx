@@ -121,7 +121,7 @@ export function ProductCard({
             </DivContainer>
             <DivContainer style={{justifyContent: 'flex-start', alignItems: 'start'}} onClick={(e: MouseEvent) => { setIsModalOpen(false); e.stopPropagation();}}>
               <Info onClick={(e: any) => {e.stopPropagation()}} style={{width: '100%'}}>
-                <Title style={{fontSize: '1.8rem'}}><a onClick={(e: any) => {e.stopPropagation()}} href={product?.url} target="_blank" title={product.name}>{product.name}</a></Title>
+                <Title style={{fontSize: '1.8rem', textOverflow: 'unset', whiteSpace: 'normal'}}><a onClick={(e: any) => {e.stopPropagation()}} href={product?.url} target="_blank" title={product.name}>{product.name}</a></Title>
                 <Price style={{cursor: 'text', fontSize: '1.3rem', paddingBottom: '.5rem'}} onClick={(e: any) => {e.stopPropagation()}}>{t('labels:lowest-price')}: R$ {product.lowest_price}</Price>
                 <CategoryWrapper style={{paddingBottom: '1.6rem'}}>
                   {product?.categories?.map((category) => (
