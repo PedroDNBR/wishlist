@@ -3,7 +3,7 @@ import { ButtonComponent } from "@/Components/Button";
 import { FormLayout, Container } from "@/Components/CategoryForm/styles";
 import { InputControlled } from "@/Components/Input";
 import { ProductCard } from "@/Components/ProductCard";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import axios from "axios";
 import { router } from '@inertiajs/react';
@@ -17,8 +17,8 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { TextEditorMenuBar } from "@/Components/TextEditor";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from '@tiptap/starter-kit'
-import { DescriptionEditorContainer, DescriptionEditorContent } from "@/Components/TextEditor/style";
-import { Label } from "@/Components/Input/style";
+import { DescriptionEditorContainer, DescriptionEditorContent, DescriptionEditorWrapper } from "@/Components/TextEditor/style";
+import { Error, Label } from "@/Components/Input/style";
 import { OpenImageModal } from "@/Components/OpenImageModal";
 import { MdFileUpload } from "react-icons/md";
 
@@ -37,7 +37,9 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
     control,
     setError,
     setValue,
-    handleSubmit
+    clearErrors,
+    handleSubmit,
+    formState: { errors: formErrors }
   } = useForm();
 
   const { t } = useTranslation();
@@ -108,9 +110,7 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
       const response = await axios.post('/api/image', { url: productUrl });
       if(response.data)
         setProductImage(response.data);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   }
 
   function defineProduct() {
@@ -185,6 +185,13 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
     // reset();
   }
 
+  function submitForm(event: FormEvent<HTMLFormElement>) {
+    clearErrors();
+    return handleSubmit(sendProduct)(event);
+  }
+
+  const descriptionError = formErrors.description?.message as string | undefined;
+
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -206,7 +213,7 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
           <FormLayout>
             <ProductCard product={product} onDelete={deleteCategory} isEditingImage={true} setProductImageAndImageFile={setProductImageAndImageFile}></ProductCard>
             <Container>
-              <form onSubmit={handleSubmit(sendProduct)}>
+              <form onSubmit={submitForm}>
                 <InputControlled control={control} label={t('inputs:name')} type="text" name="name" max={255} />
                 <InputControlled control={control} label={t('inputs:url')} type="text" name="url" onPaste={getImage} />
                 <InputControlled control={control} label={t('inputs:lowest-price')} type="text" max={10} name="lowest_price" />
@@ -216,11 +223,14 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
                   <MdFileUpload/> {t('inputs:image-upload')}
                 </ImageSubmitContainer>
 
-                <DescriptionEditorContainer>
-                  <Label isError={false} htmlFor="Descrição" >{t('inputs:description')}</Label>
-                  <TextEditorMenuBar editor={editor} />
-                  <DescriptionEditorContent editor={editor} />
-                </DescriptionEditorContainer>
+                <DescriptionEditorWrapper>
+                  <DescriptionEditorContainer isError={!!descriptionError}>
+                    <Label isError={!!descriptionError} htmlFor="Descrição" >{t('inputs:description')}</Label>
+                    <TextEditorMenuBar editor={editor} />
+                    <DescriptionEditorContent editor={editor} />
+                  </DescriptionEditorContainer>
+                  <Error>{descriptionError}</Error>
+                </DescriptionEditorWrapper>
                 <ButtonComponent name={t('inputs:create')} />
               </form>
             </Container>

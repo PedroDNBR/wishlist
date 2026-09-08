@@ -62,8 +62,6 @@ export function ProductCard({
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  console.log(isModalOpen);
-
   return (
     <Card onClick={(e:any) => {setIsModalOpen(true)}} style={{cursor: 'pointer'}}>
       <ImageContainer>

@@ -1,5 +1,5 @@
 import styled, { css, DefaultTheme } from "styled-components";
-import { Label, labelModifiers } from "../Input/style";
+import { borderModifiers, Label, labelModifiers } from "../Input/style";
 import { EditorContent } from "@tiptap/react";
 
 export interface InputStyleProps {
@@ -7,9 +7,17 @@ export interface InputStyleProps {
     isActive: boolean;
 }
 
-export const DescriptionEditorContainer = styled.div`
-    ${({ theme }) => css`
-        margin-bottom: 1.3375rem;
+export interface DescriptionEditorStyleProps {
+    theme: DefaultTheme;
+    isError: boolean;
+}
+
+export const DescriptionEditorWrapper = styled.div`
+    margin-bottom: 1.3375rem;
+`;
+
+export const DescriptionEditorContainer = styled.div<DescriptionEditorStyleProps>`
+    ${({ theme, isError }) => css`
         padding: 10px 15px;
         display: flex;
         background-color: ${theme.grey[500]};
@@ -24,6 +32,7 @@ export const DescriptionEditorContainer = styled.div`
             -webkit-box-shadow: 0px 0px 0px 2px ${theme.fadeDarkBlue};
             box-shadow: 0px 0px 0px 2px ${theme.fadeDarkBlue};
         }
+        ${isError && borderModifiers.error(theme)}
     `};
 `;
 

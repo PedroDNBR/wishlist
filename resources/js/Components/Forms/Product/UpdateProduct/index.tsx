@@ -3,7 +3,7 @@ import { ButtonComponent } from "@/Components/Button";
 import { FormLayout, Container } from "@/Components/CategoryForm/styles";
 import { InputControlled } from "@/Components/Input";
 import { ProductCard } from "@/Components/ProductCard";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Controller, useController, useForm, useWatch } from "react-hook-form";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { Dropdown } from "@/Components/Dropdown";
@@ -18,12 +18,13 @@ import { useTranslation } from "react-i18next";
 import { ReactSelectControlled } from "@/Components/ReactSelectControlled";
 import { Container as ImageSubmitContainer } from '@/Components/OpenImageModalInputButton/style';
 import { TextEditorMenuBar } from "@/Components/TextEditor";
-import { DescriptionEditorContainer, DescriptionEditorContent } from "@/Components/TextEditor/style";
+import { DescriptionEditorContainer, DescriptionEditorContent, DescriptionEditorWrapper } from "@/Components/TextEditor/style";
 import { MdFileUpload } from "react-icons/md";
 import { useEditor, EditorContent, Content } from "@tiptap/react";
-import { Label } from "@/Components/Input/style";
+import { Error, Label } from "@/Components/Input/style";
 import StarterKit from '@tiptap/starter-kit'
 import * as Dialog from '@radix-ui/react-dialog';
+import { OpenImageModal } from "@/Components/OpenImageModal";
 
 interface UpdateProductProps {
   product: Product;
@@ -36,7 +37,9 @@ export default function UpdateProduct({ errors, categories, product: editProduct
     control,
     setError,
     setValue,
-    handleSubmit
+    clearErrors,
+    handleSubmit,
+    formState: { errors: formErrors }
   } = useForm();
 
   const { t } = useTranslation();
@@ -62,7 +65,6 @@ export default function UpdateProduct({ errors, categories, product: editProduct
     control,
     name: "name",
   });
-  console.log(productName);
 
   const productPrice = useWatch({
     control,
@@ -100,9 +102,7 @@ export default function UpdateProduct({ errors, categories, product: editProduct
       const response = await axios.post('/api/image', { url: productUrl });
       if(response.data)
         setProductImage(response.data);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   }
 
   function defineProduct() {
@@ -177,6 +177,13 @@ export default function UpdateProduct({ errors, categories, product: editProduct
     // reset();
   }
 
+  function submitForm(event: FormEvent<HTMLFormElement>) {
+    clearErrors();
+    return handleSubmit(sendProduct)(event);
+  }
+
+  const descriptionError = formErrors.description?.message as string | undefined;
+
   const formattedCategories = () => {
     return editProduct.categories.filter(category => !productCategories.includes(category)).map((category: Category) => {
       return {
@@ -203,6 +210,11 @@ export default function UpdateProduct({ errors, categories, product: editProduct
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    function handleClose()
+    {
+      setIsModalOpen(false);
+    }
+
     const editor = useEditor({
       extensions,
       onUpdate({ editor }) {
@@ -217,7 +229,7 @@ export default function UpdateProduct({ errors, categories, product: editProduct
             <ProductCard product={product} onDelete={deleteCategory} isEditingImage={true} setProductImageAndImageFile={setProductImageAndImageFile}>
             </ProductCard>
             <Container>
-              <form onSubmit={handleSubmit(sendProduct)}>
+              <form onSubmit={submitForm}>
                 <InputControlled control={control} label={t('inputs:name')} type="text" name="name" max={55} />
                 <InputControlled control={control} label={t('inputs:url')} type="text" name="url" onPaste={getImage} />
                 <InputControlled control={control} label={t('inputs:lowest-price')} type="text" max={10} name="lowest_price" />
@@ -226,15 +238,19 @@ export default function UpdateProduct({ errors, categories, product: editProduct
                   <MdFileUpload/> {t('inputs:image-upload')}
                 </ImageSubmitContainer>
 
-                <DescriptionEditorContainer>
-                  <Label isError={false} htmlFor="Descrição" >{t('inputs:description')}</Label>
-                  <TextEditorMenuBar editor={editor} />
-                  <DescriptionEditorContent editor={editor} />
-                </DescriptionEditorContainer>
+                <DescriptionEditorWrapper>
+                  <DescriptionEditorContainer isError={!!descriptionError}>
+                    <Label isError={!!descriptionError} htmlFor="Descrição" >{t('inputs:description')}</Label>
+                    <TextEditorMenuBar editor={editor} />
+                    <DescriptionEditorContent editor={editor} />
+                  </DescriptionEditorContainer>
+                  <Error>{descriptionError}</Error>
+                </DescriptionEditorWrapper>
                 <ButtonComponent name={t('inputs:update')} />
               </form>
             </Container>
           </FormLayout>
+          <OpenImageModal onClose={handleClose} setImageAndImageFile={setProductImageAndImageFile} />
         </Dialog.Root>
     </>
   )
