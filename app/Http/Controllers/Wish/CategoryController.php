@@ -42,13 +42,18 @@ class CategoryController extends Controller
 
     public function update(Category $category, Request $request)
     {
+        $this->checkUserCompatibility($category->user_id);
         $request->session()->put('category', 'editing');
-        $category->update($request->all());
+        $category->update([
+            'color' => $request['color'],
+            'name' => $request['name'],
+        ]);
         return redirect()->back();
     }
 
     public function destroy(Category $category)
     {
+        $this->checkUserCompatibility($category->user_id);
         $category->forceDelete();
         return redirect()->back();
     }

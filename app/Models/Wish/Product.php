@@ -3,6 +3,8 @@
 namespace App\Models\Wish;
 
 use App\Models\BaseModel;
+use App\Services\ImageStorage;
+use App\Services\ProfileCard;
 use Database\Factories\ProductFactory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
@@ -27,6 +29,26 @@ class Product extends BaseModel
     protected static function newFactory()
     {
         return ProductFactory::new();
+    }
+
+    protected static function booted()
+    {
+        static::updated(function (Product $product) {
+            if ($product->wasChanged('image_url')) {
+                app(ImageStorage::class)->forget($product->getOriginal('image_url'));
+            }
+
+            app(ProfileCard::class)->forget($product->user_id);
+        });
+
+        static::deleted(function (Product $product) {
+            app(ImageStorage::class)->forget($product->image_url);
+            app(ProfileCard::class)->forget($product->user_id);
+        });
+
+        static::created(function (Product $product) {
+            app(ProfileCard::class)->forget($product->user_id);
+        });
     }
 
     /**

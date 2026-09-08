@@ -11,7 +11,6 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Kovah\HtmlMeta\Facades\HtmlMeta;
 use Intervention\Image\Facades\Image;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductController extends Controller
 {
@@ -131,10 +130,5 @@ class ProductController extends Controller
         return [
             'location' => asset('media/images/' . $imageName)
         ];
-    }
-
-    private function checkUserCompatibility(int $user_id)
-    {
-        if ($user_id !== auth()->user()->id) throw new NotFoundHttpException();
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Models\Auth;
 
 use App\Models\BaseModel;
+use App\Services\ImageStorage;
+use App\Services\ProfileCard;
 use App\Models\Wish\Category;
 use App\Models\Wish\Product;
 use Carbon\Carbon;
@@ -53,6 +55,17 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     protected static function newFactory()
     {
         return UserFactory::new();
+    }
+
+    protected static function booted()
+    {
+        static::updated(function (User $user) {
+            if ($user->wasChanged('profile_picture')) {
+                app(ImageStorage::class)->forget($user->getOriginal('profile_picture'));
+            }
+
+            app(ProfileCard::class)->forget($user->id);
+        });
     }
 
     /**

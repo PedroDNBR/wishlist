@@ -8,6 +8,7 @@ use App\Models\Wish\Category;
 use App\Models\Wish\Product;
 use App\QueryBuilder\Filters\FilterByCategories;
 use App\QueryBuilder\Sorts\SortByCategories;
+use App\Services\ProfileCard;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -44,7 +45,7 @@ class WishController extends Controller
         ]);
     }
 
-    public function indexPublicProfile(Request $request, User $user)
+    public function indexPublicProfile(Request $request, User $user, ProfileCard $card)
     {
         $products = QueryBuilder::for(Product::class)
             ->fromUser($user->id)
@@ -70,6 +71,44 @@ class WishController extends Controller
             'categories' => $categories,
             'request' => $request->all(),
             'profile_user' => $user
+        ])->withViewData(['meta' => $this->profileMeta($user, $card)]);
+    }
+
+    public function shareCard(User $user, ProfileCard $card)
+    {
+        $summary = $card->summary($user);
+        $path = $card->path($user, $card->signature($user, $summary));
+
+        if (!is_file($path) && !$card->make($user, $summary, $path)) {
+            abort_if(empty($user->profile_picture), 404);
+
+            return redirect()->away($user->profile_picture);
+        }
+
+        return response()->file($path, [
+            'Content-Type' => 'image/webp',
+            'Cache-Control' => 'public, max-age=86400',
         ]);
+    }
+
+    private function profileMeta(User $user, ProfileCard $card): array
+    {
+        $summary = $card->summary($user);
+
+        return [
+            'title' => __('meta.wishlist-from', ['name' => $user->name]),
+            'description' => __('meta.profile-description', [
+                'products' => $summary['products'],
+                'categories' => $summary['categories'],
+                'name' => $user->name,
+            ]),
+            'url' => route('public_dashboard', $user),
+            'image' => route('public_dashboard.card', [
+                'user' => $user,
+                'v' => $card->signature($user, $summary),
+            ]),
+            'width' => ProfileCard::WIDTH,
+            'height' => ProfileCard::HEIGHT,
+        ];
     }
 }

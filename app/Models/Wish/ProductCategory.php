@@ -33,10 +33,14 @@ class ProductCategory extends BaseModel
     {
         ProductCategory::where('product_id', $productId)->delete();
 
-        foreach ($categories as $category) {
+        $owned = Category::fromLoggedUser()
+            ->whereIn('id', array_column($categories, 'id'))
+            ->pluck('id');
+
+        foreach ($owned as $categoryId) {
             ProductCategory::create([
                 'product_id' =>  $productId,
-                'category_id' => $category['id'],
+                'category_id' => $categoryId,
             ]);
         }
     }

@@ -24,6 +24,7 @@ Route::get('/register', 'Auth/RegisteredUserController@create')->name('auth.regi
 Route::get('/login', 'Auth/AuthenticatedSessionController@create')->name('auth.login');
 
 Route::get('/wishes/{user:username}', [WishController::class, 'indexPublicProfile'])->name('public_dashboard');
+Route::get('/wishes/{user:username}/card', [WishController::class, 'shareCard'])->name('public_dashboard.card');
 
 Route::prefix('/users')->group(function () {
     Route::post('/register', [RegisteredUserController::class, 'store']);
@@ -42,6 +43,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/product', [ProductController::class, 'store'])->name('product.store');
     Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+
+    Route::post('/api/image', [ProductController::class, 'getImage'])->name('image');
+    Route::post('/api/store-image', [ProductController::class, 'storeImage'])->name('store-image');
 
     Route::get('/create-product', [ProductController::class, 'create'])->name('product');
     Route::get('/update-product/{product}', [ProductController::class, 'edit'])->name('product.edit');
