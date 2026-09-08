@@ -203,7 +203,7 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
   const editor = useEditor({
     extensions,
     onUpdate({ editor }) {
-        setProductDescription(editor.getHTML());
+        setProductDescription(editor.isEmpty ? '' : editor.getHTML());
     },
   })
 

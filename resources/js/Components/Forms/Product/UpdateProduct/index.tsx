@@ -218,7 +218,7 @@ export default function UpdateProduct({ errors, categories, product: editProduct
     const editor = useEditor({
       extensions,
       onUpdate({ editor }) {
-          setProductDescription(editor.getHTML());
+          setProductDescription(editor.isEmpty ? '' : editor.getHTML());
       },
     });
 

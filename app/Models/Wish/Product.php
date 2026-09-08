@@ -46,7 +46,7 @@ class Product extends BaseModel
             'lowest_price'  => ['required', 'string', 'max:255'],
             'image_url'  => ['required', 'string'],
             'user_id'  => ['required', 'integer'],
-            'description' => ['string', 'max:1024'],
+            'description' => ['nullable', 'string', 'max:1024'],
         ];
     }
 
@@ -94,7 +94,7 @@ class Product extends BaseModel
             'lowest_price' => str_replace(',', '', $data['lowest_price']),
             'image_url' => $data['image_url'],
             'user_id' =>  $user_id,
-            'description' => $data['description'],
+            'description' => $data['description'] ?? null,
         ]);
 
         ProductCategory::createCategoriesFromArray($data['categories'], $product->id);
