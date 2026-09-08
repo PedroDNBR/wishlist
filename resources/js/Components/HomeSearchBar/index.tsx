@@ -59,6 +59,8 @@ export function HomeSearchBar({ categories = [], request, public_user }: SearchP
     { value: '-lowest_price', label: t('inputs:highest-price') },
     { value: 'name', label: t('inputs:title-a-z') },
     { value: '-name', label: t('inputs:title-z-a') },
+    { value: 'categories', label: t('inputs:category-a-z') },
+    { value: '-categories', label: t('inputs:category-z-a') },
   ];
 
   const categoriesSelect = () => {

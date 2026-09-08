@@ -15,6 +15,8 @@
   "select-categories": "Selecionar categorias",
   "title-a-z": "Título A-Z",
   "title-z-a": "Título Z-A",
+  "category-a-z": "Categoria A-Z",
+  "category-z-a": "Categoria Z-A",
   "lowest-price": "Menor preço",
   "highest-price": "Maior preço",
   "url": "URL",
@@ -29,5 +31,4 @@
   "description": "Descrição",
   "url-or-copied-image": "Url ou Imagem copiada",
   "apply": "Aplicar"
-
 }
