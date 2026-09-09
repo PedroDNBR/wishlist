@@ -52,7 +52,7 @@ export default function CreateProduct({ errors, categories }: CreateProductProps
     handleErrors();
   }, [errors])
 
-  const placeholderImage = "https://lolitajoias.com.br/wp-content/uploads/2020/09/no-image.jpg"
+  const placeholderImage = "https://bartenderstore.com.br/wp-content/uploads/2023/05/no-image.jpg"
 
   const [productDescription, setProductDescription] = useState<string>("");
   const [productCategories, setProductCategories] = useState<Category[]>([]);

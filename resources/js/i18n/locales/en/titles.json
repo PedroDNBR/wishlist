@@ -18,5 +18,9 @@
   "wishlist-landing-page-footer": "Whether you're shopping for yourself or sharing with friends and family, our Wishlist website makes it easy to keep track of everything you want.",
   "wishlist-landing-page-item-product-form": "With our easy-to-use platform, you can save any product you love, attach the store's URL where you found it, and even register the lowest price you've seen.",
   "wishlist-landing-page-item-mobile": "And it's compatible with both desktop and mobile devices, so you can access your Wishlist from anywhere.",
-  "wishlist-landing-page-item-share": "With our sharing feature, you can easily share your Wishlist with others, making it the perfect tool for special occasions like birthdays, weddings, and holidays."
+  "wishlist-landing-page-item-share": "With our sharing feature, you can easily share your Wishlist with others, making it the perfect tool for special occasions like birthdays, weddings, and holidays.",
+  "forgot-password-title": "Forgot your password?",
+  "forgot-password-text": "Enter your email and we will send you a link to create a new password.",
+  "reset-password-title": "Create a new password",
+  "remembered-password": "Remembered your password? "
 }

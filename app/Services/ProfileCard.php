@@ -264,11 +264,14 @@ class ProfileCard
 
     private function download(string $url): ?string
     {
+        if (!app(SafeUrl::class)->isFetchable($url)) {
+            return null;
+        }
+
         $context = stream_context_create([
             'http' => [
                 'timeout' => self::DOWNLOAD_TIMEOUT,
-                'follow_location' => 1,
-                'max_redirects' => 3,
+                'follow_location' => 0,
                 'header' => 'User-Agent: Mozilla/5.0 (compatible; WishlistCard/1.0)',
             ],
         ]);

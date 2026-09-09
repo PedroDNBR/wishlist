@@ -3,6 +3,7 @@
 namespace App\Models\Wish;
 
 use App\Models\BaseModel;
+use App\Services\HtmlSanitizer;
 use App\Services\ImageStorage;
 use App\Services\ProfileCard;
 use Database\Factories\ProductFactory;
@@ -29,6 +30,11 @@ class Product extends BaseModel
     protected static function newFactory()
     {
         return ProductFactory::new();
+    }
+
+    public function setDescriptionAttribute($value)
+    {
+        $this->attributes['description'] = app(HtmlSanitizer::class)->clean($value);
     }
 
     protected static function booted()
@@ -66,7 +72,7 @@ class Product extends BaseModel
             'name' => ['required', 'string', 'max:255'],
             'url' => ['required', 'url', 'max:255'],
             'lowest_price'  => ['required', 'string', 'max:255'],
-            'image_url'  => ['required', 'string'],
+            'image_url'  => ['required', 'url', 'max:255'],
             'user_id'  => ['required', 'integer'],
             'description' => ['nullable', 'string', 'max:1024'],
         ];

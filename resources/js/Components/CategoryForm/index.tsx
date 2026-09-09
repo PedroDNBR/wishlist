@@ -24,7 +24,7 @@ export function CategoryForm({ form, onSubmit, category, buttonName, closeModal,
   const { control, handleSubmit, reset, setValue } = form;
   const { t } = useTranslation();
   const [color, setColor] = useState(category?.color ?? '#ffffff');
-  const placeholderImage = "https://lolitajoias.com.br/wp-content/uploads/2020/09/no-image.jpg"
+  const placeholderImage = "https://bartenderstore.com.br/wp-content/uploads/2023/05/no-image.jpg"
 
   async function submitHandler(data: Category) {
     setColor("#ffffff");

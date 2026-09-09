@@ -27,9 +27,9 @@ Route::get('/wishes/{user:username}', [WishController::class, 'indexPublicProfil
 Route::get('/wishes/{user:username}/card', [WishController::class, 'shareCard'])->name('public_dashboard.card');
 
 Route::prefix('/users')->group(function () {
-    Route::post('/register', [RegisteredUserController::class, 'store']);
-    Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-    Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy']);
+    Route::post('/register', [RegisteredUserController::class, 'store'])->middleware(['guest', 'throttle:5,1']);
+    Route::post('/login', [AuthenticatedSessionController::class, 'store'])->middleware('guest');
+    Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

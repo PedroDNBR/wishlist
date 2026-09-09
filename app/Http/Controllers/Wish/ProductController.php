@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Wish;
 use App\Http\Controllers\Controller;
 use App\Models\Wish\Category;
 use App\Models\Wish\Product;
+use App\Services\SafeUrl;
 use DOMDocument;
 use DOMXPath;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Kovah\HtmlMeta\Facades\HtmlMeta;
 use Intervention\Image\Facades\Image;
 
@@ -32,7 +34,7 @@ class ProductController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'url' => ['required', 'url', 'max:255'],
             'lowest_price'  => ['required', 'string', 'max:255'],
-            'image_url'  => ['required', 'string'],
+            'image_url'  => ['required', 'url', 'max:255'],
             'categories' => ['required', 'array'],
             'categories.*.id' => ['required', 'integer'],
         ]);
@@ -59,7 +61,7 @@ class ProductController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'url' => ['required', 'url', 'max:255'],
             'lowest_price'  => ['required', 'string', 'max:255'],
-            'image_url'  => ['required', 'string'],
+            'image_url'  => ['required', 'url', 'max:255'],
             'categories' => ['required', 'array'],
             'categories.*.id' => ['required', 'integer'],
         ]);
@@ -75,14 +77,20 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-    public function getImage(Request $request)
+    public function getImage(Request $request, SafeUrl $safeUrl)
     {
+        $request->validate(['url' => ['required', 'url', 'max:255']]);
+
+        abort_unless($safeUrl->isFetchable($request['url']), 422);
+
         $metas = HtmlMeta::forUrl($request['url'])->getMeta();
         if (!empty($metas['og:image'])) return $metas['og:image'];
 
         $context  = stream_context_create(
             array(
                 "http" => array(
+                    "follow_location" => 0,
+                    "timeout" => 10,
                     "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
                 )
             )
@@ -104,12 +112,10 @@ class ProductController extends Controller
     public function storeImage(Request $request)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,jpg,png'
+            'file' => 'required|image|mimes:jpeg,jpg,png|max:5120'
         ]);
 
-        $ext = $request->file->extension();
-
-        $imageName = time() . '.webp';
+        $imageName = Str::uuid() . '.webp';
 
         $image = $request->file;
 

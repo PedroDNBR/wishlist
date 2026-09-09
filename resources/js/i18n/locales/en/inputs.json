@@ -30,5 +30,11 @@
   "image-upload": "Upload image",
   "description": "Description",
   "url-or-copied-image": "Url or copied Image",
-  "apply": "Apply"
+  "apply": "Apply",
+  "current-password": "Current password",
+  "new-password": "New password",
+  "forgot-password": "Forgot my password",
+  "send-reset-link": "Send recovery link",
+  "back-to-login": "Back to login",
+  "reset-password": "Reset password"
 }

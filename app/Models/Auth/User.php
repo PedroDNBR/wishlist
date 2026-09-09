@@ -99,11 +99,6 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
         $this->attributes['password'] = bcrypt($value);
     }
 
-    public function setPasswordConfirmationAttribute(string $value)
-    {
-        $this->attributes['password_confirmation'] = bcrypt($value);
-    }
-
     public function getCreatedAtAttribute(string $value)
     {
         return Carbon::parse($value)->format('d/m/Y');

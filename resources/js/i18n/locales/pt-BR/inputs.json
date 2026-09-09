@@ -30,5 +30,11 @@
   "image-upload": "Enviar imagem",
   "description": "Descrição",
   "url-or-copied-image": "Url ou Imagem copiada",
-  "apply": "Aplicar"
+  "apply": "Aplicar",
+  "current-password": "Senha atual",
+  "new-password": "Nova senha",
+  "forgot-password": "Esqueci minha senha",
+  "send-reset-link": "Enviar link de recuperação",
+  "back-to-login": "Voltar ao login",
+  "reset-password": "Redefinir senha"
 }

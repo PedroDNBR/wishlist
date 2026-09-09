@@ -38,7 +38,7 @@ class Category extends BaseModel
     {
         return [
             'name' => ['required', 'string', 'max:12'],
-            'color' => ['required', 'string', 'min:7', 'max:7'],
+            'color' => ['required', 'string', 'regex:/^#[0-9a-fA-F]{6}$/'],
             'user_id'  => ['required', 'integer'],
         ];
     }

@@ -51,6 +51,7 @@ export default function Login({ errors: apiErrors }: LoginProps) {
                 <input type="checkbox" id="remember" {...register('remember')} />
                 <div className="b-input"></div>
               </label>
+            <AuthAccountSpan content="" link="/forgot-password" linkTitle={t('inputs:forgot-password')} />
             </Checkbox>
             <ButtonComponent name={t('inputs:login')} />
           </Form>

@@ -54,15 +54,17 @@ export function ProfileForm({ user, errors }: ProfileFormProps) {
     name: string;
     username: string;
     email: string;
+    current_password: string;
     password: string;
     password_confirmation: string;
   }
 
-  async function updateProfile({ username, name, email, password, password_confirmation }: updateProfileProps) {
+  async function updateProfile({ username, name, email, current_password, password, password_confirmation }: updateProfileProps) {
     const profile = {
       name: name,
       username: username,
       email: email,
+      current_password: current_password,
       password: password,
       password_confirmation: password_confirmation,
       profile_picture: profileImage,
@@ -108,7 +110,8 @@ export function ProfileForm({ user, errors }: ProfileFormProps) {
           <InputControlled control={control} label={t('inputs:name')} type="text" name="name" />
           <InputControlled control={control} label={t('inputs:username')} type="text" name="username" />
           <InputControlled control={control} label={t('inputs:email')} type="email" name="email" />
-          <PasswordInputControlled control={control} label={t('inputs:password')} name="password" />
+          <PasswordInputControlled control={control} label={t('inputs:current-password')} name="current_password" />
+          <PasswordInputControlled control={control} label={t('inputs:new-password')} name="password" />
           <InputControlled control={control} label={t('inputs:confirm-password')} type="password" name="password_confirmation" />
           <ButtonComponent name={t('inputs:update')} />
         </form>
